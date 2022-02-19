@@ -11,7 +11,7 @@
     "test": "__tests__"
   },
   "bin": {
-    "open-cli": "bin/index.js"
+    "navi": "bin/index.js"
   },
   "files": [
     "lib"
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@navi-cli/core": "file:..\\core",
-    "import-local": "^3.1.0"
+    "import-local": "^3.0.2",
+    "npmlog": "^6.0.1"
   }
 }

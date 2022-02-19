@@ -10,5 +10,3 @@ function cli() {
   console.log(core(), b)
   return 'cli'
 }
-
-cli()
