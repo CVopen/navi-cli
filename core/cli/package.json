@@ -10,6 +10,9 @@
     "lib": "lib",
     "test": "__tests__"
   },
+  "bin": {
+    "open-cli": "bin/index.js"
+  },
   "files": [
     "lib"
   ],
@@ -20,6 +23,7 @@
     "test": "../../node_modules/.bin/jest"
   },
   "dependencies": {
-    "@open-cli/core": "file:..\\core"
+    "@open-cli/core": "file:..\\core",
+    "import-local": "^3.1.0"
   }
 }
