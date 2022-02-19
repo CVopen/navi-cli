@@ -5,5 +5,10 @@
     "core/*",
     "utils/*"
   ],
+  "command": {
+    "publish": {
+      "message": "chore(release): publish"
+    }
+  },
   "useWorkspaces": true
 }
