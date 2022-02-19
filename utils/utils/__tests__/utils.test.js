@@ -2,6 +2,6 @@
 
 const utils = require('..');
 
-describe('@open-cli/utils', () => {
-    it('needs tests');
+describe('@navi-cli/utils', () => {
+  it('needs tests');
 });

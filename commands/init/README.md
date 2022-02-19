@@ -1,11 +1,11 @@
-# `@open-cli/init`
+# `@navi-cli/init`
 
 > TODO: description
 
 ## Usage
 
 ```
-const init = require('@open-cli/init');
+const init = require('@navi-cli/init');
 
 // TODO: DEMONSTRATE API
 ```

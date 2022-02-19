@@ -2,8 +2,8 @@
 
 const core = require('..');
 
-describe('@open-cli/core', () => {
-  it('@open-cli/core tests', () => {
+describe('@navi-cli/core', () => {
+  it('@navi-cli/core tests', () => {
     expect(core()).toBe('core')
   })
 })

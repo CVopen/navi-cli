@@ -2,6 +2,6 @@
 
 const init = require('..');
 
-describe('@open-cli/init', () => {
-    it('needs tests');
+describe('@navi-cli/init', () => {
+  it('needs tests');
 });
