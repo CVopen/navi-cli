@@ -1,0 +1,9 @@
+{
+  "version": "independent",
+  "packages": [
+    "commands/*",
+    "core/*",
+    "utils/*"
+  ],
+  "useWorkspaces": true
+}
