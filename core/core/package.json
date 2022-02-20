@@ -1,9 +1,9 @@
 {
   "name": "@navi-cli/core",
   "version": "0.0.2",
-  "description": "open-cli core",
+  "description": "navi-cli core",
   "author": "CVopen",
-  "homepage": "",
+  "homepage": "https://github.com/CVopen/navi-cli#readme",
   "license": "ISC",
   "main": "lib/index.js",
   "directories": {
@@ -16,7 +16,17 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CVopen/navi-cli.git"
+  },
   "scripts": {
     "test": "../../node_modules/.bin/jest"
+  },
+  "bugs": {
+    "url": "https://github.com/CVopen/navi-cli/issues"
+  },
+  "dependencies": {
+    "@navi-cli/utils": "file:..\\..\\utils\\utils"
   }
 }

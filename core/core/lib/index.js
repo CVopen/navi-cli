@@ -2,7 +2,9 @@
 
 module.exports = core
 
+const utils = require('@navi-cli/utils')
+
 function core() {
-  const a = '123'
+  utils()
   return 'core'
 }
