@@ -1,7 +1,7 @@
 {
-  "name": "@navi-cli/core",
-  "version": "0.0.2",
-  "description": "navi-cli core",
+  "name": "@navi-cli/request",
+  "version": "0.0.0",
+  "description": "navi-cli request",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
   "license": "ISC",
@@ -21,17 +21,12 @@
     "url": "git+https://github.com/CVopen/navi-cli.git"
   },
   "scripts": {
-    "test": "../../node_modules/.bin/jest"
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/CVopen/navi-cli/issues"
   },
   "dependencies": {
-    "@navi-cli/log": "file:..\\..\\utils\\log",
-    "colors": "^1.4.0",
-    "commander": "^9.0.0"
-  },
-  "engines": {
-    "node": "^12.0.0 || >= 14.0.0"
+    "axios": "^0.25.0"
   }
 }

@@ -2,7 +2,7 @@
   "name": "@navi-cli/init",
   "version": "1.0.2",
   "description": "open-cli init",
-  "author": "CVopen <1766730733@qq.com>",
+  "author": "CVopen",
   "homepage": "",
   "license": "ISC",
   "main": "lib/index.js",
