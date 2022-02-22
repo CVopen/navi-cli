@@ -14,15 +14,19 @@ function core(pkg) {
     .name('navi')
     .usage('<command> [options]')
     .version(pkg.version, '-v, --version', 'output the current version')
-    .option('-d, --debug', 'enable dubug mode', false)
+    .option('-c, --cache', 'turn off cache mode', true)
 
-  program.on('option:debug', function () {
-    process.env.LOG_LEVEL = 'verbose'
-    log.level = process.env.LOG_LEVEL
-    log.verbose('debug')
+  if (process.env.NAVI_LOG_LEVEL === 'verbose') {
+    log.level = process.env.NAVI_LOG_LEVEL
+    log.verbose('you are in debug mode')
+  }
+
+  program.on('option:cache', function () {
+    process.env.NAVI_CACHE = '0'
   })
 
   program.on('command:*', function (errCommand) {
+    console.log(arguments)
     program.outputHelp()
     console.log()
     log.error(colors.red(`未知的命令: ${errCommand[0]}`))
