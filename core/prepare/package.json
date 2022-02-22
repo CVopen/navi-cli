@@ -29,11 +29,13 @@
   "dependencies": {
     "@navi-cli/log": "file:..\\..\\utils\\log",
     "@navi-cli/request": "file:..\\..\\utils\\request",
+    "@navi-cli/utils": "file:..\\..\\utils\\utils",
     "colors": "^1.4.0",
     "dotenv": "^16.0.0",
     "path-exists": "^4.0.0",
     "root-check": "^1.0.0",
     "user-home": "^3.0.0",
-    "axios": "^0.25.0"
+    "axios": "^0.25.0",
+    "dedent": "^0.7.0"
   }
 }

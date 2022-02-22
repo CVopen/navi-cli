@@ -1385,8 +1385,7 @@
 "@navi-cli/core@file:core/core":
   version "0.0.2"
   dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-core-0.0.2-cb1d887d-1352-4c1a-b20e-1d6bf8b75625-1645458257956/node_modules/utils/log"
-    "@navi-cli/prepare" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-core-0.0.2-cb1d887d-1352-4c1a-b20e-1d6bf8b75625-1645458257956/node_modules/@navi-cli/prepare"
+    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-core-0.0.2-5a78b7d4-0fb5-4ccb-8a35-6ba740bad570-1645537834217/node_modules/utils/log"
     colors "^1.4.0"
     commander "^9.0.0"
 
@@ -1398,8 +1397,8 @@
 "@navi-cli/prepare@file:core/prepare":
   version "0.0.0"
   dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-00df826f-3d4c-4eba-8ade-934c1e34bacd-1645458257958/node_modules/utils/log"
-    "@navi-cli/request" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-00df826f-3d4c-4eba-8ade-934c1e34bacd-1645458257958/node_modules/utils/request"
+    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-fd8a4cca-c15e-41bd-8cc5-55b34e7f9b60-1645537834219/node_modules/utils/log"
+    "@navi-cli/request" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-fd8a4cca-c15e-41bd-8cc5-55b34e7f9b60-1645537834219/node_modules/utils/request"
     axios "^0.25.0"
     colors "^1.4.0"
     dotenv "^16.0.0"
@@ -1411,6 +1410,7 @@
   version "0.0.0"
   dependencies:
     axios "^0.25.0"
+    url-join "^4.0.1"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -6740,6 +6740,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+url-join@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npmjs.org/url-join/-/url-join-4.0.1.tgz#b642e21a2646808ffa178c4c5fda39844e12cde7"
+  integrity sha512-jk1+QP6ZJqyOiuEI9AEWQfju/nB2Pw466kbA0LEZljHwKeMgd9WrAEgEGxjPDD2+TNbbb37rTyhEfrCXfuKXnA==
 
 user-home@^3.0.0:
   version "3.0.0"
