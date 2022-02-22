@@ -4,6 +4,7 @@ module.exports = core
 
 const colors = require('colors/safe')
 const { Command } = require('commander')
+const dedent = require('dedent')
 
 const log = require('@navi-cli/log')
 
@@ -33,6 +34,15 @@ function core(pkg) {
     const echoCommands = program.commands.map((cmd) => cmd.name())
     log.info(colors.red(`可用命令: ${echoCommands}`))
   })
+
+  program.addHelpText(
+    'after',
+    colors.green(dedent`
+    epilogue:
+
+      For more information, find our manual at https://github.com/CVopen/navi-cli
+  `)
+  )
 
   return program
 }

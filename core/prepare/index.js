@@ -15,6 +15,10 @@ const { getPackageVersions } = require('@navi-cli/request')
 const { getLatestVersion } = require('@navi-cli/utils')
 
 async function prepare(pkg) {
+  if (process.argv.length <= 2) {
+    log.error('cli', 'A command is required. Pass --help to see all available commands and options.')
+    process.exit(1)
+  }
   try {
     await checkVersion(pkg)
     checkRoot()
@@ -56,8 +60,8 @@ async function checkVersion(pkg) {
 }
 
 function checkEnv() {
-  const env = require('./consts')
-  const dotenvPath = path.resolve(userHome, 'navi-cli.env')
+  const env = require('./consts'),
+    dotenvPath = path.resolve(userHome, 'navi-cli.env')
   if (!pathExists(dotenvPath)) {
     let content = ''
     Object.keys(env).forEach((key) => (content += `${key}=${env[key]} \n`))

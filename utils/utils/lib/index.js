@@ -14,6 +14,17 @@ function getLatestVersion(versions = [], currentVersion) {
   return laseVersion
 }
 
+function isEmptyList(target) {
+  if (!Array.isArray(target)) {
+    return false
+  }
+  if (!target[0]) {
+    return false
+  }
+  return true
+}
+
 module.exports = {
   getLatestVersion,
+  isEmptyList,
 }
