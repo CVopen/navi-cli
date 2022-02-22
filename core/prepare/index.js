@@ -2,10 +2,13 @@
 
 module.exports = prepare
 
+const path = require('path')
+
 const colors = require('colors/safe')
 const userHome = require('user-home')
 const pathExists = require('path-exists').sync
 const dedent = require('dedent')
+const fse = require('fs-extra')
 
 const log = require('@navi-cli/log')
 const { getPackageVersions } = require('@navi-cli/request')
@@ -16,6 +19,7 @@ async function prepare(pkg) {
     await checkVersion(pkg)
     checkRoot()
     checkUserHome()
+    checkEnv()
   } catch (error) {
     log.error(error.message)
     return true
@@ -33,14 +37,12 @@ function checkUserHome() {
 }
 
 async function checkVersion(pkg) {
-  const currentVersion = pkg.version
-  const npmName = pkg.name
-  const res = await getPackageVersions(npmName)
-  const latestVersion = getLatestVersion(res, currentVersion)
+  const currentVersion = pkg.version,
+    npmName = pkg.name,
+    res = await getPackageVersions(npmName),
+    latestVersion = getLatestVersion(res, currentVersion)
 
-  if (!latestVersion) {
-    return log.notice('cli version', currentVersion)
-  }
+  if (!latestVersion) return log.notice('cli version', currentVersion)
 
   log.warn(
     'cli updated',
@@ -51,4 +53,17 @@ async function checkVersion(pkg) {
       `
     )
   )
+}
+
+function checkEnv() {
+  const env = require('./consts')
+  const dotenvPath = path.resolve(userHome, 'navi-cli.env')
+  if (!pathExists(dotenvPath)) {
+    let content = ''
+    Object.keys(env).forEach((key) => (content += `${key}=${env[key]} \n`))
+    fse.outputFileSync(dotenvPath, content)
+  }
+  require('dotenv').config({
+    path: dotenvPath,
+  })
 }

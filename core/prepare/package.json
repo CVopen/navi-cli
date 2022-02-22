@@ -36,6 +36,7 @@
     "root-check": "^1.0.0",
     "user-home": "^3.0.0",
     "axios": "^0.25.0",
-    "dedent": "^0.7.0"
+    "dedent": "^0.7.0",
+    "fs-extra": "^10.0.0"
   }
 }

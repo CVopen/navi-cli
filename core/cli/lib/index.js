@@ -15,7 +15,6 @@ async function naviCLI() {
     .command('init [projectName]')
     .option('-f, --force', '是否强制初始化项目')
     .action(function () {
-      // console.log(arguments)
       console.log('init')
     })
 
