@@ -5,28 +5,21 @@ module.exports = prepare
 const colors = require('colors/safe')
 const userHome = require('user-home')
 const pathExists = require('path-exists').sync
+const dedent = require('dedent')
 
 const log = require('@navi-cli/log')
-const { get } = require('@navi-cli/request')
+const { getPackageVersions } = require('@navi-cli/request')
+const { getLatestVersion } = require('@navi-cli/utils')
 
 async function prepare(pkg) {
   try {
-    await exec(pkg)
+    await checkVersion(pkg)
+    checkRoot()
+    checkUserHome()
   } catch (error) {
     log.error(error.message)
     return true
   }
-}
-
-async function exec(pkg) {
-  version(pkg)
-  await checkVersion(pkg)
-  checkRoot()
-  checkUserHome()
-}
-
-function version(pkg) {
-  log.notice('cli version', pkg.version)
 }
 
 function checkRoot() {
@@ -35,11 +28,27 @@ function checkRoot() {
 
 function checkUserHome() {
   if (!userHome || !pathExists(userHome)) {
-    throw new Error(colors.red('当前登录用户主目录不存在！'))
+    throw new Error(colors.red('当前登录用户主目录不存在!'))
   }
 }
 
 async function checkVersion(pkg) {
-  const res = await get({ url: `/${pkg.name}` })
-  console.log(Object.keys(res.versions))
+  const currentVersion = pkg.version
+  const npmName = pkg.name
+  const res = await getPackageVersions(npmName)
+  const latestVersion = getLatestVersion(res, currentVersion)
+
+  if (!latestVersion) {
+    return log.notice('cli version', currentVersion)
+  }
+
+  log.warn(
+    'cli updated',
+    colors.yellow(
+      dedent`
+        navi has a new version(npm install -g ${npmName})
+        current: ${currentVersion}, latest: ${latestVersion}
+      `
+    )
+  )
 }
