@@ -26,7 +26,6 @@ function core(pkg) {
   })
 
   program.on('command:*', function (errCommand) {
-    console.log(arguments)
     program.outputHelp()
     console.log()
     log.error(colors.red(`未知的命令: ${errCommand[0]}`))
