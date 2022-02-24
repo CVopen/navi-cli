@@ -40,8 +40,9 @@ function generateCommand() {
     accessSync(commandJson, constants.F_OK)
     const customList = require(commandJson)
     commandList = [...commandList, ...customList]
+    console.log(35)
   } catch (error) {
-    console.log()
+    // error.message
   }
 
   return { commandList, INSIDE_CMD }

@@ -6,15 +6,14 @@ const core = require('@navi-cli/core')
 const prepare = require('@navi-cli/prepare')
 const { isEmptyList } = require('@navi-cli/utils')
 const bootstrap = require('@navi-cli/bootstrap')
-const log = require('@navi-cli/log')
-
-const colors = require('colors')
+const { print } = require('@navi-cli/log')
 
 const generateCommand = require('./command')
 
 const PKG = require('../package.json')
 
 async function naviCLI() {
+  print('test')
   if (await prepare(PKG)) process.exit(1)
 
   const { commandList, INSIDE_CMD } = generateCommand()
@@ -59,12 +58,12 @@ function registerCommand({ cmd, option, description, execPkgName }, index, progr
 
 function checkCmd(cmd, index, INSIDE_CMD) {
   if (!cmd || typeof cmd !== 'string') {
-    log.error(colors.red('command.json: cmd is not a string'))
+    print('error', 'command.json: cmd is not a string', 'red')
     process.exit(1)
   }
 
   if (index >= INSIDE_CMD.length && INSIDE_CMD.includes(cmd.split(' ')[0])) {
-    log.error(colors.red(`command.json: '${cmd}' is already occupied`))
+    print('error', `command.json: '${cmd}' is already occupied`, 'red')
     process.exit(1)
   }
 }

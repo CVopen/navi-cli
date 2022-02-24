@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@navi-cli/log": "file:..\\..\\utils\\log",
+    "path-exists": "^4.0.0",
     "user-home": "^3.0.0"
   }
 }

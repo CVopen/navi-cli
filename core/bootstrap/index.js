@@ -4,27 +4,38 @@ module.exports = bootstrap
 
 const path = require('path')
 
-const log = require('@navi-cli/log')
+const { print } = require('@navi-cli/log')
 
 const userHome = require('user-home')
+const pathExists = require('path-exists').sync
+
+const { prepareArg, isCache, isUseLatestPackage, isLcalDebug } = require('./prepareArg')
 
 function bootstrap(options) {
   const execPkg = options.execPkgName
   options = prepareArg(options)
-
   const { NAVI_CACHE_DIR, NAVI_CACHE_DEPENDENCIES } = process.env
   const chaheLocal = path.resolve(userHome, NAVI_CACHE_DIR, NAVI_CACHE_DEPENDENCIES)
-  log.verbose('execPkg', execPkg)
-  log.verbose('chaheLocal', chaheLocal)
-}
+  print('verbose', 'execPkg', execPkg, 'red')
+  print('verbose', 'chaheLocal', chaheLocal, 'red')
 
-function prepareArg(options) {
-  const command = Object.create(null)
-  Object.keys(options.command).forEach((key) => {
-    if (key.startsWith('_') || key === 'parent') return
-    command[key] = options.command[key]
-  })
-  options.command = command
-  delete options.execPkgName
-  return options
+  console.log(isLcalDebug())
+  const [isDebug, pkgPath] = isLcalDebug()
+  if (isDebug) {
+    if (!pathExists(pkgPath)) {
+      print('error', 'target package does not exist', 'red')
+      process.exit(1)
+    }
+    return
+  }
+
+  if (isCache()) {
+    if (isUseLatestPackage()) {
+      return
+    } else {
+      return
+    }
+  } else {
+    return
+  }
 }
