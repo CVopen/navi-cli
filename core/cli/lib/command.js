@@ -13,16 +13,26 @@ function generateCommand() {
       cmd: 'init [projectName]',
       description: 'generate a new project from a template',
       option: ['-f, --force', 'force initialization'],
+      execPkgName: '@navi-cli/exec',
     },
     {
       cmd: 'vue',
       description: 'generate a new project from a vue-cli',
+      execPkgName: '@navi-cli/vue',
     },
     {
       cmd: 'react',
       description: 'generate a new project from a create-react-app',
+      execPkgName: '@navi-cli/react',
+    },
+    {
+      cmd: 'add',
+      description: 'add custom command',
+      execPkgName: '@navi-cli/add',
     },
   ]
+
+  const INSIDE_CMD = commandList.map(({ cmd }) => cmd.split(' ')[0])
 
   const commandJson = path.join(userHome, process.env.NAVI_CACHE_DIR, CUSTOM_FILE_NAME)
 
@@ -34,5 +44,5 @@ function generateCommand() {
     console.log()
   }
 
-  return commandList
+  return { commandList, INSIDE_CMD }
 }
