@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-module.exports = vue;
+module.exports = vue
 
 function vue() {
-    // TODO
+  // TODO
 }

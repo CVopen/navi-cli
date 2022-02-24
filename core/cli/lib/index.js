@@ -6,6 +6,8 @@ const core = require('@navi-cli/core')
 const prepare = require('@navi-cli/prepare')
 const { isEmptyList } = require('@navi-cli/utils')
 
+const generateCommand = require('./command')
+
 const PKG = require('../package.json')
 
 async function naviCLI() {
@@ -13,30 +15,19 @@ async function naviCLI() {
 
   const program = core(PKG)
 
-  const command = [
-    {
-      cmd: ['init [projectName]', 'generate a new project from a template'],
-      option: [['-f, --force', 'force initialization']],
-      action() {
-        console.log('command init')
-      },
-    },
-    {
-      cmd: ['vue', 'generate a new project from a vue-cli'],
-      action() {
-        console.log('command vue')
-      },
-    },
-    {
-      cmd: ['react', 'generate a new project from a create-react-app'],
-      action() {
-        console.log('command react')
-      },
-    },
-  ]
+  generateCommand().forEach(({ cmd, option, action, description }) => {
+    if (!cmd || typeof cmd !== 'string') {
+      throw new Error('cmd is not a string')
+    }
 
-  command.forEach(({ cmd, option, action }) => {
-    let register = program.command(...cmd)
+    if (typeof action !== 'function') {
+      throw new Error('action is not a function')
+    }
+
+    let register = program.command(cmd)
+    if (description && typeof description === 'string') {
+      register.description(description)
+    }
     if (isEmptyList(option)) {
       if (isEmptyList(option[0])) {
         option.forEach((op) => register.option(...op))

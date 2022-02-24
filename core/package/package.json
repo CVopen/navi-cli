@@ -1,7 +1,7 @@
 {
-  "name": "@navi-cli/react",
+  "name": "@navi-cli/package",
   "version": "0.0.0",
-  "description": "navi-cli react",
+  "description": "navi-cli package",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
   "license": "ISC",
