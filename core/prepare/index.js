@@ -37,6 +37,7 @@ function checkRoot() {
 }
 
 function checkUserHome() {
+  log.info('userhome', userHome)
   if (!userHome || !pathExists(userHome)) {
     throw new Error(colors.red('当前登录用户主目录不存在!'))
   }

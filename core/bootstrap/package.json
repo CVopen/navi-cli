@@ -25,5 +25,9 @@
   },
   "bugs": {
     "url": "https://github.com/CVopen/navi-cli/issues"
+  },
+  "dependencies": {
+    "@navi-cli/log": "file:..\\..\\utils\\log",
+    "user-home": "^3.0.0"
   }
 }
