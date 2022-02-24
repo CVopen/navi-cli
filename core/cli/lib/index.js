@@ -5,6 +5,7 @@ module.exports = naviCLI
 const core = require('@navi-cli/core')
 const prepare = require('@navi-cli/prepare')
 const { isEmptyList } = require('@navi-cli/utils')
+const bootstrap = require('@navi-cli/bootstrap')
 
 const generateCommand = require('./command')
 
@@ -15,13 +16,9 @@ async function naviCLI() {
 
   const program = core(PKG)
 
-  generateCommand().forEach(({ cmd, option, action, description }) => {
+  generateCommand().forEach(({ cmd, option, description }) => {
     if (!cmd || typeof cmd !== 'string') {
       throw new Error('cmd is not a string')
-    }
-
-    if (typeof action !== 'function') {
-      throw new Error('action is not a function')
     }
 
     let register = program.command(cmd)
@@ -35,7 +32,7 @@ async function naviCLI() {
         register.option(...option)
       }
     }
-    register.action(action)
+    register.action(bootstrap)
   })
 
   program.parse(process.argv)
