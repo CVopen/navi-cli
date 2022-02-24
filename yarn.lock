@@ -1382,12 +1382,16 @@
     npmlog "^4.1.2"
     write-file-atomic "^3.0.3"
 
+"@navi-cli/bootstrap@file:core/bootstrap":
+  version "0.0.0"
+
 "@navi-cli/core@file:core/core":
   version "0.0.2"
   dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-core-0.0.2-5a78b7d4-0fb5-4ccb-8a35-6ba740bad570-1645537834217/node_modules/utils/log"
+    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-core-0.0.2-67558ac9-4fb0-4001-a663-381ff9d30800-1645712383873/node_modules/utils/log"
     colors "^1.4.0"
     commander "^9.0.0"
+    dotenv "^16.0.0"
 
 "@navi-cli/log@file:utils/log":
   version "0.0.0"
@@ -1397,11 +1401,14 @@
 "@navi-cli/prepare@file:core/prepare":
   version "0.0.0"
   dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-fd8a4cca-c15e-41bd-8cc5-55b34e7f9b60-1645537834219/node_modules/utils/log"
-    "@navi-cli/request" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-fd8a4cca-c15e-41bd-8cc5-55b34e7f9b60-1645537834219/node_modules/utils/request"
+    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-eada5859-0b29-4bf4-87e6-b6952078c2d7-1645712383871/node_modules/utils/log"
+    "@navi-cli/request" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-eada5859-0b29-4bf4-87e6-b6952078c2d7-1645712383871/node_modules/utils/request"
+    "@navi-cli/utils" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-eada5859-0b29-4bf4-87e6-b6952078c2d7-1645712383871/node_modules/utils/utils"
     axios "^0.25.0"
     colors "^1.4.0"
+    dedent "^0.7.0"
     dotenv "^16.0.0"
+    fs-extra "^10.0.0"
     path-exists "^4.0.0"
     root-check "^1.0.0"
     user-home "^3.0.0"
@@ -1411,6 +1418,11 @@
   dependencies:
     axios "^0.25.0"
     url-join "^4.0.1"
+
+"@navi-cli/utils@file:utils/utils":
+  version "0.0.2"
+  dependencies:
+    semver "^7.3.5"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"

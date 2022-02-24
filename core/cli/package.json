@@ -32,6 +32,8 @@
   "dependencies": {
     "@navi-cli/prepare": "file:..\\prepare",
     "@navi-cli/core": "file:..\\core",
+    "@navi-cli/utils": "file:..\\..\\utils\\utils",
+    "@navi-cli/bootstrap": "file:..\\bootstrap",
     "import-local": "^3.0.2",
     "npmlog": "^6.0.1"
   }
