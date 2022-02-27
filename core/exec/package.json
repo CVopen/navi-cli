@@ -1,7 +1,7 @@
 {
-  "name": "@navi-cli/package",
-  "version": "0.0.0",
-  "description": "navi-cli package",
+  "name": "@navi-cli/exec",
+  "version": "1.0.0",
+  "description": "navi-cli exec",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
   "license": "ISC",
@@ -28,10 +28,9 @@
   },
   "dependencies": {
     "@navi-cli/log": "file:..\\..\\utils\\log",
+    "@navi-cli/package": "file:..\\package",
     "@navi-cli/utils": "file:..\\..\\utils\\utils",
-    "@navi-cli/request": "file:..\\..\\utils\\request",
-    "npminstall": "^5.4.1",
-    "path-exists": "^4.0.0",
-    "pkg-dir": "^5.0.0"
+    "execa": "5.1.1",
+    "user-home": "^3.0.0"
   }
 }

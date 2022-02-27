@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@navi-cli/log": "file:..\\..\\utils\\log",
+    "@navi-cli/exec": "file:..\\exec",
     "@navi-cli/package": "file:..\\package",
     "@navi-cli/utils": "file:..\\..\\utils\\utils",
     "user-home": "^3.0.0"

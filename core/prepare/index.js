@@ -12,7 +12,7 @@ const fse = require('fs-extra')
 
 const { print } = require('@navi-cli/log')
 const { getPackageVersions } = require('@navi-cli/request')
-const { getLatestVersion } = require('@navi-cli/utils')
+const { getIsLatestVersion } = require('@navi-cli/utils')
 
 const ENV_FILE_NAME = 'navi-cli.env'
 
@@ -46,8 +46,7 @@ async function checkVersion(pkg) {
   const currentVersion = pkg.version,
     npmName = pkg.name,
     res = await getPackageVersions(npmName),
-    latestVersion = getLatestVersion(res, currentVersion)
-
+    latestVersion = getIsLatestVersion(res, currentVersion)
   if (!latestVersion) return print('notice', 'cli version', currentVersion)
 
   print(
@@ -64,8 +63,10 @@ async function checkVersion(pkg) {
 
 function checkEnv() {
   const env = require('./consts'),
-    dotenvPath = path.resolve(userHome, ENV_FILE_NAME)
-  if (!pathExists(dotenvPath)) {
+    dotenvPath = path.resolve(userHome, ENV_FILE_NAME),
+    isExists = pathExists(dotenvPath)
+
+  if (!isExists) {
     let content = ''
     Object.keys(env).forEach((key) => (content += `${key}=${env[key]} \n`))
     fse.outputFileSync(dotenvPath, content)
@@ -73,4 +74,12 @@ function checkEnv() {
   require('dotenv').config({
     path: dotenvPath,
   })
+
+  if (!isExists) {
+    Object.keys(env).forEach((key) => {
+      if (!process.env[key]) {
+        process.env[key] = env[key]
+      }
+    })
+  }
 }

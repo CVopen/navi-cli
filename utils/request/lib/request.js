@@ -2,16 +2,14 @@
 
 const axios = require('axios')
 
-const { getBaseUrl } = require('@navi-cli/utils')
-
 const request = axios.create({
-  baseURL: getBaseUrl(),
+  baseURL: process.env.NAVI_BASE_URL || 'https://registry.npmjs.org',
   timeout: 6000,
 })
 
 request.interceptors.request.use(
   (config) => config,
-  (err) => Promise.resolve(err)
+  (err) => Promise.reject(err)
 )
 
 request.interceptors.response.use(
@@ -21,7 +19,7 @@ request.interceptors.response.use(
     }
     return Promise.resolve()
   },
-  (err) => Promise.resolve(err)
+  (err) => Promise.reject(err)
 )
 
 const get = ({ url, params, headers = {} }) => {
