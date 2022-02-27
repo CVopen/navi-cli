@@ -5,37 +5,40 @@ module.exports = bootstrap
 const path = require('path')
 
 const { print } = require('@navi-cli/log')
+const Package = require('@navi-cli/package')
 
-const userHome = require('user-home')
-const pathExists = require('path-exists').sync
-
-const { prepareArg, isCache, isUseLatestPackage, isLcalDebug } = require('./prepareArg')
+const { prepareArg, isCache, isUseLatestPackage, isLcalDebug, getCacheLocal } = require('./prepareArg')
 
 function bootstrap(options) {
-  const execPkg = options.execPkgName
+  const commandName = options.command.name()
+  const packageName = options.packageName
   options = prepareArg(options)
-  const { NAVI_CACHE_DIR, NAVI_CACHE_DEPENDENCIES } = process.env
-  const chaheLocal = path.resolve(userHome, NAVI_CACHE_DIR, NAVI_CACHE_DEPENDENCIES)
-  print('verbose', 'execPkg', execPkg, 'red')
-  print('verbose', 'chaheLocal', chaheLocal, 'red')
 
-  console.log(isLcalDebug())
-  const [isDebug, pkgPath] = isLcalDebug()
-  if (isDebug) {
-    if (!pathExists(pkgPath)) {
-      print('error', 'target package does not exist', 'red')
-      process.exit(1)
-    }
-    return
+  print('verbose', 'options', options)
+
+  let targetPath = isLcalDebug(commandName)
+
+  let pkg = null
+  if (targetPath) {
+    pkg = new Package({ targetPath })
   }
+
+  let chaheLocal = getCacheLocal(isCache())
+  targetPath = chaheLocal
+  chaheLocal = path.resolve(targetPath, 'node_modules')
 
   if (isCache()) {
+    // 需要缓存
     if (isUseLatestPackage()) {
-      return
+      // 使用最新包
     } else {
-      return
+      // 不需要
     }
   } else {
-    return
+    // 不需要缓存
+    pkg = new Package({ targetPath, chaheLocal, packageName, packageVersion: 'latest' })
   }
+  const execPkgPath = pkg.getDebugPkgPath()
+
+  print('verbose', 'execPkgPath', execPkgPath, 'cyan')
 }

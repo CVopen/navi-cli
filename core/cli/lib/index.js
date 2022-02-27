@@ -13,7 +13,6 @@ const generateCommand = require('./command')
 const PKG = require('../package.json')
 
 async function naviCLI() {
-  print('test')
   if (await prepare(PKG)) process.exit(1)
 
   const { commandList, INSIDE_CMD } = generateCommand()
@@ -28,7 +27,7 @@ async function naviCLI() {
   program.parse(process.argv)
 }
 
-function registerCommand({ cmd, option, description, execPkgName }, index, program) {
+function registerCommand({ cmd, option, description, packageName }, index, program) {
   let register = program.command(cmd)
   if (description && typeof description === 'string') {
     register.description(description)
@@ -50,7 +49,7 @@ function registerCommand({ cmd, option, description, execPkgName }, index, progr
       cmds: commandArg,
       args,
       command,
-      execPkgName,
+      packageName,
     }
     bootstrap(params)
   })

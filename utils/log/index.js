@@ -28,7 +28,7 @@ function print() {
   logs(type, args, color)
 }
 
-function logs(type = 1, message, color) {
+function logs(type, message, color) {
   if (color) {
     log[type](colors[color](...message))
   } else {

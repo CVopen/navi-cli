@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path')
+
 const semver = require('semver')
 
 function getLatestVersion(versions = [], currentVersion) {
@@ -24,7 +26,25 @@ function isEmptyList(target) {
   return true
 }
 
+function formatPath(p) {
+  if (p && typeof p === 'string') {
+    const sep = path.sep
+    if (sep === '/') {
+      return p
+    } else {
+      return p.replace(/\\/g, '/')
+    }
+  }
+  return p
+}
+
+function getBaseUrl() {
+  return process.env.NAVI_BASE_URL || 'https://registry.npmjs.org'
+}
+
 module.exports = {
   getLatestVersion,
   isEmptyList,
+  formatPath,
+  getBaseUrl,
 }

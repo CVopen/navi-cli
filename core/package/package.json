@@ -25,5 +25,11 @@
   },
   "bugs": {
     "url": "https://github.com/CVopen/navi-cli/issues"
+  },
+  "dependencies": {
+    "@navi-cli/log": "file:..\\..\\utils\\log",
+    "@navi-cli/utils": "file:..\\..\\utils\\utils",
+    "npminstall": "^5.4.1",
+    "pkg-dir": "^5.0.0"
   }
 }
