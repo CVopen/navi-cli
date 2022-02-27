@@ -27,12 +27,13 @@
     "url": "https://github.com/CVopen/navi-cli/issues"
   },
   "dependencies": {
-    "@navi-cli/log": "file:..\\..\\utils\\log",
+    "@navi-cli/log": "^1.0.1",
     "colors": "^1.4.0",
     "commander": "^9.0.0",
     "dotenv": "^16.0.0"
   },
   "engines": {
     "node": "^12.0.0 || >= 14.0.0"
-  }
+  },
+  "gitHead": "ffc8442d652463c9db87e1aa11425bdc54da3e5b"
 }
