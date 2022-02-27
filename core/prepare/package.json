@@ -1,6 +1,6 @@
 {
   "name": "@navi-cli/prepare",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "navi-cli prepare",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
@@ -27,9 +27,9 @@
     "url": "https://github.com/CVopen/navi-cli/issues"
   },
   "dependencies": {
-    "@navi-cli/log": "^1.0.1",
-    "@navi-cli/request": "^1.0.1",
-    "@navi-cli/utils": "^1.0.1",
+    "@navi-cli/log": "^1.0.3",
+    "@navi-cli/request": "^1.0.3",
+    "@navi-cli/utils": "^1.0.3",
     "axios": "^0.25.0",
     "colors": "^1.4.0",
     "dedent": "^0.7.0",

@@ -1,6 +1,6 @@
 {
   "name": "@navi-cli/core",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "navi-cli core",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
@@ -27,7 +27,7 @@
     "url": "https://github.com/CVopen/navi-cli/issues"
   },
   "dependencies": {
-    "@navi-cli/log": "^1.0.1",
+    "@navi-cli/log": "^1.0.3",
     "colors": "^1.4.0",
     "commander": "^9.0.0",
     "dotenv": "^16.0.0"
