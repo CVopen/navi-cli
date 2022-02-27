@@ -1,7 +1,7 @@
 {
-  "name": "@navi-cli/bootstrap",
+  "name": "@navi-cli/open",
   "version": "0.0.0",
-  "description": "navi-cli bootstrap",
+  "description": "navi-cli open",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
   "license": "ISC",
@@ -25,11 +25,5 @@
   },
   "bugs": {
     "url": "https://github.com/CVopen/navi-cli/issues"
-  },
-  "dependencies": {
-    "@navi-cli/log": "file:..\\..\\utils\\log",
-    "@navi-cli/package": "file:..\\package",
-    "@navi-cli/utils": "file:..\\..\\utils\\utils",
-    "user-home": "^3.0.0"
   }
 }

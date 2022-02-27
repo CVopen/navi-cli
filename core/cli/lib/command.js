@@ -13,22 +13,22 @@ function generateCommand() {
       cmd: 'init [projectName]',
       description: 'generate a new project from a template',
       option: ['-f, --force', 'force initialization'],
-      execPkgName: '@navi-cli/exec',
+      packageName: '@navi-cli/init',
     },
     {
       cmd: 'vue',
       description: 'generate a new project from a vue-cli',
-      execPkgName: '@navi-cli/vue',
+      packageName: '@navi-cli/vue',
     },
     {
       cmd: 'react',
       description: 'generate a new project from a create-react-app',
-      execPkgName: '@navi-cli/react',
+      packageName: '@navi-cli/react',
     },
     {
       cmd: 'add',
       description: 'add custom command',
-      execPkgName: '@navi-cli/add',
+      packageName: '@navi-cli/add',
     },
   ]
 
@@ -40,8 +40,9 @@ function generateCommand() {
     accessSync(commandJson, constants.F_OK)
     const customList = require(commandJson)
     commandList = [...commandList, ...customList]
+    console.log(35)
   } catch (error) {
-    console.log()
+    // error.message
   }
 
   return { commandList, INSIDE_CMD }

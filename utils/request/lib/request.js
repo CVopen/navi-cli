@@ -2,8 +2,10 @@
 
 const axios = require('axios')
 
+const { getBaseUrl } = require('@navi-cli/utils')
+
 const request = axios.create({
-  baseURL: process.env.NAVI_BASE_URL || 'https://registry.npmjs.org',
+  baseURL: getBaseUrl(),
   timeout: 6000,
 })
 

@@ -27,6 +27,7 @@
     "url": "https://github.com/CVopen/navi-cli/issues"
   },
   "dependencies": {
-    "npmlog": "^6.0.1"
+    "npmlog": "^6.0.1",
+    "colors": "^1.4.0"
   }
 }

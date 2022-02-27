@@ -10,7 +10,7 @@ const pathExists = require('path-exists').sync
 const dedent = require('dedent')
 const fse = require('fs-extra')
 
-const log = require('@navi-cli/log')
+const { print } = require('@navi-cli/log')
 const { getPackageVersions } = require('@navi-cli/request')
 const { getLatestVersion } = require('@navi-cli/utils')
 
@@ -18,7 +18,7 @@ const ENV_FILE_NAME = 'navi-cli.env'
 
 async function prepare(pkg) {
   if (process.argv.length <= 2) {
-    log.error('cli', 'A command is required. Pass --help to see all available commands and options.')
+    print('error', 'cli', 'A command is required. Pass --help to see all available commands and options.', 'red')
     process.exit(1)
   }
   try {
@@ -27,7 +27,7 @@ async function prepare(pkg) {
     checkUserHome()
     checkEnv()
   } catch (error) {
-    log.error(error.message)
+    print('error', error.message, 'red')
     return true
   }
 }
@@ -37,7 +37,6 @@ function checkRoot() {
 }
 
 function checkUserHome() {
-  log.info('userhome', userHome)
   if (!userHome || !pathExists(userHome)) {
     throw new Error(colors.red('当前登录用户主目录不存在!'))
   }
@@ -49,15 +48,16 @@ async function checkVersion(pkg) {
     res = await getPackageVersions(npmName),
     latestVersion = getLatestVersion(res, currentVersion)
 
-  if (!latestVersion) return log.notice('cli version', currentVersion)
+  if (!latestVersion) return print('notice', 'cli version', currentVersion)
 
-  log.warn(
+  print(
+    'warn',
     'cli updated',
     colors.yellow(
       dedent`
-        navi has a new version(npm install -g ${npmName})
-        current: ${currentVersion}, latest: ${latestVersion}
-      `
+      navi has a new version(npm install -g ${npmName})
+      current: ${currentVersion}, latest: ${latestVersion}
+    `
     )
   )
 }

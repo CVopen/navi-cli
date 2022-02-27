@@ -27,6 +27,7 @@
     "url": "https://github.com/CVopen/navi-cli/issues"
   },
   "dependencies": {
+    "@navi-cli/utils": "file:..\\utils",
     "axios": "^0.25.0",
     "url-join": "^4.0.1"
   }
