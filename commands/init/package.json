@@ -1,6 +1,6 @@
 {
   "name": "@navi-cli/init",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "open-cli init",
   "author": "CVopen",
   "homepage": "",
@@ -18,5 +18,6 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
-  }
+  },
+  "gitHead": "ffc8442d652463c9db87e1aa11425bdc54da3e5b"
 }

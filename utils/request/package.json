@@ -1,6 +1,6 @@
 {
   "name": "@navi-cli/request",
-  "version": "0.0.0",
+  "version": "1.0.3",
   "description": "navi-cli request",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
@@ -29,5 +29,6 @@
   "dependencies": {
     "axios": "^0.25.0",
     "url-join": "^4.0.1"
-  }
+  },
+  "gitHead": "ffc8442d652463c9db87e1aa11425bdc54da3e5b"
 }
