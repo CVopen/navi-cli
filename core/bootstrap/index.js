@@ -14,12 +14,12 @@ const fse = require('fs-extra')
 async function bootstrap(options) {
   const packageName = options.packageName
 
-  let targetPath = options.local
+  let targetPath = options.targetPath
 
   let pkg = null
   if (targetPath) {
     pkg = new Package({ targetPath })
-    exec(pkg.getPkgPath(options.local), options)
+    exec(pkg.getPkgPath(targetPath), options)
     return
   }
 
@@ -66,9 +66,9 @@ function init(options) {
     if (key.startsWith('_') || key === 'parent') return
     command[key] = options.command[key]
   })
-  options.command = command
-  delete options.packageName
-  delete options.clear
-  delete options.targetPath
-  return options
+  return {
+    cmds: options.cmds,
+    args: options.args,
+    command,
+  }
 }

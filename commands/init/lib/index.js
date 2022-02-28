@@ -1,9 +1,20 @@
 'use strict'
 
-module.exports = init
+module.exports = factory
 
-function init(options) {
-  // TODO
-  console.log(options)
-  console.log(process.env.NAVI_CACHE_DIR)
+function factory(options) {
+  return new Init(options)
+}
+
+class Init {
+  constructor(options) {
+    this.initialize(options)
+  }
+
+  initialize(options) {
+    this.projectName = options.cmds[0]
+    this.force = options.args.force
+    console.log(this.projectName)
+    console.log(this.force)
+  }
 }

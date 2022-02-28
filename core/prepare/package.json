@@ -27,9 +27,9 @@
     "url": "https://github.com/CVopen/navi-cli/issues"
   },
   "dependencies": {
-    "@navi-cli/log": "^1.0.3",
-    "@navi-cli/request": "^1.0.3",
-    "@navi-cli/utils": "^1.0.3",
+    "@navi-cli/log": "file:..\\..\\utils\\log",
+    "@navi-cli/request": "file:..\\..\\utils\\request",
+    "@navi-cli/utils": "file:..\\..\\utils\\utils",
     "axios": "^0.25.0",
     "colors": "^1.4.0",
     "dedent": "^0.7.0",

@@ -1382,71 +1382,30 @@
     npmlog "^4.1.2"
     write-file-atomic "^3.0.3"
 
-"@navi-cli/bootstrap@file:core/bootstrap":
-  version "0.0.0"
-  dependencies:
-    "@navi-cli/exec" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-bootstrap-0.0.0-67842680-b0b2-4b2f-8a21-20d443c8ce63-1645978942020/node_modules/@navi-cli/exec"
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-bootstrap-0.0.0-67842680-b0b2-4b2f-8a21-20d443c8ce63-1645978942020/node_modules/utils/log"
-    "@navi-cli/package" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-bootstrap-0.0.0-67842680-b0b2-4b2f-8a21-20d443c8ce63-1645978942020/node_modules/@navi-cli/package"
-    "@navi-cli/utils" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-bootstrap-0.0.0-67842680-b0b2-4b2f-8a21-20d443c8ce63-1645978942020/node_modules/utils/utils"
-    user-home "^3.0.0"
-
-"@navi-cli/core@file:core/core":
-  version "0.0.2"
-  dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-core-0.0.2-86d2c52b-4364-47d6-903c-ed674ed131b1-1645978942020/node_modules/utils/log"
-    colors "^1.4.0"
-    commander "^9.0.0"
-    dotenv "^16.0.0"
-
-"@navi-cli/exec@file:core/exec":
-  version "1.0.0"
-  dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-exec-1.0.0-0426edc9-977a-4961-8533-3de861824b0d-1645978942019/node_modules/utils/log"
-    "@navi-cli/package" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-exec-1.0.0-0426edc9-977a-4961-8533-3de861824b0d-1645978942019/node_modules/@navi-cli/package"
-    "@navi-cli/utils" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-exec-1.0.0-0426edc9-977a-4961-8533-3de861824b0d-1645978942019/node_modules/utils/utils"
-    execa "5.1.1"
-    user-home "^3.0.0"
-
 "@navi-cli/log@file:utils/log":
-  version "0.0.0"
+  version "1.0.3"
   dependencies:
     colors "^1.4.0"
     npmlog "^6.0.1"
 
 "@navi-cli/package@file:core/package":
-  version "0.0.0"
+  version "1.0.3"
   dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-package-0.0.0-28987351-a17b-40e6-8192-b0ec9bb17b97-1645978942019/node_modules/utils/log"
-    "@navi-cli/request" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-package-0.0.0-28987351-a17b-40e6-8192-b0ec9bb17b97-1645978942019/node_modules/utils/request"
-    "@navi-cli/utils" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-package-0.0.0-28987351-a17b-40e6-8192-b0ec9bb17b97-1645978942019/node_modules/utils/utils"
+    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-package-1.0.3-69ec54c5-946a-467a-90af-02b955702765-1646065443183/node_modules/utils/log"
+    "@navi-cli/request" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-package-1.0.3-69ec54c5-946a-467a-90af-02b955702765-1646065443183/node_modules/utils/request"
+    "@navi-cli/utils" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-package-1.0.3-69ec54c5-946a-467a-90af-02b955702765-1646065443183/node_modules/utils/utils"
     npminstall "^5.4.1"
     path-exists "^4.0.0"
     pkg-dir "^5.0.0"
 
-"@navi-cli/prepare@file:core/prepare":
-  version "0.0.0"
-  dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-f562f0cb-ef79-4bb7-8333-c24bc611d367-1645978942021/node_modules/utils/log"
-    "@navi-cli/request" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-f562f0cb-ef79-4bb7-8333-c24bc611d367-1645978942021/node_modules/utils/request"
-    "@navi-cli/utils" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-0.0.0-f562f0cb-ef79-4bb7-8333-c24bc611d367-1645978942021/node_modules/utils/utils"
-    axios "^0.25.0"
-    colors "^1.4.0"
-    dedent "^0.7.0"
-    dotenv "^16.0.0"
-    fs-extra "^10.0.0"
-    path-exists "^4.0.0"
-    root-check "^1.0.0"
-    user-home "^3.0.0"
-
 "@navi-cli/request@file:utils/request":
-  version "0.0.0"
+  version "1.0.3"
   dependencies:
     axios "^0.25.0"
     url-join "^4.0.1"
 
 "@navi-cli/utils@file:utils/utils":
-  version "0.0.2"
+  version "1.0.3"
   dependencies:
     semver "^7.3.5"
 

@@ -28,7 +28,7 @@ async function naviCLI() {
 }
 
 function registerCommand(item, program) {
-  const { cmd, option, description } = item
+  const { cmd, option, description, targetPath, packageName } = item
   let register = program.command(cmd)
   if (description && typeof description === 'string') {
     register.description(description)
@@ -46,16 +46,13 @@ function registerCommand(item, program) {
     const commandArg = [...arguments],
       command = commandArg.pop(),
       args = commandArg.pop()
-
     const params = {
-      ...item,
       cmds: commandArg,
       args,
       command,
+      targetPath,
+      packageName,
     }
-    delete params.cmd
-    delete params.option
-    delete params.description
     bootstrap(params)
   })
 }
