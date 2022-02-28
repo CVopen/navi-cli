@@ -40,7 +40,6 @@ function generateCommand() {
     accessSync(commandJson, constants.F_OK)
     const customList = require(commandJson)
     commandList = [...commandList, ...customList]
-    console.log(35)
   } catch (error) {
     // error.message
   }

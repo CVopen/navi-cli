@@ -17,7 +17,7 @@ class Package {
     this.packageName = options.packageName
     this.packageVersion = options.packageVersion
 
-    print('verbose', 'options', options)
+    print('verbose', 'Package options', options)
   }
 
   getPkgPath(targetPath) {
@@ -36,8 +36,12 @@ class Package {
     return formatPath(dir)
   }
 
-  install() {
-    npminstall({
+  async install() {
+    if (!this.packageVersion) {
+      const versions = await getPackageVersions(this.packageName)
+      this.packageVersion = getSortVersion(versions)[0]
+    }
+    await npminstall({
       root: this.targetPath,
       storeDir: this.chaheLocal,
       registry: process.env.NAVI_BASE_URL,
@@ -47,7 +51,6 @@ class Package {
 
   async exists(isUseLatest = true) {
     const res = await getPackageVersions(this.packageName)
-    console.log(res)
     return this._exists(res, isUseLatest)
   }
 
@@ -56,12 +59,15 @@ class Package {
     if (isUserLatest) {
       this.packageVersion = versions[0]
       return pathExists(this._getPkgLocal(versions[0]))
-    } else {
-      return versions.some((version) => {
-        this.packageVersion = version
-        return pathExists(this._getPkgLocal(version))
-      })
     }
+    const exist = versions.some((version) => {
+      this.packageVersion = version
+      return pathExists(this._getPkgLocal(version))
+    })
+    if (!exist) {
+      this.packageVersion = versions[0]
+    }
+    return exist
   }
 
   _getPkgLocal(version = this.packageVersion) {
@@ -71,10 +77,8 @@ class Package {
       const cacheName = this.packageName.replace('/', '_')
       const nameArr = this.packageName.split('/')
       return path.resolve(this.chaheLocal, `_${cacheName}@${version}@${nameArr[0]}`, nameArr[1])
-    } else {
-      console.log(this.chaheLocal)
-      return path.resolve(this.chaheLocal, `_${this.packageName}@${version}@${this.packageName}`)
     }
+    return path.resolve(this.chaheLocal, `_${this.packageName}@${version}@${this.packageName}`)
   }
 }
 

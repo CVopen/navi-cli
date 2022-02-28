@@ -1,6 +1,6 @@
 {
   "name": "@navi-cli/bootstrap",
-  "version": "0.0.0",
+  "version": "1.0.3",
   "description": "navi-cli bootstrap",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
@@ -28,9 +28,9 @@
   },
   "dependencies": {
     "@navi-cli/log": "file:..\\..\\utils\\log",
-    "@navi-cli/exec": "file:..\\exec",
     "@navi-cli/package": "file:..\\package",
-    "@navi-cli/utils": "file:..\\..\\utils\\utils",
+    "fs-extra": "^10.0.0",
+    "execa": "5.1.1",
     "user-home": "^3.0.0"
   }
 }
