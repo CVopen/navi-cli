@@ -30,11 +30,11 @@
     "url": "https://github.com/CVopen/navi-cli/issues"
   },
   "dependencies": {
-    "@navi-cli/bootstrap": "^1.0.3",
-    "@navi-cli/core": "^1.0.3",
-    "@navi-cli/log": "^1.0.3",
-    "@navi-cli/prepare": "^1.0.3",
-    "@navi-cli/utils": "^1.0.3",
+    "@navi-cli/bootstrap": "file:..\\bootstrap",
+    "@navi-cli/core": "file:..\\core",
+    "@navi-cli/log": "file:..\\..\\utils\\log",
+    "@navi-cli/prepare": "file:..\\prepare",
+    "@navi-cli/utils": "file:..\\..\\utils\\utils",
     "import-local": "^3.0.2",
     "npmlog": "^6.0.1",
     "user-home": "^3.0.0"
