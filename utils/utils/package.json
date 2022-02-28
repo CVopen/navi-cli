@@ -21,5 +21,6 @@
   },
   "dependencies": {
     "semver": "^7.3.5"
-  }
+  },
+  "gitHead": "ffc8442d652463c9db87e1aa11425bdc54da3e5b"
 }
