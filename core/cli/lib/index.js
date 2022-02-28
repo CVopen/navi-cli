@@ -21,13 +21,14 @@ async function naviCLI() {
 
   commandList.forEach((item, index) => {
     checkCmd(item.cmd, index, INSIDE_CMD)
-    registerCommand(item, index, program)
+    registerCommand(item, program)
   })
 
   program.parse(process.argv)
 }
 
-function registerCommand({ cmd, option, description, packageName }, index, program) {
+function registerCommand(item, program) {
+  const { cmd, option, description } = item
   let register = program.command(cmd)
   if (description && typeof description === 'string') {
     register.description(description)
@@ -45,12 +46,16 @@ function registerCommand({ cmd, option, description, packageName }, index, progr
     const commandArg = [...arguments],
       command = commandArg.pop(),
       args = commandArg.pop()
+
     const params = {
+      ...item,
       cmds: commandArg,
       args,
       command,
-      packageName,
     }
+    delete params.cmd
+    delete params.option
+    delete params.description
     bootstrap(params)
   })
 }
