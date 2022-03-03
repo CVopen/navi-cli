@@ -2,9 +2,10 @@
 
 const path = require('path')
 
-const { print } = require('@navi-cli/log')
+const { ValidationError, print } = require('@navi-cli/log')
 const { formatPath, getSortVersion } = require('@navi-cli/utils')
 const { getPackageVersions } = require('@navi-cli/request')
+const spinner = require('@navi-cli/spinner')
 
 const pkgDir = require('pkg-dir').sync
 const npminstall = require('npminstall')
@@ -26,8 +27,7 @@ class Package {
     }
     const dir = pkgDir(targetPath)
     if (!dir) {
-      print('error', 'target package does not exist', 'red')
-      process.exit(1)
+      throw new ValidationError('red', 'target package does not exist')
     }
     const pkg = require(path.resolve(dir, 'package.json'))
     if (pkg && pkg.main) {
@@ -38,7 +38,9 @@ class Package {
 
   async install() {
     if (!this.packageVersion) {
+      const loading = spinner()
       const versions = await getPackageVersions(this.packageName)
+      loading.stop()
       this.packageVersion = getSortVersion(versions)[0]
     }
     await npminstall({
@@ -50,7 +52,9 @@ class Package {
   }
 
   async exists(isUseLatest = true) {
+    const loading = spinner()
     const res = await getPackageVersions(this.packageName)
+    loading.stop()
     return this._exists(res, isUseLatest)
   }
 

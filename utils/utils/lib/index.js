@@ -42,9 +42,14 @@ function formatPath(p) {
   return p
 }
 
+function sleep(time = 1000) {
+  return new Promise((resolve) => setTimeout(resolve, time))
+}
+
 module.exports = {
   getIsLatestVersion,
   isEmptyList,
   formatPath,
   getSortVersion,
+  sleep,
 }

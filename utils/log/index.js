@@ -36,7 +36,15 @@ function logs(type, message, color) {
   }
 }
 
+class ValidationError extends Error {
+  constructor(color, message, ...rest) {
+    super(message)
+    log.error(colors[color](message), ...rest)
+  }
+}
+
 module.exports = {
   log,
   print,
+  ValidationError,
 }
