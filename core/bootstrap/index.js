@@ -4,11 +4,10 @@ module.exports = bootstrap
 
 const path = require('path')
 
-const { print } = require('@navi-cli/log')
 const Package = require('@navi-cli/package')
+const childProcess = require('@navi-cli/child-process')
 const { isCache, isUseLatestPackage, getCacheLocal } = require('./prepareArg')
 
-const execa = require('execa')
 const fse = require('fs-extra')
 
 async function bootstrap(options) {
@@ -47,13 +46,7 @@ function exec(execPkgPath, options) {
 
   // 执行
   const code = `require('${execPkgPath}')(${JSON.stringify(options)})`
-  const child = execa('node', ['-e', code], {
-    cwd: process.cwd(),
-    stdio: 'inherit',
-  })
-  child.on('error', (err) => {
-    print('error', err.message, 'red')
-  })
+  const child = childProcess.exec('node', ['-e', code])
   child.on('exit', () => {
     if (!clear) return
     fse.remove(targetPath)

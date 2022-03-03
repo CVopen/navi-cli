@@ -6,7 +6,7 @@ const core = require('@navi-cli/core')
 const prepare = require('@navi-cli/prepare')
 const { isEmptyList } = require('@navi-cli/utils')
 const bootstrap = require('@navi-cli/bootstrap')
-const { print } = require('@navi-cli/log')
+const { ValidationError } = require('@navi-cli/log')
 
 const generateCommand = require('./command')
 
@@ -59,12 +59,10 @@ function registerCommand(item, program) {
 
 function checkCmd(cmd, index, INSIDE_CMD) {
   if (!cmd || typeof cmd !== 'string') {
-    print('error', 'command.json: cmd is not a string', 'red')
-    process.exit(1)
+    throw new ValidationError('red', 'command.json: cmd is not a string')
   }
 
   if (index >= INSIDE_CMD.length && INSIDE_CMD.includes(cmd.split(' ')[0])) {
-    print('error', `command.json: '${cmd}' is already occupied`, 'red')
-    process.exit(1)
+    throw new ValidationError('red', `command.json: '${cmd}' is already occupied`)
   }
 }

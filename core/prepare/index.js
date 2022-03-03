@@ -10,7 +10,7 @@ const pathExists = require('path-exists').sync
 const dedent = require('dedent')
 const fse = require('fs-extra')
 
-const { print } = require('@navi-cli/log')
+const { print, ValidationError } = require('@navi-cli/log')
 const { getPackageVersions } = require('@navi-cli/request')
 const { getIsLatestVersion } = require('@navi-cli/utils')
 
@@ -18,8 +18,11 @@ const ENV_FILE_NAME = 'navi-cli.env'
 
 async function prepare(pkg) {
   if (process.argv.length <= 2) {
-    print('error', 'cli', 'A command is required. Pass --help to see all available commands and options.', 'red')
-    process.exit(1)
+    throw new ValidationError(
+      'red',
+      'cli',
+      'A command is required. Pass --help to see all available commands and options.'
+    )
   }
   try {
     await checkVersion(pkg)

@@ -27,10 +27,9 @@
     "url": "https://github.com/CVopen/navi-cli/issues"
   },
   "dependencies": {
-    "@navi-cli/log": "file:..\\..\\utils\\log",
+    "@navi-cli/child-process": "file:..\\..\\utils\\child-process",
     "@navi-cli/package": "file:..\\package",
     "fs-extra": "^10.0.0",
-    "execa": "5.1.1",
     "user-home": "^3.0.0"
   },
   "gitHead": "ffc8442d652463c9db87e1aa11425bdc54da3e5b"

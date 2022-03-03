@@ -1,7 +1,7 @@
 {
-  "name": "@navi-cli/package",
-  "version": "1.0.3",
-  "description": "navi-cli package",
+  "name": "@navi-cli/spinner",
+  "version": "1.0.0",
+  "description": "navi-cli spinner",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
   "license": "ISC",
@@ -27,13 +27,6 @@
     "url": "https://github.com/CVopen/navi-cli/issues"
   },
   "dependencies": {
-    "@navi-cli/log": "file:..\\..\\utils\\log",
-    "@navi-cli/utils": "file:..\\..\\utils\\utils",
-    "@navi-cli/request": "file:..\\..\\utils\\request",
-    "@navi-cli/spinner": "file:..\\..\\utils\\spinner",
-    "npminstall": "^5.4.1",
-    "path-exists": "^4.0.0",
-    "pkg-dir": "^5.0.0"
-  },
-  "gitHead": "ffc8442d652463c9db87e1aa11425bdc54da3e5b"
+    "ora": "^5.4.1"
+  }
 }
