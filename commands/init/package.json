@@ -1,6 +1,6 @@
 {
   "name": "@navi-cli/init",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "open-cli init",
   "author": "CVopen",
   "homepage": "",
@@ -23,8 +23,8 @@
   "dependencies": {
     "@navi-cli/child-process": "file:..\\..\\utils\\child-process",
     "@navi-cli/log": "file:..\\..\\utils\\log",
-    "@navi-cli/utils": "file:..\\..\\utils\\utils",
     "@navi-cli/package": "file:..\\..\\core\\package",
+    "@navi-cli/utils": "file:..\\..\\utils\\utils",
     "ejs": "^3.1.6",
     "fs-extra": "^10.0.0",
     "glob": "^7.2.0",
