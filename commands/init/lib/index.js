@@ -97,7 +97,7 @@ class Init {
     if (!fse.pathExistsSync(settingPath)) return mergeOption()
 
     const settingJson = require(settingPath)
-
+    if (!settingJson.ignore) settingJson.ignore = []
     if (!settingJson.template || !isEmptyList(settingJson.template)) return mergeOption(settingJson)
 
     function validate(v) {
@@ -148,8 +148,9 @@ class Init {
         })
       }
     }
-
-    return new Promise((resolve) => glob('**', { ...options, ignore: setting.ignore }, _globCallback(resolve)))
+    return new Promise((resolve) =>
+      glob('**', { ...options, ignore: [...setting.ignore, '**/*.html'] }, _globCallback(resolve))
+    )
   }
 
   execute({ targetPath, setting, ignore }) {
