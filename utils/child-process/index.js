@@ -4,9 +4,13 @@ const { ValidationError } = require('@navi-cli/log')
 
 const execa = require('execa')
 
+function mergeOptions(opts) {
+  return Object.assign({}, opts, { stdio: 'inherit' })
+}
+
 function exec(command, args, opts) {
-  const options = Object.assign({}, opts, { stdio: 'inherit' })
-  const child = execa(command, args, options)
+  opts = mergeOptions(opts)
+  const child = execa(command, args, opts)
   child.on('error', (err) => {
     throw new ValidationError('red', err.message)
   })
@@ -15,8 +19,7 @@ function exec(command, args, opts) {
 }
 
 function execSync(command, args, opts) {
-  const options = Object.assign({}, opts, { stdio: 'inherit' })
-  return execa.sync(command, args, options).stdout
+  return execa.sync(command, args, mergeOptions(opts)).stdout
 }
 
 module.exports = {

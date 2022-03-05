@@ -7,7 +7,7 @@ const dots = require('cli-spinners')
 
 const dotsKeyList = Object.keys(dots)
 
-function spinner({ prefixText = 'loading', text, index } = {}) {
+function spinner({ prefixText = 'loading: ', text, index } = {}) {
   if (typeof index !== 'number') {
     index = dotsKeyList[parseInt(Math.random() * dotsKeyList.length)]
   }

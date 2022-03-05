@@ -4,12 +4,14 @@ const axios = require('axios')
 
 const request = axios.create({
   baseURL: process.env.NAVI_BASE_URL || 'https://registry.npmjs.org',
-  timeout: 6000,
+  timeout: 10000,
 })
 
 request.interceptors.request.use(
   (config) => config,
-  (err) => Promise.reject(err)
+  (err) => {
+    throw new Error(err)
+  }
 )
 
 request.interceptors.response.use(
@@ -19,7 +21,9 @@ request.interceptors.response.use(
     }
     return Promise.resolve()
   },
-  (err) => Promise.reject(err)
+  (err) => {
+    throw new Error(err)
+  }
 )
 
 const get = ({ url, params, headers = {} }) => {

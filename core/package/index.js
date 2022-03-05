@@ -23,7 +23,7 @@ class Package {
 
   getPkgPath(targetPath) {
     if (!targetPath) {
-      targetPath = this._getPkgLocal()
+      targetPath = this.getPkgLocal()
     }
     const dir = pkgDir(targetPath)
     if (!dir) {
@@ -62,11 +62,11 @@ class Package {
     versions = getSortVersion(versions)
     if (isUserLatest) {
       this.packageVersion = versions[0]
-      return pathExists(this._getPkgLocal(versions[0]))
+      return pathExists(this.getPkgLocal(versions[0]))
     }
     const exist = versions.some((version) => {
       this.packageVersion = version
-      return pathExists(this._getPkgLocal(version))
+      return pathExists(this.getPkgLocal(version))
     })
     if (!exist) {
       this.packageVersion = versions[0]
@@ -74,7 +74,7 @@ class Package {
     return exist
   }
 
-  _getPkgLocal(version = this.packageVersion) {
+  getPkgLocal(version = this.packageVersion) {
     // @navi-cli/init -> _@navi-cli_init@1.0.3@@navi-cli
     // userhome -> _userhome@1.0.0@userhome
     if (this.packageName.startsWith('@')) {

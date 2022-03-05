@@ -21,10 +21,13 @@
   },
   "gitHead": "ffc8442d652463c9db87e1aa11425bdc54da3e5b",
   "dependencies": {
-    "@navi-cli/log": "file:..\\..\\utils\\log",
-    "@navi-cli/package": "file:..\\..\\core\\package",
     "@navi-cli/child-process": "file:..\\..\\utils\\child-process",
+    "@navi-cli/log": "file:..\\..\\utils\\log",
+    "@navi-cli/utils": "file:..\\..\\utils\\utils",
+    "@navi-cli/package": "file:..\\..\\core\\package",
+    "ejs": "^3.1.6",
     "fs-extra": "^10.0.0",
+    "glob": "^7.2.0",
     "inquirer": "^8.2.0",
     "user-home": "^3.0.0",
     "validate-npm-package-name": "^3.0.0"
