@@ -1,11 +1,11 @@
-# `@navi-cli/exec`
+# `@navi-cli/bootstrap`
 
 > TODO: description
 
 ## Usage
 
 ```
-const exec = require('@navi-cli/exec');
+const exec = require('@navi-cli/bootstrap');
 
 // TODO: DEMONSTRATE API
 ```
