@@ -148,6 +148,7 @@ class Init {
         })
       }
     }
+    if (!setting.ignore) setting.ignore = []
     return new Promise((resolve) =>
       glob('**', { ...options, ignore: [...setting.ignore, '**/*.html'] }, _globCallback(resolve))
     )
