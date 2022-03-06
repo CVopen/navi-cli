@@ -47,7 +47,11 @@ class Init {
   }
 
   async prepare() {
-    if (!fse.pathExistsSync(this.projectPath)) return
+    if (!fse.pathExistsSync(this.projectPath)) {
+      fse.ensureFileSync(this.projectPath)
+      execSync('git', ['init'], { cwd: this.projectPath })
+      return
+    }
     if (!this.force) {
       print('warn', 'A directory with the same name exists', 'yellow')
       process.exit(0)
@@ -60,6 +64,7 @@ class Init {
     })
     if (!result.confirmDelete) process.exit(0)
     fse.emptyDirSync(this.projectPath)
+    execSync('git', ['init'], { cwd: this.projectPath })
   }
 
   async slectTemplate(choices) {
@@ -97,7 +102,7 @@ class Init {
     if (!fse.pathExistsSync(settingPath)) return mergeOption()
 
     const settingJson = require(settingPath)
-
+    if (!settingJson.ignore) settingJson.ignore = []
     if (!settingJson.template || !isEmptyList(settingJson.template)) return mergeOption(settingJson)
 
     function validate(v) {
@@ -148,8 +153,10 @@ class Init {
         })
       }
     }
-
-    return new Promise((resolve) => glob('**', { ...options, ignore: setting.ignore }, _globCallback(resolve)))
+    if (!setting.ignore) setting.ignore = []
+    return new Promise((resolve) =>
+      glob('**', { ...options, ignore: [...setting.ignore, '**/*.html'] }, _globCallback(resolve))
+    )
   }
 
   execute({ targetPath, setting, ignore }) {

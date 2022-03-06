@@ -1,11 +1,11 @@
 {
   "name": "@navi-cli/prepare",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "navi-cli prepare",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
   "license": "ISC",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"

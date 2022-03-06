@@ -16,7 +16,7 @@ function generateCommand() {
       packageName: '@navi-cli/init',
     },
     {
-      cmd: 'vue',
+      cmd: 'vue [vueCommand]',
       description: 'generate a new project from a vue-cli',
       packageName: '@navi-cli/vue',
     },
