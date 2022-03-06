@@ -1,6 +1,6 @@
 {
   "name": "@navi-cli/init",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "open-cli init",
   "author": "CVopen",
   "homepage": "",
@@ -29,8 +29,8 @@
     "fs-extra": "^10.0.0",
     "glob": "^7.2.0",
     "inquirer": "^8.2.0",
-    "user-home": "^3.0.0",
     "lru-cache": "^4.0.1",
+    "user-home": "^3.0.0",
     "validate-npm-package-name": "^3.0.0"
   }
 }
