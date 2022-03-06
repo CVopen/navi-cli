@@ -20,14 +20,8 @@ function isUseLatestPackage() {
   return process.env.NAVI_LATEST === '1'
 }
 
-function isLcalDebug(cmd) {
-  const ENV_NAME = 'NAVI_DEBUG_PKG_PATH_' + cmd.toUpperCase()
-  return process.env[ENV_NAME]
-}
-
 module.exports = {
   isCache,
   isUseLatestPackage,
-  isLcalDebug,
   getCacheLocal,
 }

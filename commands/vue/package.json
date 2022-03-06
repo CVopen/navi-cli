@@ -5,7 +5,7 @@
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
   "license": "ISC",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -25,6 +25,14 @@
   },
   "bugs": {
     "url": "https://github.com/CVopen/navi-cli/issues"
+  },
+  "dependencies": {
+    "@navi-cli/child-process": "file:..\\..\\utils\\child-process",
+    "@navi-cli/open": "file:..\\..\\utils\\open",
+    "@navi-cli/log": "file:..\\..\\utils\\log",
+    "ansi-escapes": "4.3.2",
+    "inquirer": "^8.2.0",
+    "validate-npm-package-name": "^3.0.0"
   },
   "gitHead": "ffc8442d652463c9db87e1aa11425bdc54da3e5b"
 }

@@ -47,7 +47,11 @@ class Init {
   }
 
   async prepare() {
-    if (!fse.pathExistsSync(this.projectPath)) return
+    if (!fse.pathExistsSync(this.projectPath)) {
+      fse.ensureFileSync(this.projectPath)
+      execSync('git', ['init'], { cwd: this.projectPath })
+      return
+    }
     if (!this.force) {
       print('warn', 'A directory with the same name exists', 'yellow')
       process.exit(0)
@@ -60,6 +64,7 @@ class Init {
     })
     if (!result.confirmDelete) process.exit(0)
     fse.emptyDirSync(this.projectPath)
+    execSync('git', ['init'], { cwd: this.projectPath })
   }
 
   async slectTemplate(choices) {
