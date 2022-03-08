@@ -1,6 +1,6 @@
 {
   "name": "@navi-cli/react",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "navi-cli react",
   "author": "CVopen",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@navi-cli/child-process": "file:..\\..\\utils\\child-process",
-    "@navi-cli/open": "file:..\\..\\utils\\open",
     "@navi-cli/log": "file:..\\..\\utils\\log",
+    "@navi-cli/open": "file:..\\..\\utils\\open",
     "inquirer": "^8.2.0",
     "validate-npm-package-name": "^3.0.0"
   },
