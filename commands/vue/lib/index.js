@@ -32,16 +32,16 @@ class Vue {
     if (val.errors) {
       throw new Error(val.errors)
     }
-    this.args = options.command.args
+    this.args = ['create', ...options.command.args]
     this.execPath = process.cwd()
   }
 
   validateExists() {
     try {
       execSync('vue', ['-V'], { cwd: this.execPath })
-      process.stdout.write(ansiEscapes.eraseLines(2))
+      erase(2)
     } catch (error) {
-      process.stdout.write(ansiEscapes.eraseLines(3))
+      erase(3)
       return true
     }
   }
@@ -88,4 +88,8 @@ class Vue {
   execute() {
     exec('vue', this.args, { cwd: this.execPath })
   }
+}
+
+function erase(count) {
+  process.stdout.write(ansiEscapes.eraseLines(count))
 }

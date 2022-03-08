@@ -21,7 +21,7 @@ function generateCommand() {
       packageName: '@navi-cli/vue',
     },
     {
-      cmd: 'react',
+      cmd: 'react [reactCommand]',
       description: 'generate a new project from a create-react-app',
       packageName: '@navi-cli/react',
     },

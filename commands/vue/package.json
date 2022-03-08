@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@navi-cli/child-process": "file:..\\..\\utils\\child-process",
-    "@navi-cli/open": "file:..\\..\\utils\\open",
     "@navi-cli/log": "file:..\\..\\utils\\log",
+    "@navi-cli/open": "file:..\\..\\utils\\open",
     "ansi-escapes": "4.3.2",
     "inquirer": "^8.2.0",
     "validate-npm-package-name": "^3.0.0"
