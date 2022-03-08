@@ -14,7 +14,7 @@ const inquirer = require('inquirer')
 const fse = require('fs-extra')
 const ejs = require('ejs')
 
-const { getTemplate, getCachePath } = require('./template')
+const { getTemplate, getCachePath } = require('./utils')
 
 function factory(options) {
   return new Init(options)
