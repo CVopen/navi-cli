@@ -12,7 +12,10 @@ function generateCommand() {
     {
       cmd: 'init [projectName]',
       description: 'generate a new project from a template',
-      option: ['-f, --force', 'force initialization'],
+      option: [
+        ['-f, --force', 'force initialization'],
+        ['-g, --git', 'initialize Git'],
+      ],
       packageName: '@navi-cli/init',
     },
     {
