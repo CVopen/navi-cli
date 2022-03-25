@@ -42,14 +42,17 @@ class Init {
     }
     this.projectName = options.cmds[0]
     this.force = options.args.force
+    this.git = options.args.git
     this.template = getTemplate()
     this.projectPath = path.resolve(process.cwd(), this.projectName)
   }
 
   async prepare() {
     if (!fse.pathExistsSync(this.projectPath)) {
-      fse.ensureFileSync(this.projectPath)
-      execSync('git', ['init'], { cwd: this.projectPath })
+      fse.emptyDirSync(this.projectPath)
+      if (!this.git) {
+        execSync('git', ['init'], { cwd: this.projectPath })
+      }
       return
     }
     if (!this.force) {
@@ -64,7 +67,9 @@ class Init {
     })
     if (!result.confirmDelete) process.exit(0)
     fse.emptyDirSync(this.projectPath)
-    execSync('git', ['init'], { cwd: this.projectPath })
+    if (!this.git) {
+      execSync('git', ['init'], { cwd: this.projectPath })
+    }
   }
 
   async slectTemplate(choices) {
