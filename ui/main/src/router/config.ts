@@ -2,6 +2,7 @@ import React from 'react'
 
 const routes = [
   { path: 'select', element: React.lazy(() => import('../pages/select')) },
+  { path: 'about', element: React.lazy(() => import('../pages/About')) },
   {
     path: '/',
     element: React.lazy(() => import('../pages')),

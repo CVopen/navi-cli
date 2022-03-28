@@ -1,10 +1,11 @@
+import {session} from '@/utils/storage'
 
 export interface AppState {
-  value: number,
-  select: 'vue' | 'select' | ''
+  frame: string, // 'vue' | 'select' | ''
+  build: string // 'webpack' | 'vite' | ''
 }
 
 export const initialState: AppState = {
-  value: 1,
-  select: ''
+  frame:  session.getItem('frame'),
+  build: session.getItem('build')
 }

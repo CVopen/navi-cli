@@ -73,7 +73,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.jsx', '.ts', '.js'],
+    extensions: ['.tsx', '.jsx', '.ts', '.js', '.css', '.less'],
     alias: {
       '@': path.resolve(process.cwd(), 'src')
     }

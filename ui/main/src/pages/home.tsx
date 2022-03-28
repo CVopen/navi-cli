@@ -1,5 +1,5 @@
 import React from 'react'
-import { increment, selectProject } from '../store/app'
+import { selectFrame } from '../store/app'
 import { useAppSelector, useAppDispatch } from '../store'
 
 export default function home() {
@@ -12,7 +12,7 @@ export default function home() {
     <div>
       <div>home</div>
       <h1>学习@reduxjs/toolkit</h1>
-      <button onClick={() => dispatch(increment())}>{app.value} 加一</button>
+      {/* <button onClick={() => dispatch(increment())}>{app.value} 加一</button> */}
     </div>
   )
 }

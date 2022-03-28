@@ -17,5 +17,6 @@ module.exports = {
   rules: {
     quotes: [1, 'single'],
     semi: [2, 'never'],
+    '@typescript-eslint/explicit-member-accessibility': 'off'
   },
 }

@@ -1,14 +1,14 @@
 import {AppState} from './state'
 
-const increment = (state: AppState) => {
-  state.value += 1
+const selectFrame = (state: AppState, { payload }: {payload: string} ) => {
+  state.frame = payload
 }
 
-const selectProject = (state: AppState, { payload }: {payload: 'vue' | 'select' | ''} ) => {
-  state.select = payload
+const selectBuild = (state: AppState, { payload }: {payload: string} ) => {
+  state.build = payload
 }
 
 export default {
-  increment,
-  selectProject
+  selectFrame,
+  selectBuild
 }

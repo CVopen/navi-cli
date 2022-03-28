@@ -11,6 +11,6 @@ export const testSlice = createSlice({
 
 export default testSlice.reducer
 export const { 
-  increment, 
-  selectProject 
+  selectFrame,
+  selectBuild
 } = testSlice.actions
