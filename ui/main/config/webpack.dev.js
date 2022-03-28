@@ -16,10 +16,10 @@ module.exports = merge(common, {
     open: true,
     hot: true,
     compress: true,
-    historyApiFallback: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    }
+    historyApiFallback: true
   },
-  plugins: [new webpack.HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin()
+  ],
 })
