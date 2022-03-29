@@ -3,7 +3,6 @@ import { selectFrame, selectBuild } from '@/store/app'
 import { useAppDispatch } from '@/store'
 import './index.less'
 
-import { QuestionCircleOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 
 import reactLogo from '@/assets/react.svg'
@@ -12,6 +11,8 @@ import webpackLogo from '@/assets/webpack.svg'
 import viteLogo from '@/assets/vite.svg'
 
 import { session } from '@/utils/storage'
+
+import Header from '@/components/Header'
 
 type keys = 'vue' | 'react' | 'webpack' | 'vite'
 type selectList = {
@@ -37,7 +38,7 @@ export default function index() {
     }
     if (key === 'webpack' || key === 'vite') {
       dispatch(selectBuild(key))
-      navigate('/home')
+      navigate('/project')
       session.setItem('build', key)
     }
   }
@@ -55,10 +56,7 @@ export default function index() {
 
   return (
     <div className="page-select">
-      <h1>
-        Navi-cli 项目管理器
-        <QuestionCircleOutlined onClick={() => navigate('/about')} />
-      </h1>
+      <Header />
       <div style={{ opacity: active ? 0 : 1 }}>
         {list.map(({ key, src }) => (
           <img src={src} key={key} onClick={() => bootstrap(key)} />

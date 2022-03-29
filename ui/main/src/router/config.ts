@@ -5,11 +5,11 @@ const routes = [
   { path: 'about', element: React.lazy(() => import('../pages/About')) },
   {
     path: '/',
-    element: React.lazy(() => import('../pages')),
+    element: React.lazy(() => import('../pages/Admin')),
     children: [
-      { path: 'home', element: React.lazy(() => import('../pages/home')) },
-      { path: 'login', element: React.lazy(() => import('../pages/login')) },
-      { path: 'register', element: React.lazy(() => import('../pages/register')) },
+      { path: 'project', element: React.lazy(() => import('../pages/Admin/Project')) },
+      { path: 'establish', element: React.lazy(() => import('../pages/Admin/Establish')) },
+      { path: 'command', element: React.lazy(() => import('../pages/Admin/Command')) },
     ],
   },
 ]
