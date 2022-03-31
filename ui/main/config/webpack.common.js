@@ -42,7 +42,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: [/\.less$/, /\.css$/],
+        test: /\.(css|less)$/,
         use: [
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           {

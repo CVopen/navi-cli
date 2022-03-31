@@ -13,11 +13,11 @@ module.exports = {
   mode: process.env.NODE_ENV,
   devtool: isDev ? 'eval-cheap-module-source-map' : 'cheap-module-source-map',
   output: {
-    path: path.resolve(process.cwd(), 'app-react'),
+    path: path.resolve(process.cwd(), 'dist'),
     filename: 'js/[name]_[contenthash]_.js',
     assetModuleFilename: 'images/[hash][ext][query]',
     pathinfo: false,
-    publicPath: isSub ? '/app-react/' : '/',
+    publicPath: isSub ? '/sub-react/' : '/',
     library: `${name}-[name]`,
     libraryTarget: 'umd',
     chunkLoadingGlobal: `webpackJsonp_${name}`,
