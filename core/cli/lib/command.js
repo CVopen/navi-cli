@@ -33,6 +33,11 @@ function generateCommand() {
       description: 'add custom command',
       packageName: '@navi-cli/add',
     },
+    {
+      cmd: 'ui',
+      description: 'start and open the vue-cli ui',
+      packageName: '@navi-cli/ui',
+    },
   ]
 
   const INSIDE_CMD = commandList.map(({ cmd }) => cmd.split(' ')[0])
