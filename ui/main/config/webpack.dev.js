@@ -16,7 +16,10 @@ module.exports = merge(common, {
     open: true,
     hot: true,
     compress: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      '/ui': 'http://localhost:8888'
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

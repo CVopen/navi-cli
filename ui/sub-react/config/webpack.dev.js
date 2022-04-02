@@ -6,7 +6,7 @@ const { merge } = require('webpack-merge')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const common = require('./webpack.common')
-console.log(path.resolve(process.cwd(), 'template/index.html'))
+
 module.exports = merge(common, {
   devServer: {
     static: {
@@ -21,5 +21,8 @@ module.exports = merge(common, {
       'Access-Control-Allow-Origin': '*',
     }
   },
-  plugins: [new webpack.HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin()
+  ],
 })
