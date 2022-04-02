@@ -38,8 +38,9 @@ export default function index() {
     }
     if (key === 'webpack' || key === 'vite') {
       dispatch(selectBuild(key))
-      navigate('/project')
+      setActive(true)
       session.setItem('build', key)
+      setTimeout(() => navigate('/project'), 1000)
     }
   }
 

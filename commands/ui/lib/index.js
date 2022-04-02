@@ -1,9 +1,8 @@
 'use strict'
 
-module.exports = ui
+const uiServer = require('./server')
+module.exports = uiServer
 
-const start = require('./server')
-
-function ui() {
-  start()
+if (process.env.NODE_ENV === 'development') {
+  uiServer()
 }
