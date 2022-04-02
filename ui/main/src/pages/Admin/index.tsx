@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Header from '@/components/Header'
 
 import { PlusSquareOutlined, SnippetsOutlined, FundProjectionScreenOutlined } from '@ant-design/icons'
 
 import { Layout, Tabs } from 'antd'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 
 import './index.less'
 
@@ -15,13 +15,12 @@ export default function index() {
   const navigate = useNavigate()
 
   const handleClick = (key: string) => navigate(key)
-
   return (
     <Layout style={{ height: '100%', background: 'transparent' }}>
       <Header />
       <Content style={{ height: '100%' }}>
         <div className="admin-content">
-          <Tabs defaultActiveKey="project" onTabClick={handleClick}>
+          <Tabs defaultActiveKey={useLocation().pathname} onTabClick={handleClick}>
             <TabPane
               tab={
                 <span>

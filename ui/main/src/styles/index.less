@@ -1,3 +1,4 @@
+@import "./var.less";
 html,body {
   width: 100%;
   height: 100%;
@@ -6,7 +7,7 @@ html,body {
 
 #root {
   height: 100%;
-  background-color: #15232d;
+  background-color: @theme-main;
   color: #fff;
 }
 
@@ -31,11 +32,16 @@ time, mark, audio, video {
   width: 100%;
   height: 100%;
   background-color: rgba(64, 169, 255, .2);
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  .fileAlignContent();
+  z-index: 1000;
   p {
     font-size: 30px;
+  }
+}
+
+.ant-message-custom-content {
+  span:last-child {
+    color: #000 ;
   }
 }

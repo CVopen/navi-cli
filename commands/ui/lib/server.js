@@ -32,7 +32,7 @@ function staticRoute(app) {
   app.get('/select', (_, res) => {
     res.sendFile(path.join(__dirname, 'static/index.html'))
   })
-  app.get('/sub-react', (_, res) => {
-    res.sendFile(path.join(__dirname, 'static/sub-react/index.html'))
+  app.get('/react', (_, res) => {
+    res.sendFile(path.join(__dirname, 'static/react/index.html'))
   })
 }
