@@ -1,13 +1,12 @@
+@import "@/styles/var.less";
 .navi-header {
-  background: #00141B;
+  background: @theme-main-deep;
   color: #fff;
   height: 180px;
   position: relative;
   user-select: none;
-  display: flex;
-  align-items: center;
+  .fileAlignContent();
   font-size: 28px;
-  justify-content: center;
   span {
     position: absolute;
     right: 20px;

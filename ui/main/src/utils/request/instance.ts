@@ -1,4 +1,4 @@
-import axios, {AxiosRequestConfig} from 'axios'
+import axios from 'axios'
 import { message } from 'antd'
 
 const instance = axios.create({
@@ -16,14 +16,24 @@ instance.interceptors.request.use(
     config.headers.Authorization= `Bearer ${localStorage.getItem('token')}`
     return config
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    message.error('请求失败!')
+    Promise.reject(error)
+  }
 )
  
 instance.interceptors.response.use(
   (response) => {
+    if (response.data.code === 201) {
+      message.error('请求失败!')
+      return Promise.reject('error')
+    }
     return response.data
   },
-  (error) =>  Promise.reject(error)
+  (error) => {
+    message.error('请求失败!')
+    Promise.reject(error)
+  }
 )
 
 export default instance

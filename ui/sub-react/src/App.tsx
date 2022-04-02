@@ -10,7 +10,7 @@ const App: React.FC = () => {
   return (
     <>
       <h1>我是react子应用</h1>
-      <BrowserRouter basename={window.__POWERED_BY_QIANKUN__ ? '/sub-react' : '/'}>
+      <BrowserRouter basename={window.__POWERED_BY_QIANKUN__ ? '/react' : '/'}>
         <RouteList />
       </BrowserRouter>
     </>

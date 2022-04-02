@@ -1,0 +1,44 @@
+@import "@/styles/var.less";
+
+.admin-command {
+  width: 100%;
+  height: calc(100% - 60px);
+  display: flex;
+  .command-select {
+    list-style: none;
+    width: 200px;
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+    .scrollbar();
+    li {
+      height: 45px;
+      .flexAlign();
+      padding-left: 10px;
+      transition: all .4s;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 1px;
+      &:hover {
+        background-color: @theme-main-deep;
+        &::before {
+          background-color: @theme-protrude;
+        }
+      }
+      &::before {
+        content: '';
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        background-color: #fff;
+        margin-right: 10px;
+      }
+    }
+    .active {
+      background-color: @theme-main-deep;
+      &::before {
+        background-color: @theme-protrude;
+      }
+    }
+  }
+}

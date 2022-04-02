@@ -1,0 +1,28 @@
+@theme-main: #15232d;
+@theme-main-deep: #00141b;
+@theme-protrude: #ffc600;
+
+.scrollbar () {
+  &::-webkit-scrollbar {
+    width: 10px;     
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #535353;
+    }
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px @theme-main;
+  }
+}
+
+.flexAlign () {
+  display: flex;
+  align-items: center;
+}
+
+.fileAlignContent () {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

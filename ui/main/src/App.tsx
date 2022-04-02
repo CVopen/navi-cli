@@ -13,9 +13,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (WebSocket) {
       const socket = new WebSocket('ws://localhost:8888/ws')
-      socket.onclose = function (e) {
-        setMask(true)
-      }
+      socket.onclose = () => setMask(true)
     }
   }, [])
 

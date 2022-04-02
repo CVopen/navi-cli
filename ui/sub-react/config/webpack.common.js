@@ -17,7 +17,7 @@ module.exports = {
     filename: 'js/[name]_[contenthash]_.js',
     assetModuleFilename: 'images/[hash][ext][query]',
     pathinfo: false,
-    publicPath: isSub ? '/sub-react/' : '/',
+    publicPath: isSub ? '/react/' : '/',
     library: `${name}-[name]`,
     libraryTarget: 'umd',
     chunkLoadingGlobal: `webpackJsonp_${name}`,

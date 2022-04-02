@@ -9,9 +9,9 @@ import { registerMicroApps, start } from 'qiankun'
 registerMicroApps([
   {
     name: 'sub-react',
-    entry: `//localhost:${process.env.NODE_ENV === 'production' ? 8888 : 4001}/sub-react/`,
+    entry: `//localhost:${process.env.NODE_ENV === 'production' ? 8888 : 4001}/react/`,
     container: '#subapp-container',
-    activeRule: '/sub-react',
+    activeRule: '/react',
   },
 ])
 
