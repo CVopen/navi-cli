@@ -1,5 +1,5 @@
 const express = require('express')
-const { getList, addCommand } = require('../controller/command')
+const { getList, addCommand, delCommand, updateCommand } = require('../controller/command')
 const { sendData } = require('../utils')
 
 const routerCommand = express.Router()
@@ -12,6 +12,14 @@ routerCommand.post('/ui/command/add', (req, res) => {
   addCommand(req.body).then((result) => {
     res.json(sendData(...result))
   })
+})
+
+routerCommand.delete('/ui/command/del', (req, res) => {
+  res.json(sendData(...delCommand(req.query)))
+})
+
+routerCommand.put('/ui/command/update', (req, res) => {
+  res.json(sendData(...updateCommand(req.body)))
 })
 
 module.exports = routerCommand

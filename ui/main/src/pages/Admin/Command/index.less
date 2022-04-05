@@ -41,6 +41,45 @@
       }
     }
   }
+  .command-content {
+    width: 1000px;
+    padding: 20px;
+    h2 {
+      font-size: 24px;
+      display: flex;
+      justify-content: space-between;
+      .command-content-name {
+        color: @theme-protrude;
+      }
+    }
+    h3 {
+      width: 980px;
+      transform: translateX(-20px);
+      background-color: @theme-main-deep;
+      border-radius: 4px;
+      padding: 10px 20px;
+      color: @theme-protrude;
+      font-size: 18px;
+    }
+    .command-option {
+      display: flex;
+      flex-wrap: wrap;
+      ul {
+        width: 300px;
+        margin-right: 20px;
+        border-bottom: 1px solid @theme-main-deep;
+        padding-bottom: 10px;
+      }
+    }
+    p {
+      width: 100%;
+      font-size: 18px;
+      word-break: break-all;
+      span {
+        color: @theme-protrude;
+      }
+    }
+  }
   .btn {
     .flexAlign();
   }

@@ -1,7 +1,7 @@
+import React, { useEffect, useState, FC, useCallback } from 'react'
 import { getCommandList } from '@/api/command'
 import NoData from '@/components/NoData'
 import { Button } from 'antd'
-import React, { useEffect, useState, FC } from 'react'
 import Content from './Content'
 
 import './index.less'
@@ -16,12 +16,15 @@ export interface CommandItem {
   packageName?: string
   targetPath?: string
   option?: string[] | string[][]
+  id: number
 }
+
+export type Visible = 0 | 1 | 2
 
 const index: FC = () => {
   const [list, setList] = useState<CommandItem[]>([])
   const [active, setActive] = useState<CommandItem>()
-  const [isModalVisible, setIsModalVisible] = useState(true)
+  const [isModalVisible, setIsModalVisible] = useState<Visible>(0)
 
   useEffect(() => {
     getList()
@@ -42,9 +45,9 @@ const index: FC = () => {
       for (const item of cmdList) {
         if (!item) continue
         if (item.startsWith('<')) {
-          command.requiredParam = item
+          command.requiredParam = item.replace(/\<(.+?)\>/, (_, str) => str)
         } else if (item.startsWith('[')) {
-          command.optionalParam = item
+          command.optionalParam = item.replace(/\[(.+?)\]/, (_, str) => str)
         } else {
           command.name = item
         }
@@ -54,14 +57,21 @@ const index: FC = () => {
 
   const handleClick = (current: CommandItem) => () => setActive(current)
 
-  const showModal = () => {
-    setIsModalVisible(true)
-  }
+  const showModal = useCallback(() => {
+    setIsModalVisible(1)
+  }, [isModalVisible])
 
   return (
     <div className="admin-command">
-      <Modal visible={isModalVisible} setVisble={setIsModalVisible} setList={setList} />
-      {!list.length ? (
+      <Modal
+        visible={isModalVisible}
+        setVisble={setIsModalVisible}
+        setList={setList}
+        list={list}
+        defaultValue={active}
+        setActive={setActive}
+      />
+      {list.length ? (
         <>
           <ul className="command-select">
             {list.map((command) => (
@@ -74,7 +84,7 @@ const index: FC = () => {
               </li>
             ))}
           </ul>
-          <Content current={active} />
+          <Content current={active} showModal={setIsModalVisible} setList={setList} list={list} setActive={setActive} />
         </>
       ) : (
         <NoData content="您还未创建过命令">
