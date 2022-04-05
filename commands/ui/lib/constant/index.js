@@ -3,7 +3,7 @@ const ERROR_CODE = 201
 const NAVI_CACHE_DIR = '.navi-cli'
 
 const SUCCESS_TEXT = 'success'
-const ERROR_TEXT = 'success'
+const ERROR_TEXT = 'error'
 
 module.exports = {
   SUCCESS_CODE,

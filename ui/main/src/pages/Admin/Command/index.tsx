@@ -60,7 +60,7 @@ const index: FC = () => {
 
   return (
     <div className="admin-command">
-      <Modal visible={isModalVisible} setVisble={setIsModalVisible} />
+      <Modal visible={isModalVisible} setVisble={setIsModalVisible} setList={setList} />
       {!list.length ? (
         <>
           <ul className="command-select">

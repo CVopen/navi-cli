@@ -25,7 +25,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     if (response.data.code === 201) {
-      message.error('请求失败!')
+      message.error(response.data.err)
       return Promise.reject('error')
     }
     return response.data

@@ -1,10 +1,12 @@
+import { addCommand } from '@/api/command'
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Modal, Select, Space } from 'antd'
-import React, { memo, useState } from 'react'
+import { Button, Form, Input, message, Modal, Select, Space } from 'antd'
+import React, { memo } from 'react'
 
 interface ModalType {
   visible: boolean
   setVisble: (type: boolean) => void
+  setList: Function
 }
 
 const defaultOptions = [
@@ -14,29 +16,62 @@ const defaultOptions = [
 
 function index({ visible, setVisble }: ModalType) {
   const [form] = Form.useForm()
-  const [packageValidate, setPackageValidate] = useState<'success' | 'error'>('success')
 
   const onOk = () => {
-    getValue().then((res) => {})
+    getValue().then((res) => {
+      addCommand(res).then((result) => {
+        console.log(result)
+      })
+    })
   }
 
   const onCancel = () => {
     setVisble(false)
+    form.resetFields()
   }
 
   const getValue = () => {
     return form.validateFields().then((result: any) => {
-      if (result.options) {
-        result.options = result.options.map(({ args, defaults, description }: any) => ({
-          args,
+      if (result.option) {
+        result.option = result.option.map(({ args, defaults, description }: any) => ({
+          args: `-${args[0]}, --${args}`,
           defaults,
           description,
         }))
       }
-      console.log('result', result)
+      let cmd = result.name
+      if (result.requiredParam) {
+        cmd += ` <${result.requiredParam}>`
+      }
+      if (result.optionalParam) {
+        cmd += ` [${result.optionalParam}]`
+      }
       setVisble(false)
-      return result
+      return {
+        cmd,
+        ...result,
+      }
     })
+  }
+
+  const validateEnglish = (_: any, value: string) => {
+    if (/[^A-Za-z]/.test(value)) {
+      return Promise.reject(new Error('必须为英文字符!'))
+    }
+    return Promise.resolve()
+  }
+
+  const paramValidate = (rule: any, value: string) => {
+    if (!value) return Promise.resolve()
+    const field = rule.field === 'requiredParam' ? 'optionalParam' : 'requiredParam'
+
+    if (/[^A-Za-z]/.test(value)) {
+      return Promise.reject(new Error('必须为英文字符!'))
+    }
+    if (form.getFieldValue(field) === value) {
+      return Promise.reject(new Error('可选择参数和必选参数值不能相同!'))
+    }
+    return Promise.resolve()
   }
 
   return (
@@ -49,7 +84,11 @@ function index({ visible, setVisble }: ModalType) {
         initialValues={{ remember: true }}
         autoComplete="off"
       >
-        <Form.Item label="命令名称" name="name" rules={[{ required: true, message: '请输入命令名称!' }]}>
+        <Form.Item
+          label="命令名称"
+          name="name"
+          rules={[{ required: true, message: '请输入命令名称!' }, { validator: validateEnglish }]}
+        >
           <Input />
         </Form.Item>
         <Form.Item label="命令描述" name="description" rules={[{ required: true, message: '请输入命令描述!' }]}>
@@ -58,21 +97,20 @@ function index({ visible, setVisble }: ModalType) {
         <Form.Item
           label="包名"
           name="packageName"
-          rules={[{ required: true, message: '请输入包名!' }]}
-          validateStatus={packageValidate}
+          rules={[{ required: true, message: '请输入包名!' }, { validator: validateEnglish }]}
         >
           <Input />
         </Form.Item>
-        <Form.Item label="必选参数名" name="requiredParam">
+        <Form.Item label="必选参数名" name="requiredParam" rules={[{ validator: paramValidate }]}>
           <Input />
         </Form.Item>
-        <Form.Item label="可选参数名" name="optionalParam">
+        <Form.Item label="可选参数名" name="optionalParam" rules={[{ validator: paramValidate }]}>
           <Input />
         </Form.Item>
         <Form.Item label="本地调试路径" name="targetPath">
           <Input />
         </Form.Item>
-        <Form.List name="options">
+        <Form.List name="option">
           {(fields, { add, remove }) => (
             <>
               {!fields.length && (
@@ -88,18 +126,18 @@ function index({ visible, setVisble }: ModalType) {
                     {...field}
                     name={[field.name, 'args']}
                     key={'args' + field.key}
-                    style={{ width: 120 }}
-                    rules={[{ required: true, message: '请输入命令参数' }]}
+                    style={{ width: 150 }}
+                    rules={[{ required: true, message: '请输入命令参数' }, { validator: validateEnglish }]}
                   >
                     <Input />
                   </Form.Item>
-                  <Form.Item key={'defaults' + field.key} name={[field.name, 'defaults']} style={{ width: 120 }}>
+                  <Form.Item key={'defaults' + field.key} name={[field.name, 'defaults']} style={{ width: 100 }}>
                     <Select options={defaultOptions} />
                   </Form.Item>
                   <Form.Item key={'description' + field.key} name={[field.name, 'description']} style={{ width: 240 }}>
                     <Input.TextArea maxLength={100} autoSize />
                   </Form.Item>
-                  <Form.Item key={'btn' + field.key} style={{ width: 60 }} name={[field.name, 'btn']}>
+                  <Form.Item key={'btn' + field.key} style={{ width: 50 }} name={[field.name, 'btn']}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <PlusOutlined style={{ cursor: 'pointer' }} onClick={() => add()} />
                       <MinusOutlined style={{ cursor: 'pointer' }} onClick={() => remove(field.name)} />

@@ -10,7 +10,7 @@ const CUSTOM_FILE_NAME = 'command.json'
 function generateCommand() {
   let commandList = [
     {
-      cmd: 'init [projectName]',
+      cmd: 'init <projectName>',
       description: 'generate a new project from a template',
       option: [
         ['-f, --force', 'force initialization'],
@@ -19,12 +19,12 @@ function generateCommand() {
       packageName: '@navi-cli/init',
     },
     {
-      cmd: 'vue [vueCommand]',
+      cmd: 'vue <vueCommand>',
       description: 'generate a new project from a vue-cli',
       packageName: '@navi-cli/vue',
     },
     {
-      cmd: 'react [reactCommand]',
+      cmd: 'react <reactCommand>',
       description: 'generate a new project from a create-react-app',
       packageName: '@navi-cli/react',
     },

@@ -1,11 +1,7 @@
 import { post, get } from '@/utils/request'
 
-export function test() {
-  return post('/list', {test: 'test'})
-    .then(res => res.data)
-    .catch(err => {
-      console.log(err)
-    })
+export function addCommand(data: any) {
+  return post('/command/add', data)
 }
 
 export function getCommandList() {
