@@ -1,6 +1,6 @@
 const { NAVI_CACHE_DIR, SUCCESS_CODE, SUCCESS_TEXT, ERROR_TEXT, ERROR_CODE } = require('../constant')
 
-function sendData(data, err = '') {
+function sendData(data = {}, err = '') {
   return {
     code: !err ? SUCCESS_CODE : ERROR_CODE,
     data,

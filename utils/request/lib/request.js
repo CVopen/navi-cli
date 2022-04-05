@@ -3,7 +3,7 @@
 const axios = require('axios')
 
 const request = axios.create({
-  baseURL: process.env.NAVI_BASE_URL || 'https://registry.npmjs.org',
+  baseURL: process.env.NAVI_BASE_URL || 'https://registry.npmmirror.com/',
   timeout: 10000,
 })
 

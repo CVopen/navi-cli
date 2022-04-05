@@ -1,10 +1,13 @@
+import React, { useEffect, useState, FC, useCallback } from 'react'
 import { getCommandList } from '@/api/command'
-import { Skeleton } from 'antd'
-import React, { useEffect, useState } from 'react'
+import NoData from '@/components/NoData'
+import { Button } from 'antd'
+import Content from './Content'
 
 import './index.less'
+import Modal from './Modal'
 
-interface CommandItem {
+export interface CommandItem {
   name: string
   optionalParam?: string
   requiredParam?: string
@@ -13,11 +16,15 @@ interface CommandItem {
   packageName?: string
   targetPath?: string
   option?: string[] | string[][]
+  id: number
 }
 
-export default function index() {
+export type Visible = 0 | 1 | 2
+
+const index: FC = () => {
   const [list, setList] = useState<CommandItem[]>([])
   const [active, setActive] = useState<CommandItem>()
+  const [isModalVisible, setIsModalVisible] = useState<Visible>(0)
 
   useEffect(() => {
     getList()
@@ -38,9 +45,9 @@ export default function index() {
       for (const item of cmdList) {
         if (!item) continue
         if (item.startsWith('<')) {
-          command.requiredParam = item
+          command.requiredParam = item.replace(/\<(.+?)\>/, (_, str) => str)
         } else if (item.startsWith('[')) {
-          command.optionalParam = item
+          command.optionalParam = item.replace(/\[(.+?)\]/, (_, str) => str)
         } else {
           command.name = item
         }
@@ -48,26 +55,46 @@ export default function index() {
     })
   }
 
-  const handleClick = (current: CommandItem) => {
-    return () => setActive(current)
-  }
+  const handleClick = (current: CommandItem) => () => setActive(current)
+
+  const showModal = useCallback(() => {
+    setIsModalVisible(1)
+  }, [isModalVisible])
 
   return (
     <div className="admin-command">
-      <Skeleton active loading={!list.length}>
-        <ul className="command-select">
-          {list.map((command) => (
-            <li
-              key={command.name}
-              className={active?.name === command.name ? 'active' : ''}
-              onClick={handleClick(command)}
-            >
-              {command.name}
-            </li>
-          ))}
-        </ul>
-        <div className="command-content">from</div>
-      </Skeleton>
+      <Modal
+        visible={isModalVisible}
+        setVisble={setIsModalVisible}
+        setList={setList}
+        list={list}
+        defaultValue={active}
+        setActive={setActive}
+      />
+      {list.length ? (
+        <>
+          <ul className="command-select">
+            {list.map((command) => (
+              <li
+                key={command.name}
+                className={active?.name === command.name ? 'active' : ''}
+                onClick={handleClick(command)}
+              >
+                {command.name}
+              </li>
+            ))}
+          </ul>
+          <Content current={active} showModal={setIsModalVisible} setList={setList} list={list} setActive={setActive} />
+        </>
+      ) : (
+        <NoData content="您还未创建过命令">
+          <Button type="primary" onClick={showModal}>
+            添加命令
+          </Button>
+        </NoData>
+      )}
     </div>
   )
 }
+
+export default index

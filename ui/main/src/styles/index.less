@@ -9,6 +9,8 @@ html,body {
   height: 100%;
   background-color: @theme-main;
   color: #fff;
+  .scrollbar();
+  overflow-y: auto;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -25,6 +27,39 @@ figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   color: #fff;
+}
+
+.ant-btn-default {
+  span {
+    color: #000
+  }
+}
+
+.ant-modal {
+  .ant-modal-body {
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    .scrollbar();
+  }
+  .ant-modal-content {
+    background-color: @theme-main;
+    .ant-modal-header {
+      .ant-modal-title {
+        color: #fff;
+      }
+      background-color: @theme-main;
+      border-bottom-color: @theme-main-deep;
+    }
+    .ant-modal-footer {
+      border-top-color: @theme-main-deep;
+    }
+    form {
+      label {
+        color: #fff;
+      }
+    }
+  }
 }
 
 .mask {
@@ -44,4 +79,12 @@ time, mark, audio, video {
   span:last-child {
     color: #000 ;
   }
+}
+
+.ant-select-item-option-content {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.ant-select-selection-item {
+  color: rgba(0, 0, 0, 0.85);
 }
