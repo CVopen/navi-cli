@@ -22,7 +22,7 @@ function server() {
   )
   app.use(express.static(path.join(__dirname, 'static')))
 
-  app.listen(8888, () => print('info', ' Ready on http://localhost:8888'))
+  app.listen(8888, () => print('info', 'Ready on http://localhost:8888'))
 }
 
 function staticRoute(app) {

@@ -1,10 +1,13 @@
 import { getCommandList } from '@/api/command'
-import { Skeleton } from 'antd'
-import React, { useEffect, useState } from 'react'
+import NoData from '@/components/NoData'
+import { Button } from 'antd'
+import React, { useEffect, useState, FC } from 'react'
+import Content from './Content'
 
 import './index.less'
+import Modal from './Modal'
 
-interface CommandItem {
+export interface CommandItem {
   name: string
   optionalParam?: string
   requiredParam?: string
@@ -15,9 +18,10 @@ interface CommandItem {
   option?: string[] | string[][]
 }
 
-export default function index() {
+const index: FC = () => {
   const [list, setList] = useState<CommandItem[]>([])
   const [active, setActive] = useState<CommandItem>()
+  const [isModalVisible, setIsModalVisible] = useState(true)
 
   useEffect(() => {
     getList()
@@ -48,26 +52,39 @@ export default function index() {
     })
   }
 
-  const handleClick = (current: CommandItem) => {
-    return () => setActive(current)
+  const handleClick = (current: CommandItem) => () => setActive(current)
+
+  const showModal = () => {
+    setIsModalVisible(true)
   }
 
   return (
     <div className="admin-command">
-      <Skeleton active loading={!list.length}>
-        <ul className="command-select">
-          {list.map((command) => (
-            <li
-              key={command.name}
-              className={active?.name === command.name ? 'active' : ''}
-              onClick={handleClick(command)}
-            >
-              {command.name}
-            </li>
-          ))}
-        </ul>
-        <div className="command-content">from</div>
-      </Skeleton>
+      <Modal visible={isModalVisible} setVisble={setIsModalVisible} />
+      {!list.length ? (
+        <>
+          <ul className="command-select">
+            {list.map((command) => (
+              <li
+                key={command.name}
+                className={active?.name === command.name ? 'active' : ''}
+                onClick={handleClick(command)}
+              >
+                {command.name}
+              </li>
+            ))}
+          </ul>
+          <Content current={active} />
+        </>
+      ) : (
+        <NoData content="您还未创建过命令">
+          <Button type="primary" onClick={showModal}>
+            添加命令
+          </Button>
+        </NoData>
+      )}
     </div>
   )
 }
+
+export default index

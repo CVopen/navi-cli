@@ -18,6 +18,7 @@ module.exports = {
     quotes: [1, 'single'],
     semi: [2, 'never'],
     '@typescript-eslint/explicit-member-accessibility': 'off',
-    'prefer-promise-reject-errors': 'off'
+    'prefer-promise-reject-errors': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off'
   },
 }

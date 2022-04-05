@@ -7,7 +7,7 @@ function router(app) {
     if (err) return console.log('Error', err)
     files.forEach((fileName) => {
       if (fileName === 'index.js') return
-      if (fileName === 'connect.js') {
+      if (fileName === 'ws.js') {
         require(`./${fileName}`)(app)
       } else {
         app.use(require(`./${fileName}`))
