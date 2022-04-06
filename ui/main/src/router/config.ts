@@ -10,6 +10,7 @@ const routes = [
       { path: 'project', element: React.lazy(() => import('../pages/Admin/Project')) },
       { path: 'establish', element: React.lazy(() => import('../pages/Admin/Establish')) },
       { path: 'command', element: React.lazy(() => import('../pages/Admin/Command')) },
+      { path: 'template', element: React.lazy(() => import('../pages/Admin/Template')) },
     ],
   },
 ]

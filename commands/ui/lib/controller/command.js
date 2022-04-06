@@ -3,6 +3,7 @@ const fs = require('fs')
 
 const userHome = require('user-home')
 const pathExists = require('path-exists').sync
+const uuid = require('uuid')
 
 const { getPackage } = require('@navi-cli/request')
 
@@ -23,7 +24,7 @@ function getList() {
 
 // add command
 function addCommand({ cmd, description, packageName, targetPath, option = [] }) {
-  const id = new Date().getTime()
+  const id = uuid.v4()
   return new Promise((resolve) => {
     if (targetPath && !pathExists(targetPath)) resolve([null, '调试路径不存在!'])
     if (!packageName) resolve([null, 'error'])
@@ -59,7 +60,7 @@ function delCommand({ id }) {
 function updateCommand({ cmd, description, packageName, targetPath, option = [], id }) {
   const commandData = require(_getLocal())
   const index = commandData.findIndex((command) => command.id == id)
-  commandData.splice(index, 1, { cmd, description, packageName, targetPath, option })
+  commandData.splice(index, 1, { cmd, description, packageName, targetPath, option, id })
   try {
     fs.writeFileSync(_getLocal(), JSON.stringify(commandData, null, '\t'))
     return []

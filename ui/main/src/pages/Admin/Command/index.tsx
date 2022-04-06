@@ -16,7 +16,7 @@ export interface CommandItem {
   packageName?: string
   targetPath?: string
   option?: string[] | string[][]
-  id: number
+  id: string
 }
 
 export type Visible = 0 | 1 | 2

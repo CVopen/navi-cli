@@ -8,7 +8,7 @@ export function getCommandList() {
   return get('/command/list').then(res => res.data)
 }
 
-export function delCommand(data: {id: number}) {
+export function delCommand(data: {id: string}) {
   return del('/command/del', data)
 }
 

@@ -31,6 +31,7 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
 
   useEffect(() => {
     if (visible !== 2) return
+    console.log(defaultData)
     if (!defaultData.option || !defaultData.option.length) return form.setFieldsValue(defaultData)
     if (Array.isArray(defaultData.option[0])) {
       defaultData.option = defaultData.option.map((str: any) => {
@@ -66,6 +67,7 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
           setList([...list])
           setActive(command)
           message.success('修改命令成功')
+          setVisble(0)
         })
       } else {
         addCommand(res).then((id) => {
@@ -100,7 +102,6 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
       if (result.optionalParam) {
         cmd += ` [${result.optionalParam}]`
       }
-      setVisble(0)
       return {
         cmd,
         ...result,

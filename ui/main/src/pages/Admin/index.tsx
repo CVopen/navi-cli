@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '@/components/Header'
 
-import { PlusSquareOutlined, SnippetsOutlined, FundProjectionScreenOutlined } from '@ant-design/icons'
+import { PlusSquareOutlined, SnippetsOutlined, FundProjectionScreenOutlined, AuditOutlined } from '@ant-design/icons'
 
 import { Layout, Tabs } from 'antd'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
@@ -44,6 +44,14 @@ export default function index() {
                 </span>
               }
               key="/command"
+            />
+            <TabPane
+              tab={
+                <span>
+                  <AuditOutlined size={50} />模 板
+                </span>
+              }
+              key="/template"
             />
           </Tabs>
           <Outlet />
