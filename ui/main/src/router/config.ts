@@ -7,10 +7,10 @@ const routes = [
     path: '/',
     element: React.lazy(() => import('../pages/Admin')),
     children: [
-      { path: 'project', element: React.lazy(() => import('../pages/Admin/Project')) },
-      { path: 'establish', element: React.lazy(() => import('../pages/Admin/Establish')) },
-      { path: 'command', element: React.lazy(() => import('../pages/Admin/Command')) },
-      { path: 'template', element: React.lazy(() => import('../pages/Admin/Template')) },
+      { path: 'project', element: React.lazy(() => import('../pages/Project')) },
+      { path: 'establish', element: React.lazy(() => import('../pages/Establish')) },
+      { path: 'command', element: React.lazy(() => import('../pages/Command')) },
+      { path: 'template', element: React.lazy(() => import('../pages/Template')) },
     ],
   },
 ]
