@@ -20,6 +20,7 @@ module.exports = {
     '@typescript-eslint/explicit-member-accessibility': 'off',
     'prefer-promise-reject-errors': 'off',
     '@typescript-eslint/no-unused-expressions': 'off',
-    'react/jsx-no-useless-fragment': 'off'
+    'react/jsx-no-useless-fragment': 'off',
+    'no-param-reassign': 'off'
   },
 }

@@ -14,7 +14,7 @@ const inquirer = require('inquirer')
 const fse = require('fs-extra')
 const ejs = require('ejs')
 
-const { getTemplate, getCachePath } = require('./utils')
+const { getTemplate, getCachePath, getProjectLocalPath } = require('./utils')
 
 function factory(options) {
   return new Init(options)
@@ -182,6 +182,22 @@ class Init {
         if (count !== cacheSize) return
 
         ejs.clearCache()
+
+        const projectPath = getProjectLocalPath()
+        if (!fse.pathExistsSync(projectPath)) {
+          fse.outputJsonSync(projectPath, [])
+        }
+        const projectData = [
+          ...require(projectPath),
+          {
+            projectName: this.projectName,
+            createTime: new Date(),
+            installCommand: setting.installCommand,
+            startCommand: setting.startCommand,
+            local: this.projectPath,
+          },
+        ]
+        fse.outputFileSync(getProjectLocalPath(), JSON.stringify(projectData, null, '\t'))
 
         if (!setting.installCommand) return
         const installCommand = setting.installCommand.split(' ')

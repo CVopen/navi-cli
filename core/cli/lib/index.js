@@ -9,6 +9,7 @@ const bootstrap = require('@navi-cli/bootstrap')
 const { ValidationError } = require('@navi-cli/log')
 
 const generateCommand = require('./command')
+const generateTemplate = require('./template')
 
 const PKG = require('../package.json')
 
@@ -16,6 +17,7 @@ async function naviCLI() {
   if (await prepare(PKG)) process.exit(1)
 
   const { commandList, INSIDE_CMD } = generateCommand()
+  generateTemplate()
 
   const program = core(PKG)
 

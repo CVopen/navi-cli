@@ -2,9 +2,11 @@ import React, { useEffect, useState, FC } from 'react'
 import { getTemplateList, delTemplate } from '@/api/template'
 import NoData from '@/components/NoData'
 import { Button, message } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 import './index.less'
 import Modal from './Modal'
+import { useAppSelector } from '@/store'
 
 export interface templateItem {
   name: string
@@ -16,6 +18,8 @@ export interface templateItem {
 export type Visible = 0 | 1 | 2
 
 const index: FC = () => {
+  const frame = useAppSelector((store) => store.app.frame)
+  const navigate = useNavigate()
   const [list, setList] = useState<templateItem[]>([])
   const [active, setActive] = useState<templateItem>()
   const [isModalVisible, setIsModalVisible] = useState<Visible>(0)
@@ -50,8 +54,11 @@ const index: FC = () => {
     <div className="admin-template">
       {!!list.length && (
         <div className="admin-template-add">
+          <Button type="primary" style={{ marginRight: 10 }} onClick={() => navigate(`/${frame}`)}>
+            创建模板
+          </Button>
           <Button type="primary" onClick={() => setIsModalVisible(1)}>
-            添加模板
+            导入模板
           </Button>
         </div>
       )}
@@ -81,14 +88,10 @@ const index: FC = () => {
                     <li>
                       <span>忽略文件: </span>
                       {ignore.reduce((target, current, index) => {
-                        if (index > 1) {
-                          return target
-                        }
+                        if (index > 1) return target
                         if (target) {
-                          // eslint-disable-next-line no-param-reassign
                           target += `、 ${current}`
                         } else {
-                          // eslint-disable-next-line no-param-reassign
                           target = current
                         }
                         return target

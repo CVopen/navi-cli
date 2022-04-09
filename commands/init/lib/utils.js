@@ -1,12 +1,15 @@
 const path = require('path')
 
 const userHome = require('user-home')
-const fse = require('fs-extra')
 
-const { TEMPLATE_JSON, NAVI_TEMPLATE } = require('./const')
+const { TEMPLATE_JSON, PROJECT_JSON } = require('./const')
 
-function getTemPlateLocalPath() {
+function getTemplateLocalPath() {
   return path.resolve(userHome, process.env.NAVI_CACHE_DIR, TEMPLATE_JSON)
+}
+
+function getProjectLocalPath() {
+  return path.resolve(userHome, process.env.NAVI_CACHE_DIR, PROJECT_JSON)
 }
 
 function getCachePath() {
@@ -16,14 +19,11 @@ function getCachePath() {
 }
 
 function getTemplate() {
-  const localPath = getTemPlateLocalPath()
-  if (!fse.pathExistsSync(localPath)) {
-    fse.outputJsonSync(localPath, [])
-  }
-  return [...NAVI_TEMPLATE, ...require(localPath)]
+  return require(getTemplateLocalPath())
 }
 
 module.exports = {
   getTemplate,
   getCachePath,
+  getProjectLocalPath,
 }
