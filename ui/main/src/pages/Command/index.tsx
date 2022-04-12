@@ -41,8 +41,11 @@ const index: FC = () => {
   }
 
   const tranformData = (list: CommandItem[]) => {
-    list.forEach((command) => {
+    list.forEach((command, index) => {
       const cmdList = command.cmd.split(' ')
+      if (!command.id) {
+        command.id = (index + 1).toString()
+      }
       for (const item of cmdList) {
         if (!item) continue
         if (item.startsWith('<')) {

@@ -71,6 +71,7 @@ const Content: FC<Props> = ({ current, showModal, setList, list, setActive }) =>
 
   return (
     <div className="command-content">
+      {Number(current?.id)}
       <h2>
         <span className="command-content-name">
           command: <span>{current?.name}</span>
@@ -79,12 +80,16 @@ const Content: FC<Props> = ({ current, showModal, setList, list, setActive }) =>
           <Button type="primary" onClick={() => showModal(1)} style={{ marginRight: 10 }}>
             添加命令
           </Button>
-          <Button type="primary" onClick={() => showModal(2)} style={{ marginRight: 10 }}>
-            修改命令
-          </Button>
-          <Button type="primary" danger onClick={del}>
-            删除命令
-          </Button>
+          {!Number(current?.id) && (
+            <>
+              <Button type="primary" onClick={() => showModal(2)} style={{ marginRight: 10 }}>
+                修改命令
+              </Button>
+              <Button type="primary" danger onClick={del}>
+                删除命令
+              </Button>
+            </>
+          )}
         </div>
       </h2>
       <p>

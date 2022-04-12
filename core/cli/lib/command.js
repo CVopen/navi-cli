@@ -42,15 +42,15 @@ function generateCommand() {
 
   const INSIDE_CMD = commandList.map(({ cmd }) => cmd.split(' ')[0])
 
-  const commandJson = path.join(userHome, process.env.NAVI_CACHE_DIR, CUSTOM_FILE_NAME)
+  const commandJSONPath = path.join(userHome, process.env.NAVI_CACHE_DIR, CUSTOM_FILE_NAME)
 
   try {
-    accessSync(commandJson, constants.F_OK)
-    const customList = require(commandJson)
+    accessSync(commandJSONPath, constants.F_OK)
+    const customList = require(commandJSONPath)
     commandList = [...commandList, ...customList]
   } catch (error) {
     // error.message
   }
 
-  return { commandList, INSIDE_CMD }
+  return { commandList, INSIDE_CMD, commandJSONPath }
 }
