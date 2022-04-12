@@ -23,33 +23,33 @@ export default function index() {
           <Tabs defaultActiveKey={useLocation().pathname} onTabClick={handleClick}>
             <TabPane
               tab={
-                <span>
+                <>
                   <SnippetsOutlined size={50} />项 目
-                </span>
+                </>
               }
               key="/project"
             />
             <TabPane
               tab={
-                <span>
+                <>
                   <PlusSquareOutlined size={50} />创 建
-                </span>
+                </>
               }
               key="/establish"
             />
             <TabPane
               tab={
-                <span>
+                <>
                   <FundProjectionScreenOutlined size={50} />命 令
-                </span>
+                </>
               }
               key="/command"
             />
             <TabPane
               tab={
-                <span>
+                <>
                   <AuditOutlined size={50} />模 板
-                </span>
+                </>
               }
               key="/template"
             />

@@ -190,7 +190,7 @@ class Init {
         const projectData = [
           ...require(projectPath),
           {
-            projectName: this.projectName,
+            name: this.projectName,
             createTime: new Date(),
             installCommand: setting.installCommand,
             startCommand: setting.startCommand,

@@ -6,6 +6,7 @@ import Content from './Content'
 
 import './index.less'
 import Modal from './Modal'
+import Menu from '@/components/Menu'
 
 export interface CommandItem {
   name: string
@@ -55,7 +56,7 @@ const index: FC = () => {
     })
   }
 
-  const handleClick = (current: CommandItem) => () => setActive(current)
+  const handleClick = useCallback((index: number) => () => setActive(list[index]), [list])
 
   const showModal = useCallback(() => {
     setIsModalVisible(1)
@@ -73,17 +74,7 @@ const index: FC = () => {
       />
       {list.length ? (
         <>
-          <ul className="command-select">
-            {list.map((command) => (
-              <li
-                key={command.name}
-                className={active?.name === command.name ? 'active' : ''}
-                onClick={handleClick(command)}
-              >
-                {command.name}
-              </li>
-            ))}
-          </ul>
+          <Menu list={list} click={handleClick} active={active} isKey={'id' as never} />
           <Content current={active} showModal={setIsModalVisible} setList={setList} list={list} setActive={setActive} />
         </>
       ) : (
@@ -98,3 +89,14 @@ const index: FC = () => {
 }
 
 export default index
+
+function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+  if (typeof a[orderBy] === 'string' && typeof b[orderBy] === 'string') {
+    // Error. This condition will always return 'false' since the types 'T[keyof T]' and 'string' have no overlap.ts(2367)
+    return 1
+  }
+  return 0
+}
+const x = { name: 'abc' }
+const y = { name: 'def' }
+descendingComparator(x, y, 'name')

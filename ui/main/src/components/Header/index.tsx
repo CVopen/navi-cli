@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Layout } from 'antd'
 import { QuestionCircleOutlined } from '@ant-design/icons'
@@ -7,7 +7,7 @@ const { Header } = Layout
 
 import './index.less'
 
-export default function index() {
+function index() {
   const navigate = useNavigate()
 
   return (
@@ -17,3 +17,5 @@ export default function index() {
     </Header>
   )
 }
+
+export default memo(index)

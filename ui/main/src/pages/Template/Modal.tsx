@@ -98,7 +98,7 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
               {!fields.length && (
                 <Form.Item name="bt" style={{ width: 200 }}>
                   <Button type="primary" onClick={add} block icon={<PlusOutlined />}>
-                    Add Ignore
+                    Add Template
                   </Button>
                 </Form.Item>
               )}
