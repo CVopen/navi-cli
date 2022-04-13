@@ -6,12 +6,10 @@ function open(url) {
   const exec = require('child_process').exec
   switch (process.platform) {
     case 'win32':
-      exec(`start ${url}`)
-      break
+      return exec(`start ${url}`)
     case 'darwin':
-      exec(`open ${url}`)
-      break
+      return exec(`open ${url}`)
     default:
-      exec('xdg-open', [url])
+      return exec('xdg-open', [url])
   }
 }

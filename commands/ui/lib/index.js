@@ -1,8 +1,8 @@
 'use strict'
 
-const uiServer = require('./server')
-module.exports = uiServer
+const server = require('./server')
+module.exports = server
 
 if (process.env.NODE_ENV === 'development') {
-  uiServer()
+  server()
 }

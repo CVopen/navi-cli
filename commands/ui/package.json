@@ -29,6 +29,7 @@
   "dependencies": {
     "@navi-cli/log": "file:..\\..\\utils\\log",
     "@navi-cli/request": "file:..\\..\\utils\\request",
+    "@navi-cli/open": "file:..\\..\\utils\\open",
     "connect-history-api-fallback": "^1.6.0",
     "express": "^4.17.3",
     "express-ws": "^5.0.2",

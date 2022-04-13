@@ -1,14 +1,14 @@
-import {AppState} from './state'
+import { AppState } from './state'
 
-const selectFrame = (state: AppState, { payload }: {payload: string} ) => {
+const selectFrame = (state: AppState, { payload }: { payload: string }) => {
   state.frame = payload
 }
 
-const selectBuild = (state: AppState, { payload }: {payload: string} ) => {
+const selectBuild = (state: AppState, { payload }: { payload: string }) => {
   state.build = payload
 }
 
 export default {
   selectFrame,
-  selectBuild
+  selectBuild,
 }

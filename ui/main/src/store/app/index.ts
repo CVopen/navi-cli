@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import {initialState} from './state'
+import { initialState } from './state'
 import reducers from './reducers'
 
 export const appSlice = createSlice({
@@ -10,7 +10,4 @@ export const appSlice = createSlice({
 })
 
 export default appSlice.reducer
-export const { 
-  selectFrame,
-  selectBuild
-} = appSlice.actions
+export const { selectFrame, selectBuild } = appSlice.actions
