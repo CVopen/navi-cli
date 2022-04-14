@@ -18,8 +18,8 @@ function openFold({ local }) {
   return new Promise((resolve) => {
     const exec = open(local)
     exec.on('exit', (code) => {
-      if (!code) {
-        print('error', `Open folder '${local}' fail`)
+      if (code != 0) {
+        print('error', `Open folder '${local}' fail, exit code '${code}'`)
       }
       resolve(code)
     })

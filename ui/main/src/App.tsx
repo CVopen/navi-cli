@@ -5,20 +5,23 @@ import 'antd/dist/antd.css'
 import './styles/index.less'
 
 import RouteList from './router'
-import { store } from './store'
+import { store, useAppDispatch } from './store'
+import { socketInstance } from './store/app'
 
 const App: React.FC = () => {
   const [mask, setMask] = useState<boolean>(false)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (WebSocket) {
       const socket = new WebSocket('ws://localhost:8888/ws')
       socket.onclose = () => setMask(true)
+      dispatch(socketInstance(socket))
     }
   }, [])
 
   return (
-    <Provider store={store}>
+    <>
       {mask && (
         <div className="mask">
           <p>您已断开连接</p>
@@ -29,8 +32,14 @@ const App: React.FC = () => {
         <RouteList />
       </BrowserRouter>
       <div id="subapp-container" />
-    </Provider>
+    </>
   )
 }
 
-export default App
+export default () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+}

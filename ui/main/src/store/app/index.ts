@@ -10,4 +10,4 @@ export const appSlice = createSlice({
 })
 
 export default appSlice.reducer
-export const { selectFrame, selectBuild } = appSlice.actions
+export const { selectFrame, selectBuild, socketInstance } = appSlice.actions
