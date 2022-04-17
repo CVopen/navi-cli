@@ -1,4 +1,4 @@
-import { delCommand } from '@/api/command'
+import { delCommand } from '@/api'
 import { Button, message } from 'antd'
 import React, { FC, memo } from 'react'
 

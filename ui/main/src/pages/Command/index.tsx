@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FC, useCallback } from 'react'
-import { getCommandList } from '@/api/command'
+import { getCommandList } from '@/api'
 import NoData from '@/components/NoData'
 import { Button } from 'antd'
 import Content from './Content'

@@ -3,7 +3,7 @@ import { Button, Form, Input, message, Modal, Space } from 'antd'
 import React, { memo, useEffect, useState } from 'react'
 import _ from 'lodash'
 
-import { addTemplate, updateTemplate } from '@/api/template'
+import { addTemplate, updateTemplate } from '@/api'
 
 import { templateItem, Visible } from '.'
 

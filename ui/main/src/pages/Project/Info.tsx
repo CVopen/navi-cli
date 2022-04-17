@@ -1,4 +1,4 @@
-import { openFolder } from '@/api/project'
+import { openFolder } from '@/api'
 import { formatDate } from '@/utils'
 import { BankOutlined, FolderOpenOutlined } from '@ant-design/icons'
 import { Button, Card } from 'antd'

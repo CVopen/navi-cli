@@ -110,16 +110,19 @@ class Init {
     if (!settingJson.ignore) settingJson.ignore = []
     if (!settingJson.template || !isEmptyList(settingJson.template)) return mergeOption(settingJson)
 
-    function validate(v) {
-      const done = this.async()
-      const _validate = () => {
-        if (!v) return done(settingJson.tip)
-        done(null, true)
-      }
-      setTimeout(_validate)
-    }
-
-    const promptList = settingJson.template.map(({ name, message }) => ({ type: 'input', name, message, validate }))
+    const promptList = settingJson.template.map(({ name, message, tip }) => ({
+      type: 'input',
+      name,
+      message,
+      validate(v) {
+        const done = this.async()
+        const _validate = () => {
+          if (!v) return done(tip)
+          done(null, true)
+        }
+        setTimeout(_validate)
+      },
+    }))
     const project = await inquirer.prompt(promptList)
     return mergeOption({ ...project, ...settingJson })
   }

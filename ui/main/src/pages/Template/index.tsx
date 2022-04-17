@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FC, memo } from 'react'
-import { getTemplateList, delTemplate } from '@/api/template'
+import { getTemplateList, delTemplate } from '@/api'
 import NoData from '@/components/NoData'
 import { Button, message } from 'antd'
 import { useNavigate } from 'react-router-dom'

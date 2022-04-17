@@ -1,4 +1,4 @@
-import { addCommand, updateCommand } from '@/api/command'
+import { addCommand, updateCommand } from '@/api'
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Form, Input, message, Modal, Select, Space } from 'antd'
 import React, { memo, useEffect, useState } from 'react'

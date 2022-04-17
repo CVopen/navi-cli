@@ -1,4 +1,4 @@
-import { getProjectList } from '@/api/project'
+import { getProjectList } from '@/api'
 import Menu from '@/components/Menu'
 import React, { useCallback, useEffect, useState } from 'react'
 import './index.less'
