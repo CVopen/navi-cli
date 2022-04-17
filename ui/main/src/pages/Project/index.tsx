@@ -12,6 +12,7 @@ export interface ProjectItem {
   createTime: string
   installCommand: string
   startCommand: string
+  buildCommand: string
   local: string
 }
 

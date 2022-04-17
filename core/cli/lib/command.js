@@ -46,7 +46,7 @@ function generateCommand() {
 
   try {
     accessSync(commandJSONPath, constants.F_OK)
-    const customList = require(commandJSONPath)
+    const customList = require(commandJSONPath).filter(({ cmd }) => !INSIDE_CMD.includes(cmd.split(' ')[0]))
     commandList = [...commandList, ...customList]
   } catch (error) {
     // error.message

@@ -30,6 +30,7 @@
     "@navi-cli/log": "file:..\\..\\utils\\log",
     "@navi-cli/request": "file:..\\..\\utils\\request",
     "@navi-cli/open": "file:..\\..\\utils\\open",
+    "@navi-cli/child-process": "file:..\\..\\utils\\child-process",
     "connect-history-api-fallback": "^1.6.0",
     "express": "^4.17.3",
     "express-ws": "^5.0.2",

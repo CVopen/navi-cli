@@ -57,7 +57,7 @@ class Init {
     }
     if (!this.force) {
       print('warn', 'A directory with the same name exists', 'yellow')
-      process.exit(0)
+      process.exit = 0
     }
     const result = await inquirer.prompt({
       type: 'confirm',
@@ -65,7 +65,7 @@ class Init {
       default: false,
       message: 'Empty directory?',
     })
-    if (!result.confirmDelete) process.exit(0)
+    if (!result.confirmDelete) process.exit = 0
     fse.emptyDirSync(this.projectPath)
     if (!this.git) {
       execSync('git', ['init'], { cwd: this.projectPath })

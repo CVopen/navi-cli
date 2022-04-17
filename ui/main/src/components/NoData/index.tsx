@@ -7,7 +7,7 @@ interface NoDataProps {
   content?: string
   icon?: ReactNode
   children?: ReactNode
-  style?: CSSStyleDeclaration
+  style?: React.CSSProperties
 }
 
 function index({

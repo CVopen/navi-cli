@@ -1,12 +1,8 @@
 const { print } = require('@navi-cli/log')
 
-module.exports = connect
+const handleMethod = require('../controller/ws')
 
-const handleMethod = {
-  start(local) {
-    console.log(local)
-  },
-}
+module.exports = connect
 
 function connect(app) {
   app.ws('/ws', (ws) => {

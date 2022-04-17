@@ -24,8 +24,13 @@ function getLocal(filename) {
   return path.join(userHome, getCacheDir(), filename)
 }
 
+function sendWsString(data) {
+  return JSON.stringify(data)
+}
+
 module.exports = {
   getCacheDir,
   sendData,
   getLocal,
+  sendWsString,
 }

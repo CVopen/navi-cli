@@ -1,4 +1,5 @@
 import { openFolder } from '@/api/project'
+import { formatDate } from '@/utils'
 import { BankOutlined, FolderOpenOutlined } from '@ant-design/icons'
 import { Button, Card } from 'antd'
 import React, { memo } from 'react'
@@ -28,7 +29,7 @@ const Info = memo(({ active }: { active: ProjectItem }) => {
       </p>
       <p>
         <span>创建时间: </span>
-        {active?.createTime}
+        {formatDate(active?.createTime)}
       </p>
       <p>
         <span>项目路径: </span>
