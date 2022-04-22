@@ -7,3 +7,7 @@ export function getProjectList() {
 export function openFolder(data: { local: string }) {
   return post('/project/open', data)
 }
+
+export function getPath() {
+  return post('/project/path').then((res) => res.data as unknown as string[])
+}

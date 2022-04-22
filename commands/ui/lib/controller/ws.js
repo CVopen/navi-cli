@@ -1,24 +1,27 @@
-const pathExists = require('path-exists').sync
-
 const path = require('path')
 
+const pathExists = require('path-exists').sync
+const notifier = require('node-notifier')
+
 const { exec } = require('@navi-cli/child-process')
+
 const { getList } = require('./project')
 const { sendWsString } = require('../utils')
 
 const DEPENDENCIES = 'node_modules'
 const type = {
-  START: 'startTime',
-  END: 'endTime',
   DATA: 'data',
   ERROR: 'error',
 }
 
+const option = notifier.WindowsToaster === notifier.Notification && { appID: 'Navi-cli' }
+
 function execCommand(project, ws) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const cmdList = project.command.split(' ')
-    const cp = exec(cmdList.shift(), cmdList, { stdio: 'pipe', cwd: project.local })
-    ws.send(sendWsString({ type: type.START, data: new Date().toString() }))
+    const cmd = cmdList.shift()
+    const cp = exec(cmd, cmdList, { stdio: 'pipe', cwd: project.local })
+    const startTime = new Date().getTime()
     ws.send(sendWsString({ type: type.DATA, data: `$ ${project.command}` }))
 
     let stdoutList
@@ -29,9 +32,18 @@ function execCommand(project, ws) {
       ws.send(sendWsString({ type: type.DATA, data: stdoutList.toString() }))
     })
 
-    cp.on('exit', () => {
-      ws.send(sendWsString({ type: type.END, data: new Date().toString() }))
-      resolve()
+    cp.on('exit', (code) => {
+      const endTime = new Date().getTime()
+      notifier.notify({
+        ...option,
+        title: `Task ${code ? 'failed' : 'completed'}`,
+        message: `Task ${project.local}:${cmd} ${code ? 'failed' : 'completed'} in ${(
+          (endTime - startTime) /
+          1000
+        ).toFixed(2)}s.`,
+        icon: path.join(__dirname, `../assets/${code ? 'close' : 'ok'}.svg`),
+      })
+      !code ? resolve() : reject()
     })
   })
 }

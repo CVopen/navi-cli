@@ -92,14 +92,3 @@ const index: FC = () => {
 }
 
 export default index
-
-function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-  if (typeof a[orderBy] === 'string' && typeof b[orderBy] === 'string') {
-    // Error. This condition will always return 'false' since the types 'T[keyof T]' and 'string' have no overlap.ts(2367)
-    return 1
-  }
-  return 0
-}
-const x = { name: 'abc' }
-const y = { name: 'def' }
-descendingComparator(x, y, 'name')

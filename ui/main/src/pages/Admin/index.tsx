@@ -35,7 +35,7 @@ export default function index() {
                   <PlusSquareOutlined size={50} />创 建
                 </>
               }
-              key="/establish"
+              key="/create"
             />
             <TabPane
               tab={

@@ -71,7 +71,6 @@ const Content: FC<Props> = ({ current, showModal, setList, list, setActive }) =>
 
   return (
     <div className="command-content">
-      {Number(current?.id)}
       <h2>
         <span className="command-content-name">
           command: <span>{current?.name}</span>
