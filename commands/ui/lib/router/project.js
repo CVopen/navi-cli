@@ -17,7 +17,7 @@ routerProject.post('/ui/project/open', (req, res) => {
 
 routerProject.post('/ui/project/path', (_, res) => {
   const platform = process.platform === 'win32' ? '\\' : '/'
-  res.json(sendData(process.cwd().split(platform)))
+  res.json(sendData(['~', ...process.cwd().split(platform)]))
 })
 
 module.exports = routerProject
