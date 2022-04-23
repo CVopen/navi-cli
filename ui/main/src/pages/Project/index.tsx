@@ -1,5 +1,6 @@
 import { getProjectList } from '@/api'
 import Menu from '@/components/Menu'
+import NoData from '@/components/NoData'
 import React, { useCallback, useEffect, useState } from 'react'
 import './index.less'
 import Info from './Info'
@@ -37,11 +38,18 @@ export default function index() {
 
   return (
     <div className="admin-project">
-      <Menu list={list} click={handleClick} active={active} isKey={'local' as never} />
-      <div className="project-content">
-        <Info active={active as ProjectItem} />
-        <Task active={active as ProjectItem} />
-      </div>
+      {list.length ? (
+        <>
+          {' '}
+          <Menu list={list} click={handleClick} active={active} isKey={'local' as never} />
+          <div className="project-content">
+            <Info active={active as ProjectItem} />
+            <Task active={active as ProjectItem} />
+          </div>
+        </>
+      ) : (
+        <NoData content="您还未创建过自己的模板" />
+      )}
     </div>
   )
 }

@@ -8,7 +8,7 @@ const routes = [
     element: React.lazy(() => import('../pages/Admin')),
     children: [
       { path: 'project', element: React.lazy(() => import('../pages/Project')) },
-      { path: 'create', element: React.lazy(() => import('../pages/create')) },
+      { path: 'create', element: React.lazy(() => import('../pages/Create')) },
       { path: 'command', element: React.lazy(() => import('../pages/Command')) },
       { path: 'template', element: React.lazy(() => import('../pages/Template')) },
     ],
