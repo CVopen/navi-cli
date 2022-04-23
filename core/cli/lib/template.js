@@ -21,6 +21,12 @@ const NAVI_TEMPLATE = [
 
 function generateTemplate() {
   const local = getTemplateLocalPath()
-  let localData = require(local).filter(({ name }) => !NAVI_TEMPLATE.find((item) => item.name === name))
+  let localTemplate = []
+  try {
+    localTemplate = require(local)
+  } catch (error) {
+    fs.mkdirSync(path.resolve(local, '../'))
+  }
+  let localData = localTemplate.filter(({ name }) => !NAVI_TEMPLATE.find((item) => item.name === name))
   fs.writeFileSync(local, JSON.stringify([...NAVI_TEMPLATE, ...localData], null, '\t'))
 }
