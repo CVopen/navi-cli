@@ -1382,54 +1382,54 @@
     npmlog "^4.1.2"
     write-file-atomic "^3.0.3"
 
-"@navi-cli/bootstrap@file:core/bootstrap":
+"@navi-cli/bootstrap@file:core/cli/../bootstrap":
   version "1.0.7"
   dependencies:
-    "@navi-cli/child-process" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-bootstrap-1.0.7-5c43d832-9ed8-4335-887f-8c4654a8a747-1650211162312/node_modules/utils/child-process"
-    "@navi-cli/package" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-bootstrap-1.0.7-5c43d832-9ed8-4335-887f-8c4654a8a747-1650211162312/node_modules/@navi-cli/package"
+    "@navi-cli/child-process" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-bootstrap-1.0.7-c9a619db-d5ef-418f-8095-173c0242bbe8-1650706093907/node_modules/@navi-cli/bootstrap/../../utils/child-process"
+    "@navi-cli/package" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-bootstrap-1.0.7-c9a619db-d5ef-418f-8095-173c0242bbe8-1650706093907/node_modules/@navi-cli/bootstrap/../package"
     fs-extra "^10.0.0"
     user-home "^3.0.0"
 
-"@navi-cli/child-process@file:utils/child-process":
+"@navi-cli/child-process@file:commands/init/../../utils/child-process", "@navi-cli/child-process@file:commands/react/../../utils/child-process", "@navi-cli/child-process@file:commands/ui/../../utils/child-process", "@navi-cli/child-process@file:commands/vue/../../utils/child-process", "@navi-cli/child-process@file:core/bootstrap/../../utils/child-process":
   version "1.0.1"
   dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-child-process-1.0.1-02e9ae5c-a836-4c0f-bac6-d161a67376e8-1650211162307/node_modules/@navi-cli/log"
+    "@navi-cli/log" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-child-process-1.0.1-512c9ee1-b6a2-418e-8172-64b64c411901-1650706093902/node_modules/@navi-cli/child-process/../log"
     execa "5.1.1"
 
-"@navi-cli/core@file:core/core":
+"@navi-cli/core@file:core/cli/../core":
   version "1.0.4"
   dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-core-1.0.4-6dd5f1a4-2961-4ef9-9e37-f955212213c2-1650211162312/node_modules/utils/log"
+    "@navi-cli/log" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-core-1.0.4-f3391e4b-fc51-455c-8d85-01681bd3ffab-1650706093910/node_modules/@navi-cli/core/../../utils/log"
     colors "^1.4.0"
     commander "^9.0.0"
     dotenv "^16.0.0"
 
-"@navi-cli/log@file:utils/log":
+"@navi-cli/log@file:commands/init/../../utils/log", "@navi-cli/log@file:commands/react/../../utils/log", "@navi-cli/log@file:commands/ui/../../utils/log", "@navi-cli/log@file:commands/vue/../../utils/log", "@navi-cli/log@file:core/cli/../../utils/log", "@navi-cli/log@file:core/core/../../utils/log", "@navi-cli/log@file:core/package/../../utils/log", "@navi-cli/log@file:core/prepare/../../utils/log", "@navi-cli/log@file:utils/child-process/../log":
   version "1.0.4"
   dependencies:
     colors "^1.4.0"
     npmlog "^6.0.1"
 
-"@navi-cli/open@file:utils/open":
+"@navi-cli/open@file:commands/react/../../utils/open", "@navi-cli/open@file:commands/ui/../../utils/open", "@navi-cli/open@file:commands/vue/../../utils/open":
   version "1.0.4"
 
-"@navi-cli/package@file:core/package":
+"@navi-cli/package@file:commands/init/../../core/package", "@navi-cli/package@file:core/bootstrap/../package":
   version "1.0.4"
   dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-package-1.0.4-14ed8f81-9379-4bd0-8b95-316422809a3f-1650211162310/node_modules/utils/log"
-    "@navi-cli/request" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-package-1.0.4-14ed8f81-9379-4bd0-8b95-316422809a3f-1650211162310/node_modules/utils/request"
-    "@navi-cli/spinner" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-package-1.0.4-14ed8f81-9379-4bd0-8b95-316422809a3f-1650211162310/node_modules/utils/spinner"
-    "@navi-cli/utils" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-package-1.0.4-14ed8f81-9379-4bd0-8b95-316422809a3f-1650211162310/node_modules/utils/utils"
+    "@navi-cli/log" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-package-1.0.4-7c03a12b-ce38-434f-8f0d-190d7057c1dd-1650706093904/node_modules/@navi-cli/package/../../utils/log"
+    "@navi-cli/request" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-package-1.0.4-7c03a12b-ce38-434f-8f0d-190d7057c1dd-1650706093904/node_modules/@navi-cli/package/../../utils/request"
+    "@navi-cli/spinner" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-package-1.0.4-7c03a12b-ce38-434f-8f0d-190d7057c1dd-1650706093904/node_modules/@navi-cli/package/../../utils/spinner"
+    "@navi-cli/utils" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-package-1.0.4-7c03a12b-ce38-434f-8f0d-190d7057c1dd-1650706093904/node_modules/@navi-cli/package/../../utils/utils"
     npminstall "^5.4.1"
     path-exists "^4.0.0"
     pkg-dir "^5.0.0"
 
-"@navi-cli/prepare@file:core/prepare":
+"@navi-cli/prepare@file:core/cli/../prepare":
   version "1.0.5"
   dependencies:
-    "@navi-cli/log" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-1.0.5-1d003bf8-5694-42ae-b3a1-3014e25661a1-1650211162314/node_modules/utils/log"
-    "@navi-cli/request" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-1.0.5-1d003bf8-5694-42ae-b3a1-3014e25661a1-1650211162314/node_modules/utils/request"
-    "@navi-cli/utils" "file:../../../file/yarn/yarn_cache/v6/npm-@navi-cli-prepare-1.0.5-1d003bf8-5694-42ae-b3a1-3014e25661a1-1650211162314/node_modules/utils/utils"
+    "@navi-cli/log" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-prepare-1.0.5-13d1aa7e-b511-48cd-808e-acefe79ecd26-1650706093908/node_modules/@navi-cli/prepare/../../utils/log"
+    "@navi-cli/request" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-prepare-1.0.5-13d1aa7e-b511-48cd-808e-acefe79ecd26-1650706093908/node_modules/@navi-cli/prepare/../../utils/request"
+    "@navi-cli/utils" "file:../../Library/Caches/Yarn/v6/npm-@navi-cli-prepare-1.0.5-13d1aa7e-b511-48cd-808e-acefe79ecd26-1650706093908/node_modules/@navi-cli/prepare/../../utils/utils"
     axios "^0.25.0"
     colors "^1.4.0"
     dedent "^0.7.0"
@@ -1439,18 +1439,18 @@
     root-check "^1.0.0"
     user-home "^3.0.0"
 
-"@navi-cli/request@file:utils/request":
+"@navi-cli/request@file:commands/ui/../../utils/request", "@navi-cli/request@file:core/package/../../utils/request", "@navi-cli/request@file:core/prepare/../../utils/request":
   version "1.0.4"
   dependencies:
     axios "^0.25.0"
     url-join "^4.0.1"
 
-"@navi-cli/spinner@file:utils/spinner":
+"@navi-cli/spinner@file:core/package/../../utils/spinner":
   version "1.0.1"
   dependencies:
     ora "^5.4.1"
 
-"@navi-cli/utils@file:utils/utils":
+"@navi-cli/utils@file:commands/init/../../utils/utils", "@navi-cli/utils@file:core/cli/../../utils/utils", "@navi-cli/utils@file:core/package/../../utils/utils", "@navi-cli/utils@file:core/prepare/../../utils/utils":
   version "1.0.4"
   dependencies:
     semver "^7.3.5"
