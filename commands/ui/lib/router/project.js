@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { getList, openFold } = require('../controller/project')
+const { getList, openFold, getPath } = require('../controller/project')
 const { sendData } = require('../utils')
 
 const routerProject = express.Router()
@@ -15,11 +15,8 @@ routerProject.post('/ui/project/open', (req, res) => {
   })
 })
 
-routerProject.post('/ui/project/path', (_, res) => {
-  const platform = process.platform === 'win32' ? '\\' : '/'
-  res.json(
-    sendData(process.platform === 'win32' ? ['~', ...process.cwd().split(platform)] : process.cwd().split(platform))
-  )
+routerProject.get('/ui/project/path', (req, res) => {
+  res.json(sendData(getPath(req.query)))
 })
 
 module.exports = routerProject

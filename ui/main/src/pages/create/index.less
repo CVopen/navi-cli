@@ -5,6 +5,7 @@
   flex: 1;
   .create-header {
     display: flex;
+    margin: 20px 0;
     .create-header-item {
       background-color: @theme-main-deep;
       line-height: 34px;
@@ -16,5 +17,28 @@
         cursor: pointer;
       }
     }
+  }
+  .create-folder {
+    height: calc(100% - 150px);
+    div {
+      padding: 20px;
+      border-radius: 5px;
+      transition: all .4s;
+      .flexAlign();
+      &:hover {
+        background-color: @theme-main-deep;
+      }
+      img {
+        width: 25px;
+      }
+      span {
+        font-size: 25px;
+        margin-right: 20px;
+      }
+    }
+  }
+  .create-btn {
+    height: 60px;
+    .fileAlignContent()
   }
 }

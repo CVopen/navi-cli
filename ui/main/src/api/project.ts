@@ -8,6 +8,6 @@ export function openFolder(data: { local: string }) {
   return post('/project/open', data)
 }
 
-export function getPath() {
-  return post('/project/path').then((res) => res.data as unknown as string[])
+export function getPath(params?: { path: string }) {
+  return get('/project/path', params).then((res) => res.data)
 }

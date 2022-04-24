@@ -1,14 +1,33 @@
 import { getPath } from '@/api'
-import { EditOutlined, EyeOutlined, FileAddOutlined, MoreOutlined, RedoOutlined, UpOutlined } from '@ant-design/icons'
-import { Dropdown, Menu, Switch } from 'antd'
+import {
+  EditOutlined,
+  EyeOutlined,
+  FileAddOutlined,
+  FolderFilled,
+  FolderOutlined,
+  MoreOutlined,
+  PlusOutlined,
+  RedoOutlined,
+  UpOutlined,
+} from '@ant-design/icons'
+import { Button, Dropdown, Menu, Switch } from 'antd'
 import React, { useEffect, useState } from 'react'
 import './index.less'
 
+import reactLogo from '@/assets/react.svg'
+import vueLogo from '@/assets/vue.svg'
+
+interface PathLocal {
+  path: string[]
+  folderList: { folderName: string; frame: '' | 'vue' | 'react' }[]
+}
+
 export default function index() {
-  const [paths, setPath] = useState<string[]>([])
+  const [pathLocal, setPathLocal] = useState<PathLocal>({ path: [], folderList: [] })
   useEffect(() => {
-    getPath().then((path) => {
-      setPath(path)
+    // getPath({ path: '/Users/open/Desktop/navi-cli/commands/ui' }).then((res) => {
+    getPath().then((res) => {
+      setPathLocal(res as unknown as PathLocal)
     })
   }, [])
 
@@ -38,8 +57,8 @@ export default function index() {
         <div className="create-header-item">
           <UpOutlined />
         </div>
-        {paths.map((key, index) => {
-          return index + 1 === paths.length ? (
+        {pathLocal.path.map((key, index) => {
+          return index + 1 === pathLocal.path.length ? (
             <div className="create-header-item" key={key} style={{ flex: 1 }}>
               <span>{key}</span>
               <EditOutlined style={{ float: 'right', marginTop: 5 }} />
@@ -58,6 +77,21 @@ export default function index() {
             <MoreOutlined />
           </Dropdown>
         </div>
+      </div>
+      <div className="create-folder">
+        {pathLocal.folderList.map(({ folderName, frame }) => (
+          <div key={folderName}>
+            {frame ? <FolderFilled /> : <FolderOutlined />}
+            {folderName}
+            {frame === 'vue' && <img src={vueLogo} alt="" />}
+            {frame === 'react' && <img src={reactLogo} alt="" />}
+          </div>
+        ))}
+      </div>
+      <div className="create-btn">
+        <Button type="primary" icon={<PlusOutlined />}>
+          在此处创建新项目
+        </Button>
       </div>
     </div>
   )
