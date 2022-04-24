@@ -21,6 +21,7 @@ module.exports = {
     'prefer-promise-reject-errors': 'off',
     '@typescript-eslint/no-unused-expressions': 'off',
     'react/jsx-no-useless-fragment': 'off',
-    'no-param-reassign': 'off'
+    'no-param-reassign': 'off',
+    '@typescript-eslint/no-invalid-void-type': 'off'
   },
 }

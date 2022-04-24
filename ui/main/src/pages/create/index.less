@@ -2,7 +2,8 @@
 
 .admin-create {
   width: 1200px;
-  flex: 1;
+  height: calc(100% - 60px);
+  user-select: none;
   .create-header {
     display: flex;
     margin: 20px 0;
@@ -19,17 +20,21 @@
     }
   }
   .create-folder {
+    .scrollbar();
+    overflow-y: auto;
     height: calc(100% - 150px);
     div {
       padding: 20px;
       border-radius: 5px;
       transition: all .4s;
+      cursor: pointer;
       .flexAlign();
       &:hover {
         background-color: @theme-main-deep;
       }
       img {
         width: 25px;
+        margin-left: 5px;
       }
       span {
         font-size: 25px;

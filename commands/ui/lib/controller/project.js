@@ -46,7 +46,7 @@ function getPath({ path = process.cwd() }) {
       return stat.isDirectory()
     })
     .map((folderName) => {
-      const local = resolve(path, PACKAGE)
+      const local = resolve(path, folderName, PACKAGE)
       let frame = ''
       if (pathExists(local)) {
         const pkg = require(local)

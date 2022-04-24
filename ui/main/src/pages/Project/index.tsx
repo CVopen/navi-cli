@@ -6,8 +6,6 @@ import './index.less'
 import Info from './Info'
 import Task from './Task'
 
-export type Visible = 0 | 1 | 2
-
 export interface ProjectItem {
   name: string
   createTime: string
@@ -20,7 +18,6 @@ export interface ProjectItem {
 export default function index() {
   const [list, setList] = useState<ProjectItem[]>([])
   const [active, setActive] = useState<ProjectItem>()
-  const [isModalVisible, setIsModalVisible] = useState<Visible>(0)
 
   useEffect(() => {
     getList()
