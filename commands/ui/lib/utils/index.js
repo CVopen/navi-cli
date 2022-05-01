@@ -1,4 +1,11 @@
-const { NAVI_CACHE_DIR, SUCCESS_CODE, SUCCESS_TEXT, ERROR_TEXT, ERROR_CODE } = require('../constant')
+const {
+  NAVI_CACHE_DIR,
+  SUCCESS_CODE,
+  SUCCESS_TEXT,
+  ERROR_TEXT,
+  ERROR_CODE,
+  NAVI_CACHE_TEMPLATE,
+} = require('../constant')
 
 const path = require('path')
 
@@ -28,9 +35,14 @@ function sendWsString(data) {
   return JSON.stringify(data)
 }
 
+function getCacheTemplateDir() {
+  return getLocal(path.join(NAVI_CACHE_TEMPLATE, 'node_modules'))
+}
+
 module.exports = {
   getCacheDir,
   sendData,
   getLocal,
   sendWsString,
+  getCacheTemplateDir,
 }

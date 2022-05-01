@@ -31,7 +31,6 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
 
   useEffect(() => {
     if (visible !== 2) return
-    console.log(defaultData)
     if (!defaultData.option || !defaultData.option.length) return form.setFieldsValue(defaultData)
     if (Array.isArray(defaultData.option[0])) {
       defaultData.option = defaultData.option.map((str: any) => {

@@ -24,12 +24,16 @@ function addTemplate({ label, name, ignore = [] }) {
     getPackage(name)
       .then(() => {
         const templateData = require(local)
-        templateData.push({ label, name, ignore, id })
-        try {
-          fs.writeFileSync(local, JSON.stringify(templateData, null, '\t'))
-          resolve([{ id }])
-        } catch (error) {
-          resolve([null, '写入失败!'])
+        if (templateData.find((item) => item.name === name)) {
+          resolve([null, '已经为该包创建过模板!'])
+        } else {
+          templateData.push({ label, name, ignore, id })
+          try {
+            fs.writeFileSync(local, JSON.stringify(templateData, null, '\t'))
+            resolve([{ id }])
+          } catch (error) {
+            resolve([null, '写入失败!'])
+          }
         }
       })
       .catch(() => {

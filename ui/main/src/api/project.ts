@@ -15,3 +15,7 @@ export function getPath(params?: { path: string; status?: boolean }) {
 export function getDisc() {
   return get('/project/disc').then((res) => res.data as unknown as string[])
 }
+
+export function getProjectSelect(params: { name: string }) {
+  return get('/project/select', params).then((res) => res.data)
+}

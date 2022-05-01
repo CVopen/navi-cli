@@ -1,5 +1,6 @@
 const open = require('@navi-cli/open')
 const { print } = require('@navi-cli/log')
+const Package = require('@navi-cli/package')
 
 const { resolve } = require('path')
 const fs = require('fs')
@@ -8,11 +9,12 @@ const child = require('child_process')
 const pathExists = require('path-exists').sync
 const fse = require('fs-extra')
 
-const { getLocal } = require('../utils')
+const { getLocal, getCacheTemplateDir } = require('../utils')
+const path = require('path')
 
 const CUSTOM_FILE_NAME = 'project.json'
 
-module.exports = { getList, openFold, getPath, getDisc }
+module.exports = { getList, openFold, getPath, getDisc, getTemplateInfo }
 
 const local = getLocal(CUSTOM_FILE_NAME)
 
@@ -98,4 +100,17 @@ function getDisc() {
       resolve(list)
     })
   })
+}
+
+async function getTemplateInfo({ name }) {
+  const pkg = new Package({
+    packageName: name,
+    targetPath: getCacheTemplateDir(),
+    chaheLocal: getCacheTemplateDir(),
+  })
+  if (!(await pkg.exists())) {
+    await pkg.install()
+  }
+
+  return require(path.join(pkg.getPkgPath(), 'setting.json')).template
 }

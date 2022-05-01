@@ -20,12 +20,14 @@ import { useAppDispatch, useAppSelector } from '@/store'
 import { getPathAsync } from '@/store/app'
 import { checkPlatFormToWin, transformPath } from '@/utils'
 import { getDisc } from '@/api'
-import Modal from './Modal'
+import ModalFolder from './ModalFolder'
+import ModalProject from './ModalProject'
 
 export default function index() {
   const [check, setCheck] = useState(false)
   const [discList, setDisc] = useState<string[]>([])
-  const [isModalVisible, setIsModalVisible] = useState(true)
+  const [isModalVisibleFolder, setIsModalVisibleFolder] = useState(false)
+  const [isModalVisibleProject, setIsModalVisibleProject] = useState(false)
 
   const { createPath } = useAppSelector(({ app }) => app)
   const dispatch = useAppDispatch()
@@ -42,7 +44,7 @@ export default function index() {
 
   const more = useMemo(() => {
     const onSelect = ({ key }: any) => {
-      key === '1' && setIsModalVisible(true)
+      key === '1' && setIsModalVisibleFolder(true)
     }
     const menu = (
       <Menu style={{ backgroundColor: '#00141b' }} onClick={onSelect}>
@@ -113,7 +115,8 @@ export default function index() {
 
   return (
     <div className="admin-create">
-      <Modal isModalVisible={isModalVisible} setShow={setIsModalVisible} />
+      <ModalFolder isModalVisible={isModalVisibleFolder} setShow={setIsModalVisibleFolder} />
+      <ModalProject isModalVisible={isModalVisibleProject} setShow={setIsModalVisibleProject} />
       <div className="create-header">
         <div className="create-header-item">
           <UpOutlined onClick={freshen(createPath.path.length - 2)} />
@@ -153,7 +156,7 @@ export default function index() {
         })}
       </div>
       <div className="create-btn">
-        <Button type="primary" icon={<PlusOutlined />} onClick={() => dispatch(getPathAsync())}>
+        <Button type="primary" icon={<PlusOutlined />} onClick={() => setIsModalVisibleProject(true)}>
           在此处创建新项目
         </Button>
       </div>

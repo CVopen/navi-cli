@@ -33,7 +33,6 @@ function core(pkg) {
 
   program.on('command:*', function (errCommand) {
     program.outputHelp()
-    console.log()
     print('error', `unknown command: ${errCommand[0]}`, 'red')
     if (program.commands.length === 0) return
     const echoCommands = program.commands.map((cmd) => cmd.name())

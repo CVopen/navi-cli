@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { getList, openFold, getPath, getDisc } = require('../controller/project')
+const { getList, openFold, getPath, getDisc, getTemplateInfo } = require('../controller/project')
 const { sendData } = require('../utils')
 
 const routerProject = express.Router()
@@ -10,9 +10,7 @@ routerProject.get('/ui/project/list', (_, res) => {
 })
 
 routerProject.post('/ui/project/open', (req, res) => {
-  openFold(req.body).then((result) => {
-    res.json(sendData(result))
-  })
+  openFold(req.body).then((result) => res.json(sendData(result)))
 })
 
 routerProject.get('/ui/project/path', (req, res) => {
@@ -20,9 +18,11 @@ routerProject.get('/ui/project/path', (req, res) => {
 })
 
 routerProject.get('/ui/project/disc', (_, res) => {
-  getDisc().then((result) => {
-    res.json(sendData(result))
-  })
+  getDisc().then((result) => res.json(sendData(result)))
+})
+
+routerProject.get('/ui/project/select', (req, res) => {
+  getTemplateInfo(req.query).then((result) => res.json(sendData(result)))
 })
 
 module.exports = routerProject
