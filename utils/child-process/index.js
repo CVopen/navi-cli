@@ -5,7 +5,7 @@ const { ValidationError } = require('@navi-cli/log')
 const execa = require('execa')
 
 function mergeOptions(opts) {
-  return Object.assign({}, opts, { stdio: 'inherit' })
+  return Object.assign({ stdio: 'inherit' }, opts)
 }
 
 function exec(command, args, opts) {

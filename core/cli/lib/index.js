@@ -2,6 +2,8 @@
 
 module.exports = naviCLI
 
+const fs = require('fs')
+
 const core = require('@navi-cli/core')
 const prepare = require('@navi-cli/prepare')
 const { isEmptyList } = require('@navi-cli/utils')
@@ -9,13 +11,15 @@ const bootstrap = require('@navi-cli/bootstrap')
 const { ValidationError } = require('@navi-cli/log')
 
 const generateCommand = require('./command')
+const generateTemplate = require('./template')
 
 const PKG = require('../package.json')
 
 async function naviCLI() {
   if (await prepare(PKG)) process.exit(1)
 
-  const { commandList, INSIDE_CMD } = generateCommand()
+  const { commandList, INSIDE_CMD, commandJSONPath } = generateCommand()
+  generateTemplate()
 
   const program = core(PKG)
 
@@ -23,6 +27,8 @@ async function naviCLI() {
     checkCmd(item.cmd, index, INSIDE_CMD)
     registerCommand(item, program)
   })
+
+  fs.writeFileSync(commandJSONPath, JSON.stringify(commandList, null, '\t'))
 
   program.parse(process.argv)
 }

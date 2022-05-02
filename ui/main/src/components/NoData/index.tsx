@@ -7,12 +7,17 @@ interface NoDataProps {
   content?: string
   icon?: ReactNode
   children?: ReactNode
-  style?: CSSStyleDeclaration
+  style?: React.CSSProperties
 }
 
-function index({ content = '暂时没有数据', icon = <FrownOutlined className="index-icon" />, children }: NoDataProps) {
+function index({
+  content = '暂时没有数据',
+  icon = <FrownOutlined className="index-icon" />,
+  children,
+  style,
+}: NoDataProps) {
   return (
-    <div className="no-data">
+    <div className="no-data" style={style && {}}>
       {icon}
       <h3>{content}</h3>
       {children}

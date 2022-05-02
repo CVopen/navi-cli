@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '@/components/Header'
 
-import { PlusSquareOutlined, SnippetsOutlined, FundProjectionScreenOutlined } from '@ant-design/icons'
+import { PlusSquareOutlined, SnippetsOutlined, FundProjectionScreenOutlined, AuditOutlined } from '@ant-design/icons'
 
 import { Layout, Tabs } from 'antd'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
@@ -23,27 +23,35 @@ export default function index() {
           <Tabs defaultActiveKey={useLocation().pathname} onTabClick={handleClick}>
             <TabPane
               tab={
-                <span>
+                <>
                   <SnippetsOutlined size={50} />项 目
-                </span>
+                </>
               }
               key="/project"
             />
             <TabPane
               tab={
-                <span>
+                <>
                   <PlusSquareOutlined size={50} />创 建
-                </span>
+                </>
               }
-              key="/establish"
+              key="/create"
             />
             <TabPane
               tab={
-                <span>
+                <>
                   <FundProjectionScreenOutlined size={50} />命 令
-                </span>
+                </>
               }
               key="/command"
+            />
+            <TabPane
+              tab={
+                <>
+                  <AuditOutlined size={50} />模 板
+                </>
+              }
+              key="/template"
             />
           </Tabs>
           <Outlet />

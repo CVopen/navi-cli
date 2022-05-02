@@ -1,14 +1,20 @@
-import {AppState} from './state'
+import { PayloadAction } from '@reduxjs/toolkit'
+import { AppState } from './state'
 
-const selectFrame = (state: AppState, { payload }: {payload: string} ) => {
-  state.frame = payload
+const selectFrame = (state: AppState, action: PayloadAction<string>) => {
+  state.frame = action.payload
 }
 
-const selectBuild = (state: AppState, { payload }: {payload: string} ) => {
-  state.build = payload
+const selectBuild = (state: AppState, action: PayloadAction<string>) => {
+  state.build = action.payload
+}
+
+const socketInstance = (state: AppState, action: PayloadAction<WebSocket>) => {
+  state.socket = action.payload
 }
 
 export default {
   selectFrame,
-  selectBuild
+  selectBuild,
+  socketInstance,
 }

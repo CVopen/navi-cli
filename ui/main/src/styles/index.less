@@ -69,7 +69,7 @@ time, mark, audio, video {
   background-color: rgba(64, 169, 255, .2);
   flex-direction: column;
   .fileAlignContent();
-  z-index: 1000;
+  z-index: 1001;
   p {
     font-size: 30px;
   }
@@ -87,4 +87,15 @@ time, mark, audio, video {
 
 .ant-select-selection-item {
   color: rgba(0, 0, 0, 0.85);
+}
+
+.ant-btn-primary[disabled], .ant-btn-primary[disabled]:hover, .ant-btn-primary[disabled]:focus, .ant-btn-primary[disabled]:active {
+  background-color: #d5d5d5;
+  span {
+    color: rgba(0, 0, 0, 0.85);
+  }
+}
+
+.ant-notification-notice-description {
+  color: #000;
 }

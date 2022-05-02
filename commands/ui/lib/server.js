@@ -4,6 +4,7 @@ const history = require('connect-history-api-fallback')
 const { print } = require('@navi-cli/log')
 
 const expressWs = require('express-ws')
+const { PROT } = require('./constant')
 module.exports = server
 
 function server() {
@@ -22,7 +23,7 @@ function server() {
   )
   app.use(express.static(path.join(__dirname, 'static')))
 
-  app.listen(8888, () => print('info', 'Ready on http://localhost:8888'))
+  app.listen(PROT, () => print('info', `Ready on http://localhost:${PROT}`))
 }
 
 function staticRoute(app) {

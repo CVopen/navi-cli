@@ -1,0 +1,51 @@
+@import "@/styles/var.less";
+
+.admin-template {
+  width: 100%;
+  flex: 1;
+  padding: 0 10px;
+  .admin-template-add {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .admin-template-content {
+    display: flex;
+    flex-wrap: wrap;
+    .admin-template-item {
+      width: 280px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0 20px 10px 0;
+      text-align: center;
+      padding-bottom: 10px;
+      transition: all .4s;
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+      &:hover {
+        transform: scale(1.1);
+      }
+      ul {
+        height: 160px;
+        text-align: left;
+        list-style: none;
+        margin: 0;
+        padding: 20px;
+        background-color: @theme-main-deep;
+      }
+      div {
+        background-color: @theme-main-deep;
+        padding-bottom: 10px;
+        border-radius: 0 0 4px 4px;
+      }
+      li {
+        font-size: 16px;
+        margin-bottom: 10px;
+        span {
+          color: @theme-protrude;
+        }
+      }
+    }
+  }
+}

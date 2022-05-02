@@ -1,11 +1,12 @@
 import React, { useEffect, useState, FC, useCallback } from 'react'
-import { getCommandList } from '@/api/command'
+import { getCommandList } from '@/api'
 import NoData from '@/components/NoData'
 import { Button } from 'antd'
 import Content from './Content'
 
 import './index.less'
 import Modal from './Modal'
+import Menu from '@/components/Menu'
 
 export interface CommandItem {
   name: string
@@ -16,7 +17,7 @@ export interface CommandItem {
   packageName?: string
   targetPath?: string
   option?: string[] | string[][]
-  id: number
+  id: string
 }
 
 export type Visible = 0 | 1 | 2
@@ -40,8 +41,11 @@ const index: FC = () => {
   }
 
   const tranformData = (list: CommandItem[]) => {
-    list.forEach((command) => {
+    list.forEach((command, index) => {
       const cmdList = command.cmd.split(' ')
+      if (!command.id) {
+        command.id = (index + 1).toString()
+      }
       for (const item of cmdList) {
         if (!item) continue
         if (item.startsWith('<')) {
@@ -55,7 +59,7 @@ const index: FC = () => {
     })
   }
 
-  const handleClick = (current: CommandItem) => () => setActive(current)
+  const handleClick = useCallback((index: number) => () => setActive(list[index]), [list])
 
   const showModal = useCallback(() => {
     setIsModalVisible(1)
@@ -73,17 +77,7 @@ const index: FC = () => {
       />
       {list.length ? (
         <>
-          <ul className="command-select">
-            {list.map((command) => (
-              <li
-                key={command.name}
-                className={active?.name === command.name ? 'active' : ''}
-                onClick={handleClick(command)}
-              >
-                {command.name}
-              </li>
-            ))}
-          </ul>
+          <Menu list={list} click={handleClick} active={active} isKey={'id' as never} />
           <Content current={active} showModal={setIsModalVisible} setList={setList} list={list} setActive={setActive} />
         </>
       ) : (

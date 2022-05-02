@@ -46,13 +46,16 @@ export default function index() {
 
   useEffect(() => {
     if (!active) return
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setList([
         { key: 'webpack', src: webpackLogo },
         { key: 'vite', src: viteLogo },
       ])
       setActive(false)
     }, 1000)
+    return () => {
+      clearTimeout(timer)
+    }
   }, [active])
 
   return (

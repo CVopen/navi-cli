@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import {initialState} from './state'
+import { initialState } from './state'
 import reducers from './reducers'
+import extraReducers from './asyncThunk'
+export * from './asyncThunk'
 
-export const testSlice = createSlice({
+export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: reducers,
+  extraReducers,
 })
 
-export default testSlice.reducer
-export const { 
-  selectFrame,
-  selectBuild
-} = testSlice.actions
+export default appSlice.reducer
+export const { selectFrame, selectBuild, socketInstance } = appSlice.actions

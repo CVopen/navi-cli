@@ -1,4 +1,4 @@
-import { addCommand, updateCommand } from '@/api/command'
+import { addCommand, updateCommand } from '@/api'
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Form, Input, message, Modal, Select, Space } from 'antd'
 import React, { memo, useEffect, useState } from 'react'
@@ -66,6 +66,7 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
           setList([...list])
           setActive(command)
           message.success('修改命令成功')
+          setVisble(0)
         })
       } else {
         addCommand(res).then((id) => {
@@ -100,7 +101,6 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
       if (result.optionalParam) {
         cmd += ` [${result.optionalParam}]`
       }
-      setVisble(0)
       return {
         cmd,
         ...result,

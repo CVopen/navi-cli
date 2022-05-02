@@ -16,5 +16,6 @@ declare module '*.gif'
 declare module '*.bmp'
 declare module '*.tiff'
 
-
 declare module 'lodash'
+
+declare module 'validate-npm-package-name'

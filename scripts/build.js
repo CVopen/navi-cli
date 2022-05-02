@@ -19,8 +19,6 @@ const subAsset = ['sub-react']
 function moveAssets() {
   const mainStaticPath = path.resolve(process.cwd(), 'ui/main/dist')
   const uiStaticPath = path.resolve(process.cwd(), 'commands/ui/lib/static')
-  console.log(mainStaticPath)
-  console.log(uiStaticPath)
   fs.emptyDirSync(uiStaticPath)
   fs.copySync(mainStaticPath, uiStaticPath)
 

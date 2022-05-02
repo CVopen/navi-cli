@@ -1,6 +1,6 @@
-import { delCommand } from '@/api/command'
+import { delCommand } from '@/api'
 import { Button, message } from 'antd'
-import React, { FC, memo, Fragment } from 'react'
+import React, { FC, memo } from 'react'
 
 import { CommandItem } from './index'
 
@@ -20,7 +20,7 @@ interface Option {
 
 const Content: FC<Props> = ({ current, showModal, setList, list, setActive }) => {
   const del = () => {
-    delCommand({ id: current?.id as number }).then(() => {
+    delCommand({ id: current?.id as string }).then(() => {
       const data = list.filter(({ name }) => name !== current?.name)
       setList([...data])
       setActive(data[0])
@@ -29,7 +29,7 @@ const Content: FC<Props> = ({ current, showModal, setList, list, setActive }) =>
   }
 
   const renderOption = () => {
-    if (!current?.option && !current?.option?.length) return <></>
+    if (!current?.option || !current?.option?.length) return <></>
     let content: Option[] = []
     if (Array.isArray(current.option[0])) {
       content = current.option.map((str: any) => {
@@ -51,21 +51,19 @@ const Content: FC<Props> = ({ current, showModal, setList, list, setActive }) =>
       <>
         <h3>命令选项:</h3>
         <div className="command-option">
-          {content.map(({ args, defaults, description }) => {
-            return (
-              <ul key={args}>
-                <li>
-                  <span>参数: </span> {args}
-                </li>
-                <li>
-                  <span>默认值: </span> {defaults}
-                </li>
-                <li>
-                  <span>描述: </span> {description}
-                </li>
-              </ul>
-            )
-          })}
+          {content.map(({ args, defaults, description }) => (
+            <ul key={args}>
+              <li>
+                <span>参数: </span> {args}
+              </li>
+              <li>
+                <span>默认值: </span> {typeof defaults === 'boolean' ? defaults.toString() : ''}
+              </li>
+              <li>
+                <span>描述: </span> {description}
+              </li>
+            </ul>
+          ))}
         </div>
       </>
     )
@@ -81,12 +79,16 @@ const Content: FC<Props> = ({ current, showModal, setList, list, setActive }) =>
           <Button type="primary" onClick={() => showModal(1)} style={{ marginRight: 10 }}>
             添加命令
           </Button>
-          <Button type="primary" onClick={() => showModal(2)} style={{ marginRight: 10 }}>
-            修改命令
-          </Button>
-          <Button type="primary" danger onClick={del}>
-            删除命令
-          </Button>
+          {!Number(current?.id) && (
+            <>
+              <Button type="primary" onClick={() => showModal(2)} style={{ marginRight: 10 }}>
+                修改命令
+              </Button>
+              <Button type="primary" danger onClick={del}>
+                删除命令
+              </Button>
+            </>
+          )}
         </div>
       </h2>
       <p>

@@ -1,0 +1,60 @@
+@import "@/styles/var.less";
+
+.admin-project {
+  width: 100%;
+  height: calc(100% - 60px);
+  display: flex;
+  .project-content {
+    width: 1000px;
+    padding: 20px;
+    .ant-card {
+      background-color: @theme-main-deep;
+      margin-bottom: 10px;
+      .info-title {
+        line-height: 32px;
+        font-size: 18px;
+        .icon {
+          color: @theme-protrude;
+          margin-right: 5px;
+        }
+        button {
+          float: right
+        }
+      }
+      p {
+        font-size: 16px;
+        margin-bottom: 5px;
+        span {
+          color: @theme-protrude;
+        }
+      }
+    }
+    .terminal {
+      background-color: @theme-main;
+      .terminal-header {
+        height: 30px;
+        border-bottom: 1px solid #f0f0f0;
+        padding: 6px;
+        span {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          display: inline-block;
+          margin-right: 5px;
+          &:nth-child(1) {
+            background-color: #ee6b60;
+          }
+          &:nth-child(2) {
+            background-color: #f6be4f;
+          }
+          &:nth-child(3) {
+            background-color: #60c655;
+          }
+        }
+      }
+      .xterm-viewport {
+        .scrollbar()
+      }
+    }
+  }
+}
