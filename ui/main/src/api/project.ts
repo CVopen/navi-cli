@@ -19,3 +19,7 @@ export function getDisc() {
 export function getProjectSelect(params: { name: string }) {
   return get('/project/select', params).then((res) => res.data)
 }
+
+export function createProject(data: any) {
+  return post('/project/create', data)
+}

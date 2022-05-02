@@ -1,5 +1,5 @@
 import { ContainerOutlined } from '@ant-design/icons'
-import { Card, Button } from 'antd'
+import { Card, Button, notification } from 'antd'
 import React, { memo, useEffect, useRef, useMemo } from 'react'
 
 import { useAppSelector } from '@/store'
@@ -13,16 +13,12 @@ import 'xterm/css/xterm.css'
 import { theme } from './constant'
 
 const type = {
-  START: 'startTime',
-  END: 'endTime',
   DATA: 'data',
   ERROR: 'error',
 }
 
-const Task = ({ active }: { active: ProjectItem }) => {
+const Task = ({ active, getList }: { active: ProjectItem; getList: () => void }) => {
   const socket = useAppSelector((store) => store.app.socket)
-
-  const installTime = useRef({ start: '', end: '' })
 
   const terminal = useRef<HTMLDivElement>(null)
 
@@ -47,8 +43,12 @@ const Task = ({ active }: { active: ProjectItem }) => {
         case type.DATA:
           data.data.split('\n').forEach((str: string) => term.writeln(str))
           break
-        case type.END:
-          // setContent(contentRef.current)
+        case type.ERROR:
+          getList()
+          notification.error({
+            message: '执行操作失败',
+            description: `${data.data}, 将删除此记录.`,
+          })
           break
         default:
           break

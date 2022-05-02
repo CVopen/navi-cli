@@ -9,17 +9,17 @@ const { getLocal } = require('../utils')
 
 const CUSTOM_FILE_NAME = 'command.json'
 
-module.exports = { getList, addCommand, delCommand, updateCommand }
+module.exports = { handleGetList, handleAddCommand, handleDelCommand, handleUpdateCommand }
 
 const local = getLocal(CUSTOM_FILE_NAME)
 
-function getList() {
+function handleGetList() {
   delete require.cache[require.resolve(local)]
   return require(local)
 }
 
 // add command
-function addCommand({ cmd, description, packageName, targetPath, option = [] }) {
+function handleAddCommand({ cmd, description, packageName, targetPath, option = [] }) {
   const id = uuid.v4()
   return new Promise((resolve) => {
     if (targetPath && !pathExists(targetPath)) resolve([null, '调试路径不存在!'])
@@ -42,7 +42,7 @@ function addCommand({ cmd, description, packageName, targetPath, option = [] }) 
 }
 
 // del command
-function delCommand({ id }) {
+function handleDelCommand({ id }) {
   const commandData = require(local).filter((command) => command.id != id)
   try {
     fs.writeFileSync(local, JSON.stringify(commandData, null, '\t'))
@@ -53,7 +53,7 @@ function delCommand({ id }) {
 }
 
 // update command
-function updateCommand({ cmd, description, packageName, targetPath, option = [], id }) {
+function handleUpdateCommand({ cmd, description, packageName, targetPath, option = [], id }) {
   const commandData = require(local)
   const index = commandData.findIndex((command) => command.id == id)
   commandData.splice(index, 1, { cmd, description, packageName, targetPath, option, id })

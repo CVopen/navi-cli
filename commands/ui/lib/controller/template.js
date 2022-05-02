@@ -8,17 +8,17 @@ const { getLocal } = require('../utils')
 
 const CUSTOM_FILE_NAME = 'template.json'
 
-module.exports = { getList, addTemplate, delTemplate, updateTemplate }
+module.exports = { handleGetList, handleAddTemplate, handleDelTemplate, handleUpdateTemplate }
 
 const local = getLocal(CUSTOM_FILE_NAME)
 
-function getList() {
+function handleGetList() {
   delete require.cache[require.resolve(local)]
   return require(local)
 }
 
 // add template
-function addTemplate({ label, name, ignore = [] }) {
+function handleAddTemplate({ label, name, ignore = [] }) {
   const id = uuid.v4()
   return new Promise((resolve) => {
     getPackage(name)
@@ -43,7 +43,7 @@ function addTemplate({ label, name, ignore = [] }) {
 }
 
 // del template
-function delTemplate({ id }) {
+function handleDelTemplate({ id }) {
   const templateData = require(local).filter((template) => template.id != id)
   try {
     fs.writeFileSync(local, JSON.stringify(templateData, null, '\t'))
@@ -54,7 +54,7 @@ function delTemplate({ id }) {
 }
 
 // update template
-function updateTemplate({ label, name, ignore = [], id }) {
+function handleUpdateTemplate({ label, name, ignore = [], id }) {
   const templateData = require(local)
   const index = templateData.findIndex((command) => command.id == id)
   templateData.splice(index, 1, { label, name, ignore, id })

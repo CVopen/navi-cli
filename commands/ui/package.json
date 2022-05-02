@@ -36,6 +36,8 @@
     "express": "^4.17.3",
     "express-ws": "^5.0.2",
     "fs-extra": "^10.0.0",
+    "glob": "^7.2.0",
+    "lru-cache": "^4.0.1",
     "node-notifier": "^10.0.1",
     "path-exists": "^4.0.0",
     "user-home": "^3.0.0",

@@ -1,9 +1,10 @@
+import validatePkg from 'validate-npm-package-name'
 import { CloseOutlined, InfoCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Modal, Select } from 'antd'
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { store } from '@/store'
 import { transformPath } from '@/utils'
-import { getProjectSelect, getTemplateList } from '@/api'
+import { createProject, getProjectSelect, getTemplateList } from '@/api'
 import { templateItem } from '../Template'
 
 interface ModalProps {
@@ -20,6 +21,8 @@ interface ProjectInfo {
 function index({ isModalVisible, setShow }: ModalProps) {
   const [form] = Form.useForm()
 
+  const targetPath = transformPath(store.getState().app.createPath.path)
+
   const [list, setList] = useState<templateItem[]>([])
   const [projectList, setProjectList] = useState<ProjectInfo[]>([])
 
@@ -27,28 +30,44 @@ function index({ isModalVisible, setShow }: ModalProps) {
     if (isModalVisible) {
       getList()
     } else {
-      form?.resetFields()
+      form.resetFields()
       setProjectList([])
     }
   }, [isModalVisible])
 
-  const handleOk = () => {
+  const handleOk = useCallback(() => {
     form.validateFields().then((res) => {
-      console.log(res)
+      const ignoreKeyList = ['name', 'packageName']
+      const projectInfo = Object.keys(res).reduce((target, key) => {
+        if (!ignoreKeyList.includes(key)) {
+          target[key] = res[key]
+        }
+        return target
+      }, {} as { [key: string]: string })
+      projectInfo.projectName = res.name.trim()
+      const params = {
+        name: res.name.trim(),
+        packageName: res.packageName,
+        targetPath,
+        projectInfo,
+      }
+      createProject(params)
     })
-  }
+  }, [])
 
-  const handleCancel = () => {
-    setShow(false)
-  }
+  const handleCancel = useCallback(() => setShow(false), [])
 
-  const getList = () => {
+  const getList = useCallback(() => {
     getTemplateList().then((res) => setList(res as unknown as templateItem[]))
-  }
+  }, [])
 
-  const handleSelect = (name: string) => {
+  const handleSelect = useCallback((name: string) => {
+    const nameValue = form.getFieldValue('name')
+    const packageName = form.getFieldValue('packageName')
+    form.resetFields()
+    form.setFieldsValue({ name: nameValue, packageName })
     getProjectSelect({ name }).then((res) => setProjectList(res as unknown as ProjectInfo[]))
-  }
+  }, [])
 
   return (
     <Modal
@@ -70,11 +89,20 @@ function index({ isModalVisible, setShow }: ModalProps) {
       <Form form={form} layout="vertical" autoComplete="off">
         <Form.Item
           label="项目文件夹"
+          required
           tooltip={{
-            title: `创建位置: ${transformPath(store.getState().app.createPath.path)}`,
+            title: `创建位置: ${targetPath}`,
             icon: <InfoCircleOutlined style={{ color: '#fff' }} />,
           }}
-          rules={[{ required: true, message: '请输入项目文件夹!' }]}
+          rules={[
+            {
+              validator(_, value) {
+                if (!value) return Promise.reject('请输入项目文件夹!')
+                if (validatePkg(value).errors) return Promise.reject('文件夹名称不合法!')
+                return Promise.resolve()
+              },
+            },
+          ]}
           name="name"
         >
           <Input placeholder="输入项目名" />
@@ -82,7 +110,7 @@ function index({ isModalVisible, setShow }: ModalProps) {
         <Form.Item
           label="选择模板"
           tooltip={{ title: '选择对应模板', icon: <InfoCircleOutlined style={{ color: '#fff' }} /> }}
-          name="projectName"
+          name="packageName"
           rules={[{ required: true, message: '请选择对应模板!' }]}
         >
           <Select placeholder="请选择模板" onChange={handleSelect}>
@@ -97,10 +125,7 @@ function index({ isModalVisible, setShow }: ModalProps) {
           <Form.Item
             key={new Date().getTime() + index}
             label={message}
-            tooltip={{
-              title: tip,
-              icon: <InfoCircleOutlined style={{ color: '#fff' }} />,
-            }}
+            tooltip={{ title: tip, icon: <InfoCircleOutlined style={{ color: '#fff' }} /> }}
             rules={[{ required: true, message: tip }]}
             name={name}
           >

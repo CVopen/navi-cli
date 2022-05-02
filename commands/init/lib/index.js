@@ -67,9 +67,6 @@ class Init {
     })
     if (!result.confirmDelete) process.exit = 0
     fse.emptyDirSync(this.projectPath)
-    if (!this.git) {
-      execSync('git', ['init'], { cwd: this.projectPath })
-    }
   }
 
   async slectTemplate(choices) {
@@ -168,6 +165,7 @@ class Init {
   }
 
   execute({ targetPath, setting, ignore }) {
+    console.log({ targetPath, setting, ignore })
     ignore.forEach((file) => {
       const target = path.join(this.projectPath, file)
       const current = path.join(path.resolve(this.pkg.getPkgLocal(), 'template'), file)
@@ -201,6 +199,10 @@ class Init {
           },
         ]
         fse.outputFileSync(getProjectLocalPath(), JSON.stringify(projectData, null, '\t'))
+
+        if (!this.git) {
+          execSync('git', ['init'], { cwd: this.projectPath })
+        }
 
         if (!setting.installCommand) return
         const installCommand = setting.installCommand.split(' ')

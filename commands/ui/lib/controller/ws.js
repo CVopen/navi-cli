@@ -1,12 +1,15 @@
 const path = require('path')
+const fs = require('fs')
 
 const pathExists = require('path-exists').sync
 const notifier = require('node-notifier')
 
 const { exec } = require('@navi-cli/child-process')
 
-const { getList } = require('./project')
+const { handleGetList } = require('./project')
 const { sendWsString } = require('../utils')
+
+const { getLocal } = require('../utils')
 
 const DEPENDENCIES = 'node_modules'
 const type = {
@@ -59,9 +62,14 @@ function run(project, ws) {
 
 module.exports = {
   start(local, ws) {
-    const project = getList().find((item) => item.local === local)
-    if (!project) return ws.send({ type: type.ERROR, data: '项目不存在' })
-
+    let projectList = handleGetList()
+    const project = projectList.find((item) => item.local === local)
+    if (!project) return ws.send(sendWsString({ type: type.ERROR, data: '项目不存在' }))
+    if (!pathExists(local)) {
+      projectList = projectList.filter((item) => item.local !== local)
+      fs.writeFileSync(getLocal('project.json'), JSON.stringify(projectList, null, '\t'))
+      return ws.send(sendWsString({ type: type.ERROR, data: '项目不存在' }))
+    }
     if (!pathExists(path.resolve(local, DEPENDENCIES))) {
       execCommand({ command: project.installCommand || 'npm install', local }, ws).then(() => {
         run(project, ws)
@@ -71,10 +79,15 @@ module.exports = {
     }
   },
   build(local, ws) {
-    const project = getList().find((item) => item.local === local)
-    if (!project) return ws.send({ type: type.ERROR, data: '项目不存在' })
-
-    if (!project.buildCommand) ws.send({ type: type.ERROR, data: '未添加build命令' })
+    let projectList = handleGetList()
+    const project = projectList.find((item) => item.local === local)
+    if (!project) return ws.send(sendWsString({ type: type.ERROR, data: '项目不存在' }))
+    if (!pathExists(local)) {
+      projectList = projectList.filter((item) => item.local !== local)
+      fs.writeFileSync(getLocal('project.json'), JSON.stringify(projectList, null, '\t'))
+      return ws.send(sendWsString({ type: type.ERROR, data: '项目不存在' }))
+    }
+    if (!project.buildCommand) return ws.send(sendWsString({ type: type.ERROR, data: '未添加build命令' }))
 
     if (!pathExists(path.resolve(local, DEPENDENCIES))) {
       execCommand({ command: project.installCommand || 'npm install', local }).then(() =>

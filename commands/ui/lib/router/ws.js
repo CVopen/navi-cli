@@ -1,4 +1,3 @@
-const fse = require('fs-extra')
 const { print } = require('@navi-cli/log')
 
 const handleMethod = require('../controller/ws')
@@ -20,6 +19,6 @@ function connect(app) {
 }
 
 process.on('SIGINT', () => {
-  fse.remove(getLocal(NAVI_CACHE_TEMPLATE))
+  require('fs-extra').removeSync(getLocal(NAVI_CACHE_TEMPLATE))
   process.exit(0)
 })
