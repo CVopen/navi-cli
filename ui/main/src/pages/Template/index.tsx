@@ -1,7 +1,7 @@
 import React, { useEffect, useState, FC, memo } from 'react'
 import { getTemplateList, delTemplate } from '@/api'
 import NoData from '@/components/NoData'
-import { Button, message } from 'antd'
+import { Button, message, notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import './index.less'
@@ -47,7 +47,17 @@ const index: FC = () => {
     <div className="admin-template">
       {!!list.length && (
         <div className="admin-template-add">
-          <Button type="primary" style={{ marginRight: 10 }} onClick={() => navigate(`/${frame}`)}>
+          <Button
+            type="primary"
+            style={{ marginRight: 10 }}
+            onClick={() => {
+              notification.info({
+                message: '模板功能',
+                description: '创建模板功能正在开发中, 请等待一段时间.',
+              })
+              navigate(`/${frame}`)
+            }}
+          >
             创建模板
           </Button>
           <Button type="primary" onClick={() => setIsModalVisible(1)}>

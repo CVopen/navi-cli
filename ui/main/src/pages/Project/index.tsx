@@ -2,6 +2,7 @@ import { getProjectList } from '@/api'
 import Menu from '@/components/Menu'
 import NoData from '@/components/NoData'
 import React, { useCallback, useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import './index.less'
 import Info from './Info'
 import Task from './Task'
@@ -19,6 +20,8 @@ export default function index() {
   const [list, setList] = useState<ProjectItem[]>([])
   const [active, setActive] = useState<ProjectItem>()
 
+  let [searchParams] = useSearchParams()
+
   useEffect(() => {
     getList()
   }, [])
@@ -29,7 +32,14 @@ export default function index() {
     getProjectList().then((res) => {
       const list = res as unknown as ProjectItem[]
       setList(list)
-      if (list.length) setActive(list[0])
+      if (list.length) {
+        let current = list[0]
+        const local = searchParams.get('local')
+        if (local) {
+          current = list.find((item) => item.local === local) as ProjectItem
+        }
+        setActive(current)
+      }
     })
   }, [])
 

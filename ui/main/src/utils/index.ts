@@ -4,7 +4,7 @@ export function strToJson(data: string) {
   return JSON.parse(data)
 }
 
-export function formatDate(date: string, format = 'YYYY:MM:DD HH:mm'): string {
+export function formatDate(date: string, format = 'YYYY/MM/DD HH:mm'): string {
   return moment(date).format(format)
 }
 

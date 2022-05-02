@@ -21,5 +21,5 @@ export function getProjectSelect(params: { name: string }) {
 }
 
 export function createProject(data: any) {
-  return post('/project/create', data)
+  return post('/project/create', data).then((res) => res.data as unknown as string)
 }

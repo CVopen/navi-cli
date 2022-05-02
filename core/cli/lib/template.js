@@ -13,9 +13,14 @@ function getTemplateLocalPath() {
 
 const NAVI_TEMPLATE = [
   {
-    label: 'vue3 项目基础模板',
-    name: 'open-cli-template-vue',
-    ignore: ['**/public/**', '**.png'],
+    label: 'react+ts+rtk 项目基础模板',
+    name: 'navi-cli-template-react-ts-rtk',
+    ignore: ['**/public/**', '**.svg'],
+  },
+  {
+    label: 'react+rtk 项目基础模板',
+    name: 'navi-cli-template-react-rtk',
+    ignore: ['**/public/**', '**.svg'],
   },
 ]
 

@@ -23,31 +23,35 @@ function execCommand(project, ws) {
   return new Promise((resolve, reject) => {
     const cmdList = project.command.split(' ')
     const cmd = cmdList.shift()
-    const cp = exec(cmd, cmdList, { stdio: 'pipe', cwd: project.local })
-    const startTime = new Date().getTime()
-    ws.send(sendWsString({ type: type.DATA, data: `$ ${project.command}` }))
+    try {
+      const cp = exec(cmd, cmdList, { stdio: 'pipe', cwd: project.local })
+      const startTime = new Date().getTime()
+      ws.send(sendWsString({ type: type.DATA, data: `$ ${project.command}` }))
 
-    let stdoutList
-    cp.stdout.on('data', (data) => {
-      stdoutList = Buffer.concat([stdoutList || Buffer.alloc(0), data])
-    })
-    cp.stdout.on('end', () => {
-      ws.send(sendWsString({ type: type.DATA, data: stdoutList.toString() }))
-    })
-
-    cp.on('exit', (code) => {
-      const endTime = new Date().getTime()
-      notifier.notify({
-        ...option,
-        title: `Task ${code ? 'failed' : 'completed'}`,
-        message: `Task ${project.local}:${cmd} ${code ? 'failed' : 'completed'} in ${(
-          (endTime - startTime) /
-          1000
-        ).toFixed(2)}s.`,
-        icon: path.join(__dirname, `../assets/${code ? 'close' : 'ok'}.svg`),
+      let stdoutList
+      cp.stdout.on('data', (data) => {
+        stdoutList = Buffer.concat([stdoutList || Buffer.alloc(0), data])
       })
-      !code ? resolve() : reject()
-    })
+      cp.stdout.on('end', () => {
+        ws.send(sendWsString({ type: type.DATA, data: stdoutList.toString() }))
+      })
+
+      cp.on('exit', (code) => {
+        const endTime = new Date().getTime()
+        notifier.notify({
+          ...option,
+          title: `Task ${code ? 'failed' : 'completed'}`,
+          message: `Task ${project.local}:${cmd} ${code ? 'failed' : 'completed'} in ${(
+            (endTime - startTime) /
+            1000
+          ).toFixed(2)}s.`,
+          icon: path.join(__dirname, `../assets/${code ? 'close' : 'ok'}.svg`),
+        })
+        !code ? resolve() : reject()
+      })
+    } catch (error) {
+      ws.send(sendWsString({ type: type.ERROR, data: '执行操作失败!' }))
+    }
   })
 }
 
@@ -55,8 +59,12 @@ function run(project, ws) {
   return () => {
     ws.send(sendWsString({ type: type.END, data: new Date().toString() }))
     const cmdList = project.startCommand.split(' ')
-    exec(cmdList.shift(), cmdList, { stdio: 'ignore', cwd: project.local, detached: true }).unref()
     ws.send(sendWsString({ type: type.DATA, data: `$ ${project.startCommand}\n\n🌠  New terminal is opened` }))
+    try {
+      exec(cmdList.shift(), cmdList, { stdio: 'ignore', cwd: project.local, detached: true }).unref()
+    } catch (error) {
+      ws.send(sendWsString({ type: type.ERROR, data: '执行操作失败!' }))
+    }
   }
 }
 

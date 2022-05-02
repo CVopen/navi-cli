@@ -5,5 +5,5 @@
   "eslint.validate": ["javascript", "javascriptreact", "vue", "typescript", "typescriptreact", "css", "less"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
 }

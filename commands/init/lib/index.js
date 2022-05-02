@@ -67,12 +67,13 @@ class Init {
     })
     if (!result.confirmDelete) process.exit = 0
     fse.emptyDirSync(this.projectPath)
+
+    const projectList = require(getProjectLocalPath()).filter((item) => item.local !== this.projectPath)
+    fse.outputFileSync(getProjectLocalPath(), JSON.stringify(projectList, null, '\t'))
   }
 
   async slectTemplate(choices) {
-    if (!choices) {
-      choices = this.template
-    }
+    if (!choices) choices = this.template
     choices = choices.map((item) => ({ name: item.label, value: item.name }))
     return (
       await inquirer.prompt({
@@ -165,7 +166,6 @@ class Init {
   }
 
   execute({ targetPath, setting, ignore }) {
-    console.log({ targetPath, setting, ignore })
     ignore.forEach((file) => {
       const target = path.join(this.projectPath, file)
       const current = path.join(path.resolve(this.pkg.getPkgLocal(), 'template'), file)
@@ -188,6 +188,7 @@ class Init {
         if (!fse.pathExistsSync(projectPath)) {
           fse.outputJsonSync(projectPath, [])
         }
+        delete require.cache[require.resolve(projectPath)]
         const projectData = [
           ...require(projectPath),
           {
@@ -195,13 +196,19 @@ class Init {
             createTime: new Date(),
             installCommand: setting.installCommand,
             startCommand: setting.startCommand,
+            buildCommand: setting.buildCommand,
             local: this.projectPath,
           },
         ]
         fse.outputFileSync(getProjectLocalPath(), JSON.stringify(projectData, null, '\t'))
 
         if (!this.git) {
-          execSync('git', ['init'], { cwd: this.projectPath })
+          try {
+            execSync('git', ['init'], { cwd: this.projectPath })
+          } catch (error) {
+            print('error', error.message)
+            print('info', '请先安装git')
+          }
         }
 
         if (!setting.installCommand) return

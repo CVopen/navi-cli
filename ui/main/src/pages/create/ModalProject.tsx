@@ -1,11 +1,13 @@
 import validatePkg from 'validate-npm-package-name'
 import { CloseOutlined, InfoCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Modal, Select } from 'antd'
+import { Button, Form, Input, Modal, notification, Select, Switch } from 'antd'
 import React, { memo, useCallback, useEffect, useState } from 'react'
-import { store } from '@/store'
-import { transformPath } from '@/utils'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { formatDate, transformPath } from '@/utils'
 import { createProject, getProjectSelect, getTemplateList } from '@/api'
 import { templateItem } from '../Template'
+import { getPathAsync } from '@/store/app'
+import { useNavigate } from 'react-router-dom'
 
 interface ModalProps {
   isModalVisible: boolean
@@ -21,7 +23,9 @@ interface ProjectInfo {
 function index({ isModalVisible, setShow }: ModalProps) {
   const [form] = Form.useForm()
 
-  const targetPath = transformPath(store.getState().app.createPath.path)
+  const targetPath = useAppSelector(({ app }) => app.createPath.path)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const [list, setList] = useState<templateItem[]>([])
   const [projectList, setProjectList] = useState<ProjectInfo[]>([])
@@ -48,12 +52,22 @@ function index({ isModalVisible, setShow }: ModalProps) {
       const params = {
         name: res.name.trim(),
         packageName: res.packageName,
-        targetPath,
+        git: res.git,
+        force: res.force,
+        targetPath: transformPath(targetPath),
         projectInfo,
       }
-      createProject(params)
+      createProject(params).then((time) => {
+        dispatch(getPathAsync({ path: transformPath(targetPath) }))
+        navigate(`/project?local=${transformPath([...targetPath, res.name.trim()])}`)
+        time = formatDate(time)
+        notification.success({
+          message: '创建成功',
+          description: `在'${transformPath(targetPath)}'创建项目'${res.name.trim()}'成功, 创建时间为: ${time}.`,
+        })
+      })
     })
-  }, [])
+  }, [targetPath])
 
   const handleCancel = useCallback(() => setShow(false), [])
 
@@ -91,7 +105,7 @@ function index({ isModalVisible, setShow }: ModalProps) {
           label="项目文件夹"
           required
           tooltip={{
-            title: `创建位置: ${targetPath}`,
+            title: `创建位置: ${transformPath(targetPath)}`,
             icon: <InfoCircleOutlined style={{ color: '#fff' }} />,
           }}
           rules={[
@@ -107,6 +121,14 @@ function index({ isModalVisible, setShow }: ModalProps) {
         >
           <Input placeholder="输入项目名" />
         </Form.Item>
+        <div className="row-form-item">
+          <Form.Item label="初始化git" valuePropName="checked" name="git">
+            <Switch defaultChecked={true} />
+          </Form.Item>
+          <Form.Item label="强制创建项目" valuePropName="checked" name="force">
+            <Switch />
+          </Form.Item>
+        </div>
         <Form.Item
           label="选择模板"
           tooltip={{ title: '选择对应模板', icon: <InfoCircleOutlined style={{ color: '#fff' }} /> }}
