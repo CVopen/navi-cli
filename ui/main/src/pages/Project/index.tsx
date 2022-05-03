@@ -22,9 +22,7 @@ export default function index() {
 
   let [searchParams] = useSearchParams()
 
-  useEffect(() => {
-    getList()
-  }, [])
+  useEffect(() => getList(), [])
 
   const handleClick = useCallback((index: number) => () => setActive(list[index]), [list])
 
@@ -47,7 +45,6 @@ export default function index() {
     <div className="admin-project">
       {list.length ? (
         <>
-          {' '}
           <Menu list={list} click={handleClick} active={active} isKey={'local' as never} />
           <div className="project-content">
             <Info active={active as ProjectItem} />

@@ -15,6 +15,8 @@ const DEPENDENCIES = 'node_modules'
 const type = {
   DATA: 'data',
   ERROR: 'error',
+  START: 'start',
+  END: 'end',
 }
 
 const option = notifier.WindowsToaster === notifier.Notification && { appID: 'Navi-cli' }
@@ -56,15 +58,13 @@ function execCommand(project, ws) {
 }
 
 function run(project, ws) {
-  return () => {
-    ws.send(sendWsString({ type: type.END, data: new Date().toString() }))
-    const cmdList = project.startCommand.split(' ')
-    ws.send(sendWsString({ type: type.DATA, data: `$ ${project.startCommand}\n\n🌠  New terminal is opened` }))
-    try {
-      exec(cmdList.shift(), cmdList, { stdio: 'ignore', cwd: project.local, detached: true }).unref()
-    } catch (error) {
-      ws.send(sendWsString({ type: type.ERROR, data: '执行操作失败!' }))
-    }
+  ws.send(sendWsString({ type: type.END, data: new Date().toString() }))
+  const cmdList = project.startCommand.split(' ')
+  ws.send(sendWsString({ type: type.DATA, data: `$ ${project.startCommand}\n\n🌠  New terminal is opened` }))
+  try {
+    exec(cmdList.shift(), cmdList, { stdio: 'ignore', cwd: project.local, detached: true }).unref()
+  } catch (error) {
+    ws.send(sendWsString({ type: type.ERROR, data: '执行操作失败!' }))
   }
 }
 
@@ -78,12 +78,14 @@ module.exports = {
       fs.writeFileSync(getLocal('project.json'), JSON.stringify(projectList, null, '\t'))
       return ws.send(sendWsString({ type: type.ERROR, data: '项目不存在' }))
     }
+    ws.send(sendWsString({ type: type.START }))
     if (!pathExists(path.resolve(local, DEPENDENCIES))) {
       execCommand({ command: project.installCommand || 'npm install', local }, ws).then(() => {
+        ws.send(sendWsString({ type: type.END }))
         run(project, ws)
       })
     } else {
-      run(project, ws)()
+      run(project, ws)
     }
   },
   build(local, ws) {
@@ -96,13 +98,17 @@ module.exports = {
       return ws.send(sendWsString({ type: type.ERROR, data: '项目不存在' }))
     }
     if (!project.buildCommand) return ws.send(sendWsString({ type: type.ERROR, data: '未添加build命令' }))
-
+    ws.send(sendWsString({ type: type.START }))
     if (!pathExists(path.resolve(local, DEPENDENCIES))) {
       execCommand({ command: project.installCommand || 'npm install', local }).then(() =>
-        execCommand({ command: project.buildCommand, local }, ws)
+        execCommand({ command: project.buildCommand, local }, ws).then(() => {
+          ws.send(sendWsString({ type: type.END }))
+        })
       )
     } else {
-      execCommand({ command: project.buildCommand, local }, ws)
+      execCommand({ command: project.buildCommand, local }, ws).then(() => {
+        ws.send(sendWsString({ type: type.END }))
+      })
     }
   },
 }

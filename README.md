@@ -1,1 +1,8 @@
-# 一个支持自定义命令和模板的脚手架
+# navi脚手架
+
+## 使用(use)
+
+```shell
+npm i -g @navi-cli/cli
+```
+

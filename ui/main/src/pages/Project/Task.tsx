@@ -1,6 +1,6 @@
 import { ContainerOutlined } from '@ant-design/icons'
 import { Card, Button, notification } from 'antd'
-import React, { memo, useEffect, useRef, useMemo } from 'react'
+import React, { memo, useEffect, useRef, useMemo, useState } from 'react'
 
 import { useAppSelector } from '@/store'
 import { ProjectItem } from '.'
@@ -12,14 +12,30 @@ import 'xterm/css/xterm.css'
 
 import { theme } from './constant'
 
-const type = {
+const TYPE = {
   DATA: 'data',
   ERROR: 'error',
+  START: 'start',
+  END: 'end',
+} as const
+
+type ValueOf<T> = T[keyof T]
+
+interface WsData {
+  data: string
+  type: ValueOf<typeof TYPE>
+}
+
+type Values<T> = T[keyof T]
+
+interface Data {
+  data: Values<typeof TYPE>
 }
 
 const Task = ({ active, getList }: { active: ProjectItem; getList: () => void }) => {
   const socket = useAppSelector((store) => store.app.socket)
 
+  const [disable, setDisable] = useState(false)
   const terminal = useRef<HTMLDivElement>(null)
 
   const term = useMemo(
@@ -37,24 +53,30 @@ const Task = ({ active, getList }: { active: ProjectItem; getList: () => void })
   useEffect(() => {
     initXterm()
     if (!socket) return
+    const handleToType = {
+      [TYPE.DATA]: (data: WsData) => data.data.split('\n').forEach((str: string) => term.writeln(str)),
+      [TYPE.ERROR](data: WsData) {
+        getList()
+        notification.error({
+          message: '执行操作失败',
+          description: `${data.data}, 将删除此记录.`,
+        })
+      },
+      [TYPE.START]: () => setDisable(true),
+      [TYPE.END]: () => setDisable(false),
+    }
+
     socket.onmessage = function (e) {
-      const data = strToJson(e.data)
-      switch (data.type) {
-        case type.DATA:
-          data.data.split('\n').forEach((str: string) => term.writeln(str))
-          break
-        case type.ERROR:
-          getList()
-          notification.error({
-            message: '执行操作失败',
-            description: `${data.data}, 将删除此记录.`,
-          })
-          break
-        default:
-          break
-      }
+      const data = strToJson<WsData>(e.data)
+      handleToType[data.type](data)
     }
   }, [])
+
+  useEffect(() => {
+    if (!active || disable) return
+    term.writeln(`$ projectName: <${active.name}>`)
+    term.writeln('')
+  }, [active, disable])
 
   const startTask = () => {
     socket?.send(JSON.stringify({ type: 'start', data: active.local }))
@@ -80,13 +102,13 @@ const Task = ({ active, getList }: { active: ProjectItem; getList: () => void })
           <ContainerOutlined className="icon" />
           任务
           {active?.buildCommand && (
-            <Button type="primary" onClick={buildTask}>
-              打包
+            <Button type="primary" disabled={disable} onClick={buildTask}>
+              {disable ? 'loading' : '打包'}
             </Button>
           )}
           {active?.startCommand && (
-            <Button type="primary" style={{ marginRight: 10 }} onClick={startTask}>
-              启动
+            <Button type="primary" disabled={disable} style={{ marginRight: 10 }} onClick={startTask}>
+              {disable ? 'loading' : '启动'}
             </Button>
           )}
         </div>

@@ -47,7 +47,7 @@ class Vue {
   }
 
   async installVueCLI(isInstall) {
-    if (!isInstall) return
+    if (!isInstall && process.platform !== 'win32') return
     const confirmInstall = (
       await inquirer.prompt({
         type: 'confirm',

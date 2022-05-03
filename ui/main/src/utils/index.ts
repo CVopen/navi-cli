@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-export function strToJson(data: string) {
+export function strToJson<T>(data: string): T {
   return JSON.parse(data)
 }
 
