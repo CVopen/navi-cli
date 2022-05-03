@@ -5,7 +5,6 @@
   - [创建项目](#创建项目)
   - [使用ui](#使用ui)
   - [template](#template)
-    - [setting.json](#setting.json)
   - [添加命令](#添加命令)
   - [创建更多模板](#创建更多模板)
 
