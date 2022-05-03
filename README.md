@@ -2,7 +2,7 @@
 
 - [navi脚手架](#navi脚手架)
   - [使用(use)](#使用(use))
-  - [创建项目(create project)](#创建项目(create project))
+  - [创建项目](#创建项目)
   - [使用ui](#使用ui)
   - [template](#template)
     - [setting.json](#setting.json)
@@ -34,7 +34,7 @@ navi -v
 navi --version
 ```
 
-## 创建项目(create project)
+## [创建项目](#创建项目)
 
 你也可以选择vue-cli或者是create-react-app来创建。
 
