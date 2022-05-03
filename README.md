@@ -7,6 +7,7 @@
   - [template](#template)
     - [setting.json](#setting.json)
   - [添加命令](#添加命令)
+  - [创建更多模板](#创建更多模板)
 
 ## 使用(use)
 
@@ -100,7 +101,7 @@ setting.json:
   - tip: 校验提示字段。
 - ignore: 忽略文件，参考[glob](https://github.com/isaacs/node-glob)
 
-## 添加自己的命令
+## 添加命令
 
 ```JS
 function command(options) {
