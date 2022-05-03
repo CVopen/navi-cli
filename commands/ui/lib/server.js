@@ -1,9 +1,12 @@
 const express = require('express')
 const path = require('path')
-const history = require('connect-history-api-fallback')
-const { print } = require('@navi-cli/log')
 
+const history = require('connect-history-api-fallback')
 const expressWs = require('express-ws')
+
+const { print } = require('@navi-cli/log')
+const open = require('@navi-cli/open')
+
 const { PROT } = require('./constant')
 module.exports = server
 
@@ -23,7 +26,12 @@ function server() {
   )
   app.use(express.static(path.join(__dirname, 'static')))
 
-  app.listen(PROT, () => print('info', `Ready on http://localhost:${PROT}`))
+  app.listen(PROT, () => {
+    if (process.env.NODE_ENV !== 'development') {
+      open(`http://localhost:${PROT}`)
+    }
+    print('info', `Ready on http://localhost:${PROT}`)
+  })
 }
 
 function staticRoute(app) {
