@@ -1,11 +1,3 @@
 # `@navi-cli/prepare`
 
-> TODO: description
-
-## Usage
-
-```
-const prepare = require('@navi-cli/prepare');
-
-// TODO: DEMONSTRATE API
-```
+请看[navi](https://github.com/CVopen/navi-cli)

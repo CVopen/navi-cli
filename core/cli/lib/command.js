@@ -28,11 +28,15 @@ function generateCommand() {
       description: 'generate a new project from a create-react-app',
       packageName: '@navi-cli/react',
     },
-    // {
-    //   cmd: 'add',
-    //   description: 'add custom command',
-    //   packageName: '@navi-cli/add',
-    // },
+    {
+      cmd: 'add',
+      description: 'add custom command',
+      option: [
+        ['-c, --command', 'add new command'],
+        ['-t, --template', 'add new template'],
+      ],
+      packageName: '@navi-cli/add',
+    },
     {
       cmd: 'ui',
       description: 'start and open the vue-cli ui',

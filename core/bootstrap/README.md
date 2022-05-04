@@ -1,11 +1,3 @@
 # `@navi-cli/bootstrap`
 
-> TODO: description
-
-## Usage
-
-```
-const exec = require('@navi-cli/bootstrap');
-
-// TODO: DEMONSTRATE API
-```
+请看[navi](https://github.com/CVopen/navi-cli)

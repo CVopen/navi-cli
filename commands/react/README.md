@@ -1,11 +1,3 @@
 # `@navi-cli/react`
 
-> TODO: description
-
-## Usage
-
-```
-const react = require('@navi-cli/react');
-
-// TODO: DEMONSTRATE API
-```
+请看[navi](https://github.com/CVopen/navi-cli)

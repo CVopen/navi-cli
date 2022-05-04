@@ -1,11 +1,10 @@
 # `@navi-cli/cli`
 
-> TODO: description
 
 ## Usage
 
 ```
-const cli = require('@navi-cli/cli');
+npm install -g @navi-cli/cli
+navi init my-project
 
-// TODO: DEMONSTRATE API
 ```

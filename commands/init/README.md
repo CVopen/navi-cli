@@ -1,11 +1,3 @@
 # `@navi-cli/init`
 
-> TODO: description
-
-## Usage
-
-```
-const init = require('@navi-cli/init');
-
-// TODO: DEMONSTRATE API
-```
+请看[navi](https://github.com/CVopen/navi-cli)

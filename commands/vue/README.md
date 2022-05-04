@@ -1,11 +1,3 @@
 # `@navi-cli/vue`
 
-> TODO: description
-
-## Usage
-
-```
-const vue = require('@navi-cli/vue');
-
-// TODO: DEMONSTRATE API
-```
+请看[navi](https://github.com/CVopen/navi-cli)
