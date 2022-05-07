@@ -1,18 +1,19 @@
 import React, { useEffect, useState, FC, memo } from 'react'
 import { getTemplateList, delTemplate } from '@/api'
 import NoData from '@/components/NoData'
-import { Button, message, notification } from 'antd'
+import { Button, message, notification, Tooltip } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import './index.less'
 import Modal from './Modal'
 import { useAppSelector } from '@/store'
+import { formatDate } from '@/utils'
 
 export interface templateItem {
   name: string
   label: string
-  ignore: string[]
   id: string
+  date?: string
 }
 
 export type Visible = 0 | 1 | 2
@@ -107,36 +108,34 @@ const Item: FC<ItemProps> = memo(({ list, setActive, setList, setIsModalVisible 
 
   return (
     <>
-      {list.map(({ name, label, id, ignore = [] }, index) => (
+      {list.map(({ name, label, id, date }, index) => (
         <div className="admin-template-item" key={id || index}>
           <ul>
             <li>
               <span>描述: </span>
-              {label}
+              <Tooltip placement="top" title={label}>
+                {label}
+              </Tooltip>
             </li>
             <li>
               <span>名称: </span>
-              {name}
+              <Tooltip placement="top" title={name}>
+                {name}
+              </Tooltip>
             </li>
-            <li>
-              <span>忽略文件: </span>
-              {ignore.reduce((target, current, index) => {
-                if (index > 1) return target
-                if (target) {
-                  target += `、 ${current}`
-                } else {
-                  target = current
-                }
-                return target
-              }, '')}
-            </li>
+            {date && (
+              <li>
+                <span>时间: </span>
+                <span>{formatDate(date)}</span>
+              </li>
+            )}
           </ul>
           {id ? (
             <div>
-              <Button type="primary" onClick={handleEdit({ name, label, id, ignore })}>
+              <Button type="primary" onClick={handleEdit({ name, label, id })}>
                 修改模板
               </Button>
-              <Button type="primary" danger onClick={del({ name, label, id, ignore })} style={{ marginLeft: 10 }}>
+              <Button type="primary" danger onClick={del({ name, label, id })} style={{ marginLeft: 10 }}>
                 删除模板
               </Button>
             </div>

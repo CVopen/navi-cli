@@ -32,8 +32,9 @@ function generateCommand() {
       cmd: 'add',
       description: 'add custom command',
       option: [
-        ['-c, --command', 'add new command'],
-        ['-t, --template', 'add new template'],
+        ['-C, --command', 'add new command', true],
+        ['-T, --template', 'add new template'],
+        ['-L, --commandLocal', 'add command debug local'],
       ],
       packageName: '@navi-cli/add',
     },

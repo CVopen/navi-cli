@@ -1,14 +1,14 @@
 # navi-cli
 
 - [navi脚手架](#navi脚手架)
-  - [使用(use)](#使用(use))
+  - [使用](#使用)
   - [创建项目](#创建项目)
   - [使用图形化界面](#使用图形化界面)
   - [template](#template)
   - [添加命令](#添加命令)
   - [创建更多模板](#创建更多模板)
 
-## 使用(use)
+## 使用
 
 ```shell
 npm i -g @navi-cli/cli
@@ -100,6 +100,11 @@ setting.json:
   - tip: 校验提示字段。
 - ignore: 忽略文件，参考[glob](https://github.com/isaacs/node-glob)
 
+### 导入模板
+```shell
+navi add -T
+```
+
 ## 添加命令
 
 ```JS
@@ -111,6 +116,16 @@ function command(options) {
  - cmds: 命令参数
  - args: 选项值
  - command: command对象
+
+### 导入命令
+```shell
+navi add 
+# OR
+navi add -C
+# OR
+navi add -T
+# 参数T为命令添加本地调试路径
+```
 
 ## 创建更多模板
 

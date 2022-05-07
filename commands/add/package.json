@@ -25,5 +25,15 @@
   },
   "bugs": {
     "url": "https://github.com/CVopen/navi-cli/issues"
+  },
+  "dependencies": {
+    "@navi-cli/child-process": "file:..\\..\\utils\\child-process",
+    "@navi-cli/log": "file:..\\..\\utils\\log",
+    "ansi-escapes": "4.3.2",
+    "inquirer": "^8.2.0",
+    "validate-npm-package-name": "^3.0.0",
+    "user-home": "^3.0.0",
+    "pkg-dir": "^5.0.0",
+    "uuid": "3.4.0"
   }
 }
