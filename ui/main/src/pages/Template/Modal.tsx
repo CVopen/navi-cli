@@ -27,13 +27,11 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
 
   useEffect(() => {
     if (visible !== 2) return
-    if (!defaultData.ignore || !defaultData.ignore.length) return form.setFieldsValue(defaultData)
-    defaultData.ignore = defaultData.ignore.map((file: string) => ({ file }))
     form.setFieldsValue(defaultData)
   }, [defaultData])
 
   const onOk = () => {
-    getValue().then((res) => {
+    form.validateFields().then((res) => {
       if (visible === 2) {
         const template = { ...res, id: defaultData.id }
         updateTemplate(template).then(() => {
@@ -61,15 +59,6 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
     form.resetFields()
   }
 
-  const getValue = () => {
-    return form.validateFields().then((result: any) => {
-      if (result.ignore) {
-        result.ignore = result.ignore.map(({ file }: any) => file)
-      }
-      return result
-    })
-  }
-
   return (
     <Modal
       title={`${visible === 2 ? '修改' : '添加'}模板信息`}
@@ -92,32 +81,6 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
         <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入名称!' }]}>
           <Input placeholder="npm 包名" />
         </Form.Item>
-        <Form.List name="ignore">
-          {(fields, { add, remove }) => (
-            <>
-              {!fields.length && (
-                <Form.Item name="bt" style={{ width: 200 }}>
-                  <Button type="primary" onClick={add} block icon={<PlusOutlined />}>
-                    Add Template
-                  </Button>
-                </Form.Item>
-              )}
-              {fields.map((field) => (
-                <Space key={field.key}>
-                  <Form.Item {...field} name={[field.name, 'file']} key={'file' + field.key} style={{ width: 400 }}>
-                    <Input placeholder="请输入glob规则" />
-                  </Form.Item>
-                  <Form.Item key={'btn' + field.key} style={{ width: 100 }} name={[field.name, 'btn']}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <PlusOutlined style={{ cursor: 'pointer' }} onClick={() => add()} />
-                      <MinusOutlined style={{ cursor: 'pointer' }} onClick={() => remove(field.name)} />
-                    </div>
-                  </Form.Item>
-                </Space>
-              ))}
-            </>
-          )}
-        </Form.List>
       </Form>
     </Modal>
   )

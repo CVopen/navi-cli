@@ -89,7 +89,7 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
     return form.validateFields().then((result: any) => {
       if (result.option) {
         result.option = result.option.map(({ args, defaults, description }: any) => [
-          `-${args[0]}, --${args}`,
+          `-${args[0].toUpperCase()}, --${args}`,
           description,
           defaults,
         ])
@@ -148,6 +148,15 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
       : Promise.resolve()
   }
 
+  const validatePackage = (rule: any, value: string) => {
+    const fileName = rule.field === 'packageName' ? 'targetPath' : 'packageName'
+    if (!value && !form.getFieldValue(fileName)) {
+      return Promise.reject('请输入包名或者调试路径!')
+    }
+    form.setFields([{ name: fileName, errors: undefined }])
+    return Promise.resolve()
+  }
+
   return (
     <Modal
       title={`${visible === 2 ? '修改' : '添加'}命令`}
@@ -174,7 +183,7 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
         <Form.Item label="命令描述" name="description" rules={[{ required: true, message: '请输入命令描述!' }]}>
           <Input.TextArea maxLength={100} autoSize />
         </Form.Item>
-        <Form.Item label="包名" name="packageName" rules={[{ required: true, message: '请输入包名!' }]}>
+        <Form.Item label="包名" name="packageName" rules={[{ validator: validatePackage }]}>
           <Input />
         </Form.Item>
         <Form.Item label="必选参数名" name="requiredParam" rules={[{ validator: paramValidate }]}>
@@ -183,7 +192,7 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
         <Form.Item label="可选参数名" name="optionalParam" rules={[{ validator: paramValidate }]}>
           <Input />
         </Form.Item>
-        <Form.Item label="本地调试路径" name="targetPath">
+        <Form.Item label="本地调试路径" name="targetPath" rules={[{ validator: validatePackage }]}>
           <Input />
         </Form.Item>
         <Form.List name="option">
@@ -209,13 +218,18 @@ function index({ visible, setVisble, setList, list, defaultValue, setActive }: M
                       { validator: optionValidate },
                     ]}
                   >
-                    <Input />
+                    <Input placeholder="请输入命令参数" />
                   </Form.Item>
-                  <Form.Item key={'defaults' + field.key} name={[field.name, 'defaults']} style={{ width: 100 }}>
-                    <Select options={defaultOptions} />
+                  <Form.Item key={'defaults' + field.key} name={[field.name, 'defaults']} style={{ width: 120 }}>
+                    <Select placeholder="默认值" options={defaultOptions} />
                   </Form.Item>
-                  <Form.Item key={'description' + field.key} name={[field.name, 'description']} style={{ width: 240 }}>
-                    <Input.TextArea maxLength={100} autoSize />
+                  <Form.Item
+                    key={'description' + field.key}
+                    name={[field.name, 'description']}
+                    style={{ width: 220 }}
+                    rules={[{ required: true, message: '请输入参数描述' }]}
+                  >
+                    <Input.TextArea placeholder="请输入参数描述" maxLength={100} autoSize />
                   </Form.Item>
                   <Form.Item key={'btn' + field.key} style={{ width: 50 }} name={[field.name, 'btn']}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>

@@ -18,7 +18,7 @@ function handleGetList() {
 }
 
 // add template
-function handleAddTemplate({ label, name, ignore = [] }) {
+function handleAddTemplate({ label, name }) {
   const id = uuid.v4()
   return new Promise((resolve) => {
     getPackage(name)
@@ -27,7 +27,7 @@ function handleAddTemplate({ label, name, ignore = [] }) {
         if (templateData.find((item) => item.name === name)) {
           resolve([null, '已经为该包创建过模板!'])
         } else {
-          templateData.push({ label, name, ignore, id })
+          templateData.push({ label, name, id, date: new Date() })
           try {
             fs.writeFileSync(local, JSON.stringify(templateData, null, '\t'))
             resolve([{ id }])

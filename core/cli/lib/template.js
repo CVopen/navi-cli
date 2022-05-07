@@ -15,12 +15,10 @@ const NAVI_TEMPLATE = [
   {
     label: 'react+ts+rtk webpack5项目基础模板',
     name: 'navi-cli-template-react-ts-rtk',
-    ignore: ['**/public/**', '**.svg'],
   },
   {
     label: 'react+rtk webpack5项目基础模板',
     name: 'navi-cli-template-react-rtk',
-    ignore: ['**/public/**', '**.svg'],
   },
 ]
 
