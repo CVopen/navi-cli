@@ -157,6 +157,7 @@ class Add {
   execute(info) {
     const data = [...getList(this.method), info]
     const local = this.template ? getTemplateLocalPath() : getCommandLocalPath()
+
     fs.writeFileSync(local, JSON.stringify(data, null, '\t'))
   }
 }

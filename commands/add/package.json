@@ -1,6 +1,6 @@
 {
   "name": "@navi-cli/add",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "navi-cli add",
   "author": "CVopen <1766730733@qq.com>",
   "homepage": "https://github.com/CVopen/navi-cli#readme",
@@ -31,9 +31,9 @@
     "@navi-cli/log": "file:..\\..\\utils\\log",
     "ansi-escapes": "4.3.2",
     "inquirer": "^8.2.0",
-    "validate-npm-package-name": "^3.0.0",
-    "user-home": "^3.0.0",
     "pkg-dir": "^5.0.0",
-    "uuid": "3.4.0"
+    "user-home": "^3.0.0",
+    "uuid": "3.4.0",
+    "validate-npm-package-name": "^3.0.0"
   }
 }
